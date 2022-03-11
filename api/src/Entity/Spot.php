@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\SpotRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SpotRepository::class)]
+#[ApiResource()]
 class Spot
 {
     #[ORM\Id]
@@ -19,7 +21,7 @@ class Spot
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $adress;
+    private $address;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $city;
@@ -39,28 +41,16 @@ class Spot
     #[ORM\Column(type: 'string', length: 255)]
     private $media;
 
-    #[ORM\Column(type: 'datetime')]
-    private $daysOpen;
-
-    #[ORM\Column(type: 'datetime')]
-    private $hoursOpen;
-
-    #[ORM\Column(type: 'float')]
-    private $longitude;
-
-    #[ORM\Column(type: 'float')]
-    private $latitute;
-
     #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'spots')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $type;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'spots')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $category;
 
     #[ORM\ManyToOne(targetEntity: flat::class, inversedBy: 'spots')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $flat;
 
     #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Like::class)]
@@ -70,7 +60,7 @@ class Spot
     private $comments;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'spots')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $user;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'spots')]
@@ -101,14 +91,14 @@ class Spot
         return $this;
     }
 
-    public function getAdress(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adress;
+        return $this->address;
     }
 
-    public function setAdress(string $adress): self
+    public function setAddress(string $address): self
     {
-        $this->adress = $adress;
+        $this->address = $address;
 
         return $this;
     }
@@ -181,54 +171,6 @@ class Spot
     public function setMedia(string $media): self
     {
         $this->media = $media;
-
-        return $this;
-    }
-
-    public function getDaysOpen(): ?string
-    {
-        return $this->daysOpen;
-    }
-
-    public function setDaysOpen(string $daysOpen): self
-    {
-        $this->daysOpen = $daysOpen;
-
-        return $this;
-    }
-
-    public function getHoursOpen(): ?\DateTime
-    {
-        return $this->hoursOpen;
-    }
-
-    public function setHoursOpen(\DateTime $hoursOpen): self
-    {
-        $this->hoursOpen = $hoursOpen;
-
-        return $this;
-    }
-
-    public function getLongitude(): ?float
-    {
-        return $this->longitude;
-    }
-
-    public function setLongitude(float $longitude): self
-    {
-        $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    public function getLatitute(): ?float
-    {
-        return $this->latitute;
-    }
-
-    public function setLatitute(float $latitute): self
-    {
-        $this->latitute = $latitute;
 
         return $this;
     }
