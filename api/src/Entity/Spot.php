@@ -41,13 +41,13 @@ class Spot
     #[ORM\Column(type: 'string', length: 255)]
     private $media;
 
-    // #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'spots')]
-    // #[ORM\JoinColumn(nullable: true)]
-    // private $type;
+    #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'spots')]
+    #[ORM\JoinColumn(nullable: true)]
+    private $type;
 
-    // #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'spots')]
-    // #[ORM\JoinColumn(nullable: true)]
-    // private $category;
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'spots')]
+    #[ORM\JoinColumn(nullable: true)]
+    private $category;
 
     // #[ORM\ManyToOne(targetEntity: flat::class, inversedBy: 'spots')]
     // #[ORM\JoinColumn(nullable: true)]
@@ -175,29 +175,29 @@ class Spot
         return $this;
     }
 
-    // public function getType(): ?Type
-    // {
-    //     return $this->type;
-    // }
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
 
-    // public function setType(?Type $type): self
-    // {
-    //     $this->type = $type;
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function getCategory(): ?Category
-    // {
-    //     return $this->category;
-    // }
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
 
-    // public function setCategory(?Category $category): self
-    // {
-    //     $this->category = $category;
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
     // public function getFlat(): ?flat
     // {

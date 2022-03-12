@@ -45,33 +45,33 @@ class Category
         return $this;
     }
 
-    // /**
-    //  * @return Collection<int, Spot>
-    //  */
-    // public function getSpots(): Collection
-    // {
-    //     return $this->spots;
-    // }
+    /**
+     * @return Collection<int, Spot>
+     */
+    public function getSpots(): Collection
+    {
+        return $this->spots;
+    }
 
-    // public function addSpot(Spot $spot): self
-    // {
-    //     if (!$this->spots->contains($spot)) {
-    //         $this->spots[] = $spot;
-    //         $spot->setCategory($this);
-    //     }
+    public function addSpot(Spot $spot): self
+    {
+        if (!$this->spots->contains($spot)) {
+            $this->spots[] = $spot;
+            $spot->setCategory($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function removeSpot(Spot $spot): self
-    // {
-    //     if ($this->spots->removeElement($spot)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($spot->getCategory() === $this) {
-    //             $spot->setCategory(null);
-    //         }
-    //     }
+    public function removeSpot(Spot $spot): self
+    {
+        if ($this->spots->removeElement($spot)) {
+            // set the owning side to null (unless already changed)
+            if ($spot->getCategory() === $this) {
+                $spot->setCategory(null);
+            }
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }
