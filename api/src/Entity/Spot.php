@@ -41,37 +41,37 @@ class Spot
     #[ORM\Column(type: 'string', length: 255)]
     private $media;
 
-    #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'spots')]
-    #[ORM\JoinColumn(nullable: true)]
-    private $type;
+    // #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'spots')]
+    // #[ORM\JoinColumn(nullable: true)]
+    // private $type;
 
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'spots')]
-    #[ORM\JoinColumn(nullable: true)]
-    private $category;
+    // #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'spots')]
+    // #[ORM\JoinColumn(nullable: true)]
+    // private $category;
 
-    #[ORM\ManyToOne(targetEntity: flat::class, inversedBy: 'spots')]
-    #[ORM\JoinColumn(nullable: true)]
-    private $flat;
+    // #[ORM\ManyToOne(targetEntity: flat::class, inversedBy: 'spots')]
+    // #[ORM\JoinColumn(nullable: true)]
+    // private $flat;
 
-    #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Like::class)]
-    private $likes;
+    // #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Like::class)]
+    // private $likes;
 
-    #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Comment::class)]
-    private $comments;
+    // #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Comment::class)]
+    // private $comments;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'spots')]
-    #[ORM\JoinColumn(nullable: true)]
-    private $user;
+    // #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'spots')]
+    // #[ORM\JoinColumn(nullable: true)]
+    // private $user;
 
-    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'spots')]
-    private $tags;
+    // #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'spots')]
+    // private $tags;
 
-    public function __construct()
-    {
-        $this->likes = new ArrayCollection();
-        $this->comments = new ArrayCollection();
-        $this->tags = new ArrayCollection();
-    }
+    // public function __construct()
+    // {
+    //     $this->likes = new ArrayCollection();
+    //     $this->comments = new ArrayCollection();
+    //     $this->tags = new ArrayCollection();
+    // }
 
 
     public function getId(): ?int
@@ -175,135 +175,135 @@ class Spot
         return $this;
     }
 
-    public function getType(): ?Type
-    {
-        return $this->type;
-    }
+    // public function getType(): ?Type
+    // {
+    //     return $this->type;
+    // }
 
-    public function setType(?Type $type): self
-    {
-        $this->type = $type;
+    // public function setType(?Type $type): self
+    // {
+    //     $this->type = $type;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
+    // public function getCategory(): ?Category
+    // {
+    //     return $this->category;
+    // }
 
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
+    // public function setCategory(?Category $category): self
+    // {
+    //     $this->category = $category;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getFlat(): ?flat
-    {
-        return $this->flat;
-    }
+    // public function getFlat(): ?flat
+    // {
+    //     return $this->flat;
+    // }
 
-    public function setFlat(?flat $flat): self
-    {
-        $this->flat = $flat;
+    // public function setFlat(?flat $flat): self
+    // {
+    //     $this->flat = $flat;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    /**
-     * @return Collection<int, Like>
-     */
-    public function getLikes(): Collection
-    {
-        return $this->likes;
-    }
+    // /**
+    //  * @return Collection<int, Like>
+    //  */
+    // public function getLikes(): Collection
+    // {
+    //     return $this->likes;
+    // }
 
-    public function addLike(Like $like): self
-    {
-        if (!$this->likes->contains($like)) {
-            $this->likes[] = $like;
-            $like->setSpot($this);
-        }
+    // public function addLike(Like $like): self
+    // {
+    //     if (!$this->likes->contains($like)) {
+    //         $this->likes[] = $like;
+    //         $like->setSpot($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeLike(Like $like): self
-    {
-        if ($this->likes->removeElement($like)) {
-            // set the owning side to null (unless already changed)
-            if ($like->getSpot() === $this) {
-                $like->setSpot(null);
-            }
-        }
+    // public function removeLike(Like $like): self
+    // {
+    //     if ($this->likes->removeElement($like)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($like->getSpot() === $this) {
+    //             $like->setSpot(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    /**
-     * @return Collection<int, Comment>
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
+    // /**
+    //  * @return Collection<int, Comment>
+    //  */
+    // public function getComments(): Collection
+    // {
+    //     return $this->comments;
+    // }
 
-    public function addComment(Comment $comment): self
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setSpot($this);
-        }
+    // public function addComment(Comment $comment): self
+    // {
+    //     if (!$this->comments->contains($comment)) {
+    //         $this->comments[] = $comment;
+    //         $comment->setSpot($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeComment(Comment $comment): self
-    {
-        if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
-            if ($comment->getSpot() === $this) {
-                $comment->setSpot(null);
-            }
-        }
+    // public function removeComment(Comment $comment): self
+    // {
+    //     if ($this->comments->removeElement($comment)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($comment->getSpot() === $this) {
+    //             $comment->setSpot(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
+    // public function getUser(): ?User
+    // {
+    //     return $this->user;
+    // }
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
+    // public function setUser(?User $user): self
+    // {
+    //     $this->user = $user;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    /**
-     * @return Collection<int, Tag>
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
+    // /**
+    //  * @return Collection<int, Tag>
+    //  */
+    // public function getTags(): Collection
+    // {
+    //     return $this->tags;
+    // }
 
-    public function addTag(Tag $tag): self
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags[] = $tag;
-        }
+    // public function addTag(Tag $tag): self
+    // {
+    //     if (!$this->tags->contains($tag)) {
+    //         $this->tags[] = $tag;
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeTag(Tag $tag): self
-    {
-        $this->tags->removeElement($tag);
+    // public function removeTag(Tag $tag): self
+    // {
+    //     $this->tags->removeElement($tag);
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

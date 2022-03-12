@@ -24,9 +24,9 @@ class Comment
     #[ORM\Column(type: 'string', length: 255)]
     private $content;
 
-    #[ORM\ManyToOne(targetEntity: Spot::class, inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $spot;
+    // #[ORM\ManyToOne(targetEntity: Spot::class, inversedBy: 'comments')]
+    // #[ORM\JoinColumn(nullable: false)]
+    // private $spot;
 
     public function getId(): ?int
     {
@@ -69,15 +69,15 @@ class Comment
         return $this;
     }
 
-    public function getSpot(): ?Spot
-    {
-        return $this->spot;
-    }
+    // public function getSpot(): ?Spot
+    // {
+    //     return $this->spot;
+    // }
 
-    public function setSpot(?Spot $spot): self
-    {
-        $this->spot = $spot;
+    // public function setSpot(?Spot $spot): self
+    // {
+    //     $this->spot = $spot;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }
