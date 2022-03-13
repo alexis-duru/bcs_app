@@ -20,13 +20,13 @@ class Flat
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    // #[ORM\OneToMany(mappedBy: 'flat', targetEntity: Spot::class)]
-    // private $spots;
+    #[ORM\OneToMany(mappedBy: 'flat', targetEntity: Spot::class)]
+    private $spots;
 
-    // public function __construct()
-    // {
-    //     $this->spots = new ArrayCollection();
-    // }
+    public function __construct()
+    {
+        $this->spots = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -45,33 +45,33 @@ class Flat
         return $this;
     }
 
-    // /**
-    //  * @return Collection<int, Spot>
-    //  */
-    // public function getSpots(): Collection
-    // {
-    //     return $this->spots;
-    // }
+    /**
+     * @return Collection<int, Spot>
+     */
+    public function getSpots(): Collection
+    {
+        return $this->spots;
+    }
 
-    // public function addSpot(Spot $spot): self
-    // {
-    //     if (!$this->spots->contains($spot)) {
-    //         $this->spots[] = $spot;
-    //         $spot->setFlat($this);
-    //     }
+    public function addSpot(Spot $spot): self
+    {
+        if (!$this->spots->contains($spot)) {
+            $this->spots[] = $spot;
+            $spot->setFlat($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function removeSpot(Spot $spot): self
-    // {
-    //     if ($this->spots->removeElement($spot)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($spot->getFlat() === $this) {
-    //             $spot->setFlat(null);
-    //         }
-    //     }
+    public function removeSpot(Spot $spot): self
+    {
+        if ($this->spots->removeElement($spot)) {
+            // set the owning side to null (unless already changed)
+            if ($spot->getFlat() === $this) {
+                $spot->setFlat(null);
+            }
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }

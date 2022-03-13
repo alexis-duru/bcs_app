@@ -20,8 +20,8 @@ class Category
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    // #[ORM\OneToMany(mappedBy: 'category', targetEntity: Spot::class)]
-    // private $spots;
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Spot::class)]
+    private $spots;
 
     public function __construct()
     {

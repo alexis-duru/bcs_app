@@ -20,13 +20,13 @@ class Tag
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    // #[ORM\ManyToMany(targetEntity: Spot::class, mappedBy: 'tags')]
-    // private $spots;
+    #[ORM\ManyToMany(targetEntity: Spot::class, mappedBy: 'tags')]
+    private $spots;
 
-    // public function __construct()
-    // {
-    //     $this->spots = new ArrayCollection();
-    // }
+    public function __construct()
+    {
+        $this->spots = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -45,30 +45,30 @@ class Tag
         return $this;
     }
 
-    // /**
-    //  * @return Collection<int, Spot>
-    //  */
-    // public function getSpots(): Collection
-    // {
-    //     return $this->spots;
-    // }
+    /**
+     * @return Collection<int, Spot>
+     */
+    public function getSpots(): Collection
+    {
+        return $this->spots;
+    }
 
-    // public function addSpot(Spot $spot): self
-    // {
-    //     if (!$this->spots->contains($spot)) {
-    //         $this->spots[] = $spot;
-    //         $spot->addTag($this);
-    //     }
+    public function addSpot(Spot $spot): self
+    {
+        if (!$this->spots->contains($spot)) {
+            $this->spots[] = $spot;
+            $spot->addTag($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function removeSpot(Spot $spot): self
-    // {
-    //     if ($this->spots->removeElement($spot)) {
-    //         $spot->removeTag($this);
-    //     }
+    public function removeSpot(Spot $spot): self
+    {
+        if ($this->spots->removeElement($spot)) {
+            $spot->removeTag($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }
