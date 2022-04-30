@@ -1,0 +1,2 @@
+# filter : localhost:8000/api/spots?category=ind dans la requête postman
+

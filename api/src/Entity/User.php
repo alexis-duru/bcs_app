@@ -2,40 +2,54 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[ApiResource()]
+#[ApiResource(
+    collectionOperations:[
+        "GET" => [
+            "normalization_context" => ["groups" => "read:user:collection"]
+        ]],
+    order: ["createdAt" => "DESC"]
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["read:user:collection",])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(["read:user:collection",])]
     private $email;
 
     #[ORM\Column(type: 'json')]
+    #[Groups(["read:user:collection",])]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
+    #[Groups(["read:user:collection",])]
     private $password;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups(["read:user:collection",])]
     private $updatedAt;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups(["read:user:collection",])]
     private $createdAt;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Spot::class)]
+    #[Groups(["read:user:collection",])]
     private $spots;
 
     public function __construct()

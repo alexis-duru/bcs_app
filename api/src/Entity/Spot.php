@@ -2,68 +2,96 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\SpotRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Flat;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SpotRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: SpotRepository::class)]
-#[ApiResource()]
+#[ApiResource(
+    collectionOperations:[
+        "GET" => [
+            "normalization_context" => ["groups" => "read:spot:collection",]
+        ]],
+    order: ["createdAt" => "DESC"],
+)]
+
+// #[ApiFilter(SearchFilter::class, properties: ['category' => 'partial', 'type' => 'partial', 'flat' => 'partial'])]
+
 class Spot
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["read:spot:collection",])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["read:spot:collection",])]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $address;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["read:spot:collection",])]
     private $city;
 
     #[ORM\Column(type: 'integer', length: 255)]
+    #[Groups(["read:spot:collection",])]
     private $postalCode;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups(["read:spot:collection",])]
     private $createdAt;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups(["read:spot:collection",])]
     private $updatedAt;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["read:spot:collection",])]
     private $details;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["read:spot:collection",])]
     private $media;
 
     #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Groups(["read:spot:collection",])]
     private $type;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Groups(["read:spot:collection",])]
     private $category;
 
-    #[ORM\ManyToOne(targetEntity: flat::class, inversedBy: 'spots')]
+    #[ORM\ManyToOne(targetEntity: Flat::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Groups(["read:spot:collection",])]
     private $flat;
 
     #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Like::class)]
+    #[Groups(["read:spot:collection",])]
     private $likes;
 
     #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Comment::class)]
+    #[Groups(["read:spot:collection",])]
     private $comments;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Groups(["read:spot:collection",])]
     private $user;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'spots')]
+    #[Groups(["read:spot:collection",])]
     private $tags;
 
     public function __construct()
