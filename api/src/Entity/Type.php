@@ -26,7 +26,7 @@ class Type
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection"])]
+    #[Groups(["read:spot:collection", "read:type:collection"])]
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Spot::class)]

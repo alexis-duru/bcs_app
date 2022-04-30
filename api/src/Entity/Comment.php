@@ -33,7 +33,7 @@ class Comment
     private $updatedAt;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection"])]
+    #[Groups(["read:spot:collection", "read:comment:collection"])]
     private $content;
 
     #[ORM\ManyToOne(targetEntity: Spot::class, inversedBy: 'comments')]

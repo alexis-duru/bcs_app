@@ -26,7 +26,7 @@ class Flat
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection",])]
+    #[Groups(["read:spot:collection", "read:flat:collection"])]
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'flat', targetEntity: Spot::class)]
