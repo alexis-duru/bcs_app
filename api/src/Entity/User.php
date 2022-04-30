@@ -33,19 +33,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     #[ORM\Column(type: 'json')]
-    #[Groups(["read:user:collection",])]
+    // #[Groups(["read:user:collection",])]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
-    #[Groups(["read:user:collection",])]
+    // #[Groups(["read:user:collection",])]
     private $password;
 
     #[ORM\Column(type: 'datetime')]
-    #[Groups(["read:user:collection",])]
+    // #[Groups(["read:user:collection",])]
     private $updatedAt;
 
     #[ORM\Column(type: 'datetime')]
-    #[Groups(["read:user:collection",])]
+    // #[Groups(["read:user:collection",])]
     private $createdAt;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Spot::class)]

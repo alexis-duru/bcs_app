@@ -2,25 +2,35 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\TagRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TagRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    collectionOperations:[
+        "GET" => [
+            "normalization_context" => ["groups" => "read:tag:collection",]
+        ]],
+)]
+
 class Tag
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["read:tag:collection",])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["read:spot:collection",])]
     private $name;
 
     #[ORM\ManyToMany(targetEntity: Spot::class, mappedBy: 'tags')]
+    #[Groups(["read:tag:collection",])]
     private $spots;
 
     public function __construct()

@@ -16,7 +16,16 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 #[ApiResource(
     collectionOperations:[
         "GET" => [
-            "normalization_context" => ["groups" => "read:spot:collection",]
+            "normalization_context" => 
+            [
+                "groups" => 
+                    "read:spot:collection", 
+                    "read:category:collection", 
+                    "read:type:collection",
+                    "read:flat:collection", 
+                    "read:tag:collection",
+                    "read:comment:collection"
+            ]
         ]],
     order: ["createdAt" => "DESC"],
 )]
@@ -32,7 +41,17 @@ class Spot
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection",])]
+    #[Groups(
+        [
+            "read:spot:collection",
+            "read:category:collection", 
+            "read:user:collection", 
+            "read:type:collection", 
+            "read:flat:collection", 
+            "read:tag:collection",
+            "read:comment:collection"
+        ]
+    )]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -47,11 +66,11 @@ class Spot
     private $postalCode;
 
     #[ORM\Column(type: 'datetime')]
-    #[Groups(["read:spot:collection",])]
+    // #[Groups(["read:spot:collection",])]
     private $createdAt;
 
     #[ORM\Column(type: 'datetime')]
-    #[Groups(["read:spot:collection",])]
+    // #[Groups(["read:spot:collection",])]
     private $updatedAt;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -78,7 +97,7 @@ class Spot
     private $flat;
 
     #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Like::class)]
-    #[Groups(["read:spot:collection",])]
+    // #[Groups(["read:spot:collection",])]
     private $likes;
 
     #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Comment::class)]
@@ -87,7 +106,7 @@ class Spot
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
-    #[Groups(["read:spot:collection",])]
+    // #[Groups(["read:spot:collection",])]
     private $user;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'spots')]

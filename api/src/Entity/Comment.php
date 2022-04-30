@@ -2,30 +2,43 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    collectionOperations:[
+        "GET" => [
+            "normalization_context" => ["groups" => "read:comment:collection"]
+        ]],
+    order: ["createdAt" => "DESC"]
+)]
+
 class Comment
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["read:comment:collection"])]
     private $id;
 
     #[ORM\Column(type: 'datetime')]
+    // #[Groups(["read:comment:collection"])]
     private $createdAt;
 
     #[ORM\Column(type: 'datetime')]
+    // #[Groups(["read:comment:collection"])]
     private $updatedAt;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["read:spot:collection"])]
     private $content;
 
     #[ORM\ManyToOne(targetEntity: Spot::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Groups(["read:comment:collection"])]
     private $spot;
 
     public function getId(): ?int
