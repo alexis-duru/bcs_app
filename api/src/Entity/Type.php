@@ -11,10 +11,21 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TypeRepository::class)]
 #[ApiResource(
-    collectionOperations:[
-    "GET" => [
-        "normalization_context" => ["groups" => "read:type:collection"]
-    ]]
+    collectionOperations:
+    [
+        "GET" => [
+            "normalization_context" => ["groups" => "read:type:collection"]
+        ]
+    ],
+    itemOperations:[
+        "GET", "PUT", "DELETE" => [
+            "normalization_context" => 
+            [
+                "groups" => 
+                    "read:type:collection",
+            ]
+        ]
+    ],
 )]
 
 class Type

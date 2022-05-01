@@ -14,8 +14,16 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ApiResource(
-    collectionOperations:[
-        "GET" => [
+    // collectionOperations:["GET"=> ['path' => '/toto/{id}'], "POST"],
+    collectionOperations:["GET" => [
+        "normalization_context" => 
+        [
+            "groups" => 
+                "read:user:collection", 
+        ]
+    ], "POST"],
+    itemOperations:[
+        "GET", "PUT", "DELETE" => [
             "normalization_context" => ["groups" => "read:user:collection"]
         ]],
     order: ["createdAt" => "DESC"]

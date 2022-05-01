@@ -14,8 +14,20 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: SpotRepository::class)]
 #[ApiResource(
-    collectionOperations:[
-        "GET" => [
+    collectionOperations:["GET" => [
+        "normalization_context" => 
+        [
+            "groups" => 
+                "read:spot:collection", 
+                "read:category:collection", 
+                "read:type:collection",
+                "read:flat:collection", 
+                "read:tag:collection",
+                "read:comment:collection"
+        ]
+    ], "POST"],
+    itemOperations:[
+        "GET", "PUT", "DELETE" => [
             "normalization_context" => 
             [
                 "groups" => 
@@ -26,7 +38,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
                     "read:tag:collection",
                     "read:comment:collection"
             ]
-        ]],
+        ]
+    ],
     order: ["createdAt" => "DESC"],
 )]
 
