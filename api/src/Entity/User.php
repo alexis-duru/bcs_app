@@ -6,10 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -25,7 +27,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
     itemOperations:[
         "GET", "PUT", "DELETE" => [
             "normalization_context" => ["groups" => "read:user:collection"]
-        ]],
+        ]
+    ],
     order: ["createdAt" => "DESC"]
 )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -38,6 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Groups(["read:user:collection",])]
+    #[Assert\NotBlank(message: 'Email is required')]
     private $email;
 
     #[ORM\Column(type: 'json')]
@@ -46,6 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string')]
     // #[Groups(["read:user:collection",])]
+    #[Assert\NotBlank(message: 'Password is required')]
     private $password;
 
     #[ORM\Column(type: 'datetime')]
@@ -58,6 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Spot::class)]
     #[Groups(["read:user:collection",])]
+    #[ApiSubresource]
     private $spots;
 
     public function __construct()

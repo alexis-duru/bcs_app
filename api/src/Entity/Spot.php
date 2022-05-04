@@ -11,6 +11,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SpotRepository::class)]
 #[ApiResource(
@@ -64,6 +65,13 @@ class Spot
             "read:tag:collection",
             "read:comment:collection"
         ]
+    )]
+    #[Assert\NotBlank(message: 'The name is required')]
+    #[Assert\Length(
+        min: 5,
+        max: 20,
+        minMessage: 'Name must be at least 5 characters long',
+        maxMessage: 'Your first name cannot be longer than 20 characters',
     )]
     private $name;
 
