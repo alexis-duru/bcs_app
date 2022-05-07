@@ -28,7 +28,11 @@ use Symfony\Component\Validator\Constraints as Assert;
     ], "POST"],
     itemOperations:[
         "GET", "PUT", "DELETE" => [
-            "normalization_context" => ["groups" => "read:user:collection"]
+            "normalization_context" => 
+            [
+                "groups" => 
+                    "read:user:collection"
+            ]
         ]
     ],
     order: ["createdAt" => "DESC"]
@@ -54,7 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
-    // #[Groups(["read:user:collection",])]
+    #[Groups(["read:user:collection",])]
     #[Assert\NotBlank(message: 'Password is required')]
     #[Assert\Length(
         min: 5,
@@ -83,6 +87,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUsername(){
+        return $this->email;
     }
 
     public function getEmail(): ?string
