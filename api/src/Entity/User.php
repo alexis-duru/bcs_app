@@ -11,10 +11,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
+#[UniqueEntity("email", message: "this email is already used")]
 #[ApiResource(
     // collectionOperations:["GET"=> ['path' => '/toto/{id}'], "POST"],
     collectionOperations:["GET" => [
@@ -42,6 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Groups(["read:user:collection",])]
     #[Assert\NotBlank(message: 'Email is required')]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
     private $email;
 
     #[ORM\Column(type: 'json')]
@@ -51,6 +56,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     // #[Groups(["read:user:collection",])]
     #[Assert\NotBlank(message: 'Password is required')]
+    #[Assert\Length(
+        min: 5,
+        minMessage: 'Password must be at least 5 characters long',
+    )]
     private $password;
 
     #[ORM\Column(type: 'datetime')]

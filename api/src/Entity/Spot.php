@@ -44,6 +44,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     order: ["createdAt" => "DESC"],
 )]
 
+
+
 // #[ApiFilter(SearchFilter::class, properties: ['category' => 'partial', 'type' => 'partial', 'flat' => 'partial'])]
 
 class Spot
@@ -69,28 +71,35 @@ class Spot
     #[Assert\NotBlank(message: 'The name is required')]
     #[Assert\Length(
         min: 5,
-        max: 20,
+        max: 40,
         minMessage: 'Name must be at least 5 characters long',
         maxMessage: 'Your first name cannot be longer than 20 characters',
     )]
     private $name;
 
+    #[Assert\NotBlank(message: 'The adress is required')]
     #[ORM\Column(type: 'string', length: 255)]
     private $address;
 
+    #[Assert\NotBlank(message: 'The city is required')]
     #[ORM\Column(type: 'string', length: 255)]
     #[Groups(["read:spot:collection",])]
     private $city;
 
     #[ORM\Column(type: 'integer', length: 255)]
+    #[Assert\NotBlank(message: 'The postal code is required')]
+    #[Assert\Length(min: 5,max: 5,)]
     #[Groups(["read:spot:collection",])]
+    // #[Assert\Type(type: "numeric", message: 'le code postal doit être numérique!')]
     private $postalCode;
 
     #[ORM\Column(type: 'datetime')]
     // #[Groups(["read:spot:collection",])]
+    // #[Assert\Type(type: "DateTimeInterface", message: "CustomMessage")]
     private $createdAt;
 
     #[ORM\Column(type: 'datetime')]
+    // #[Assert\Type(type: "DateTimeInterface", message: "CustomMessage")]
     // #[Groups(["read:spot:collection",])]
     private $updatedAt;
 
