@@ -40,9 +40,3 @@ class PasswordEncoderSubscriber implements EventSubscriberInterface {
         // dd($user);
     }
 }
-
-?>
-
-// UserPasswordHasherInterface
-
-// hashPassword() 
