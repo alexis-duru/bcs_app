@@ -136,6 +136,7 @@ class Spot
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Assert\NotBlank(message: 'User is required')]
     // #[Groups(["read:spot:collection",])]
     private $user;
 
