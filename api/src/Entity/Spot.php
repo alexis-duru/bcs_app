@@ -20,26 +20,32 @@ use Symfony\Component\Validator\Constraints as Assert;
         [
             "groups" => 
                 "read:spot:collection", 
-                "read:category:collection", 
-                "read:type:collection",
-                "read:flat:collection", 
-                "read:tag:collection",
-                "read:comment:collection"
+                // "read:category:collection", 
+                // "read:type:collection",
+                // "read:flat:collection", 
+                // "read:tag:collection",
+                // "read:comment:collection"
+
         ]
     ], "POST"],
     itemOperations:[
-        "GET", "PUT", "DELETE" => [
-            "normalization_context" => 
-            [
-                "groups" => 
-                    "read:spot:collection", 
-                    "read:category:collection", 
-                    "read:type:collection",
-                    "read:flat:collection", 
-                    "read:tag:collection",
-                    "read:comment:collection"
+        "GET" => [
+            "normalization_context" => [
+                "groups" => "read:spot:item"
             ]
-        ]
+        ], 
+        // "PUT", "DELETE" => [
+        //     "normalization_context" => 
+        //     [
+        //         "groups" => 
+        //             "read:spot:collection", 
+        //             "read:category:collection", 
+        //             "read:type:collection",
+        //             "read:flat:collection", 
+        //             "read:tag:collection",
+        //             "read:comment:collection"
+        //     ]
+        // ]
     ],
     order: ["createdAt" => "DESC"],
 )]
@@ -53,7 +59,7 @@ class Spot
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(["read:spot:collection",])]
+    #[Groups(["read:spot:collection", "read:spot:item"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -65,7 +71,8 @@ class Spot
             "read:type:collection", 
             "read:flat:collection", 
             "read:tag:collection",
-            "read:comment:collection"
+            "read:comment:collection",
+            "read:user:item"
         ]
     )]
     #[Assert\NotBlank(message: 'The name is required')]
@@ -77,19 +84,27 @@ class Spot
     )]
     private $name;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'spots')]
+    #[ORM\JoinColumn(nullable: true)]
+    #[Assert\NotBlank(message: 'User is required')]
+    #[Groups(["read:spot:item"])]
+    // #[Groups(["read:spot:collection",])]
+    private $user;
+
     #[Assert\NotBlank(message: 'The adress is required')]
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["read:user:item", "read:user:collection"])]
     private $address;
 
     #[Assert\NotBlank(message: 'The city is required')]
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection",])]
+    #[Groups(["read:spot:collection", "read:user:item", "read:user:collection"])]
     private $city;
 
     #[ORM\Column(type: 'integer', length: 255)]
     #[Assert\NotBlank(message: 'The postal code is required')]
     #[Assert\Length(min: 5,max: 5,)]
-    #[Groups(["read:spot:collection",])]
+    #[Groups(["read:spot:collection", "read:user:item", "read:user:collection"])]
     // #[Assert\Type(type: "numeric", message: 'le code postal doit être numérique!')]
     private $postalCode;
 
@@ -104,7 +119,7 @@ class Spot
     private $updatedAt;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection",])]
+    #[Groups(["read:spot:collection", "read:user:item", "read:user:collection"])]
     private $details;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -118,7 +133,7 @@ class Spot
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
-    #[Groups(["read:spot:collection",])]
+    #[Groups(["read:spot:collection", "read:spot:item"])]
     private $category;
 
     #[ORM\ManyToOne(targetEntity: Flat::class, inversedBy: 'spots')]
@@ -133,12 +148,6 @@ class Spot
     #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Comment::class)]
     #[Groups(["read:spot:collection",])]
     private $comments;
-
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'spots')]
-    #[ORM\JoinColumn(nullable: true)]
-    #[Assert\NotBlank(message: 'User is required')]
-    // #[Groups(["read:spot:collection",])]
-    private $user;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'spots')]
     #[Groups(["read:spot:collection",])]

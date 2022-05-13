@@ -19,34 +19,37 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity("email", message: "this email is already used")]
 #[ApiResource(
     // collectionOperations:["GET"=> ['path' => '/toto/{id}'], "POST"],
-    collectionOperations:["GET" => [
+    collectionOperations:
+    ["GET" => [
         "normalization_context" => 
         [
             "groups" => 
                 "read:user:collection", 
         ]
     ], "POST"],
+
     itemOperations:[
-        "GET", "PUT", "DELETE" => [
+        "GET" => [
             "normalization_context" => 
             [
                 "groups" => 
-                    "read:user:collection"
+                    "read:user:item",
             ]
-        ]
+        ], "PUT", "DELETE" 
     ],
     order: ["createdAt" => "DESC"]
+
 )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(["read:user:collection",])]
+    #[Groups(["read:user:collection", "read:user:item"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(["read:user:collection",])]
+    #[Groups(["read:user:collection", "read:user:item"])]
     #[Assert\NotBlank(message: 'Email is required')]
     #[Assert\Email(
         message: 'The email {{ value }} is not a valid email.',
@@ -58,7 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
-    #[Groups(["read:user:collection",])]
+    // #[Groups(["read:user:collection",])]
     #[Assert\NotBlank(message: 'Password is required')]
     #[Assert\Length(
         min: 5,
@@ -75,7 +78,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $createdAt;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Spot::class)]
-    #[Groups(["read:user:collection",])]
+    #[Groups(["read:user:collection", "read:user:item"])]
     #[ApiSubresource]
     private $spots;
 

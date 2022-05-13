@@ -26,7 +26,7 @@ class Category
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:category:collection"])]
+    #[Groups(["read:spot:collection", "read:category:collection", "read:spot:item"])]
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Spot::class)]
