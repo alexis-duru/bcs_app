@@ -19,7 +19,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
                 "groups" => "read:type:collection", 
             ]
         ], 
-        "POST"
     ],
     itemOperations:
     [
@@ -41,7 +40,7 @@ class Type
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item", "read:type:collection", "read:type:item"])]
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Spot::class)]

@@ -15,9 +15,17 @@ use Symfony\Component\Serializer\Annotation\Groups;
         "GET" => [
             "normalization_context" => 
             [
-                "groups" => "read:category:collection"
+                "groups" => "read:category:collection",
             ]
-        ]
+        ],"POST"],
+    itemOperations:
+    [
+        "GET" => [
+            "normalization_context" => 
+            [
+                "groups" => "read:category:item",
+            ]
+        ], 
     ],
 )]
 
@@ -26,11 +34,11 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(["read:category:collection",])]
+    #[Groups(["read:category:collection"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item", "read:category:collection", "read:category:item"])]
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Spot::class)]

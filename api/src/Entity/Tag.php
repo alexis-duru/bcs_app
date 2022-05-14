@@ -26,7 +26,7 @@ class Tag
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $name;
 
     #[ORM\ManyToMany(targetEntity: Spot::class, mappedBy: 'tags')]

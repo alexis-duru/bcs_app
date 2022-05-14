@@ -28,7 +28,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             [
                 "groups" => "read:spot:collection", 
             ]
-        ]],
+        ],
+    ],
     itemOperations:
     [
         "GET" => [
@@ -66,7 +67,7 @@ class Spot
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item" ])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item", "read:category:collection", "read:type:collection", "read:type:item"])]
     #[Assert\NotBlank(message: 'The name is required')]
     #[Assert\Length(
         min: 5,
@@ -117,17 +118,17 @@ class Spot
 
     #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $type;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $category;
 
     #[ORM\ManyToOne(targetEntity: Flat::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $flat;
 
     #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Like::class)]
@@ -135,11 +136,11 @@ class Spot
     private $likes;
 
     #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Comment::class)]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $comments;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'spots')]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $tags;
 
     public function __construct()
