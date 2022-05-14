@@ -11,10 +11,23 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: FlatRepository::class)]
 #[ApiResource(
-    collectionOperations:[
-    "GET" => [
-        "normalization_context" => ["groups" => "read:flat:collection"]
-    ]]
+    collectionOperations:
+    [
+        "GET" => [
+            "normalization_context" => 
+            [
+                "groups" => "read:flat:collection", 
+            ]
+        ], "POST"],
+    itemOperations:
+    [
+        "GET" => [
+            "normalization_context" => 
+            [
+                "groups" => "read:flat:item",
+            ]
+        ], 
+    ],
 )]
 
 class Flat
@@ -26,7 +39,7 @@ class Flat
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:flat:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'flat', targetEntity: Spot::class)]

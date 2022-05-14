@@ -14,17 +14,21 @@ use Symfony\Component\Serializer\Annotation\Groups;
     collectionOperations:
     [
         "GET" => [
-            "normalization_context" => ["groups" => "read:type:collection"]
-        ]
-    ],
-    itemOperations:[
-        "GET", "PUT", "DELETE" => [
             "normalization_context" => 
             [
-                "groups" => 
-                    "read:type:collection",
+                "groups" => "read:type:collection", 
             ]
-        ]
+        ], 
+        "POST"
+    ],
+    itemOperations:
+    [
+        "GET" => [
+            "normalization_context" => 
+            [
+                "groups" => "read:type:item",
+            ]
+        ], 
     ],
 )]
 
@@ -37,7 +41,7 @@ class Type
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:type:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Spot::class)]

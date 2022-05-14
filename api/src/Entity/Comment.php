@@ -9,10 +9,23 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 #[ApiResource(
-    collectionOperations:[
+    collectionOperations:
+    [
         "GET" => [
-            "normalization_context" => ["groups" => "read:comment:collection"]
-        ]],
+            "normalization_context" => 
+            [
+                "groups" => "read:comment:collection", 
+            ]
+        ], "POST"],
+    itemOperations:
+    [
+        "GET" => [
+            "normalization_context" => 
+            [
+                "groups" => "read:comment:item",
+            ]
+        ], 
+    ],
     order: ["createdAt" => "DESC"]
 )]
 
@@ -33,7 +46,7 @@ class Comment
     private $updatedAt;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:comment:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
     private $content;
 
     #[ORM\ManyToOne(targetEntity: Spot::class, inversedBy: 'comments')]

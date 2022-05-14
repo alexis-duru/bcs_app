@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         "normalization_context" => 
         [
             "groups" => 
-                "read:user:collection", 
+                "read:user:collection",
         ]
     ], "POST"],
 
@@ -49,7 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(["read:user:collection", "read:user:item"])]
+    #[Groups(["read:user:collection", "read:user:item", "read:spot:collection", "read:spot:item"])]
     #[Assert\NotBlank(message: 'Email is required')]
     #[Assert\Email(
         message: 'The email {{ value }} is not a valid email.',

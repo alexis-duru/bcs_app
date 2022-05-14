@@ -15,37 +15,40 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SpotRepository::class)]
 #[ApiResource(
-    collectionOperations:["GET" => [
-        "normalization_context" => 
-        [
-            "groups" => 
-                "read:spot:collection", 
-                // "read:category:collection", 
-                // "read:type:collection",
-                // "read:flat:collection", 
-                // "read:tag:collection",
-                // "read:comment:collection"
-
-        ]
-    ], "POST"],
-    itemOperations:[
+    collectionOperations:
+    [
         "GET" => [
-            "normalization_context" => [
-                "groups" => "read:spot:item"
+            "normalization_context" => 
+            [
+                "groups" => "read:spot:collection", 
             ]
         ], 
-        // "PUT", "DELETE" => [
-        //     "normalization_context" => 
-        //     [
-        //         "groups" => 
-        //             "read:spot:collection", 
-        //             "read:category:collection", 
-        //             "read:type:collection",
-        //             "read:flat:collection", 
-        //             "read:tag:collection",
-        //             "read:comment:collection"
-        //     ]
-        // ]
+        "POST" => [
+            "normalization_context" => 
+            [
+                "groups" => "read:spot:collection", 
+            ]
+        ]],
+    itemOperations:
+    [
+        "GET" => [
+            "normalization_context" => 
+            [
+                "groups" => "read:spot:item",
+            ]
+        ], 
+        "PUT" => [
+            "normalization_context" => 
+            [
+                "groups" => "read:spot:item",
+            ]
+        ], 
+        "DELETE" => [
+            "normalization_context" => 
+            [
+                "groups" => "read:spot:item",
+            ]
+        ], 
     ],
     order: ["createdAt" => "DESC"],
 )]
@@ -63,18 +66,7 @@ class Spot
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(
-        [
-            "read:spot:collection",
-            "read:category:collection", 
-            "read:user:collection", 
-            "read:type:collection", 
-            "read:flat:collection", 
-            "read:tag:collection",
-            "read:comment:collection",
-            "read:user:item"
-        ]
-    )]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item" ])]
     #[Assert\NotBlank(message: 'The name is required')]
     #[Assert\Length(
         min: 5,
@@ -87,39 +79,36 @@ class Spot
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
     #[Assert\NotBlank(message: 'User is required')]
-    #[Groups(["read:spot:item"])]
-    // #[Groups(["read:spot:collection",])]
+    #[Groups(["read:spot:collection", "read:spot:item"])]
     private $user;
 
     #[Assert\NotBlank(message: 'The adress is required')]
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:user:item", "read:user:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $address;
 
     #[Assert\NotBlank(message: 'The city is required')]
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:user:item", "read:user:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $city;
 
     #[ORM\Column(type: 'integer', length: 255)]
     #[Assert\NotBlank(message: 'The postal code is required')]
     #[Assert\Length(min: 5,max: 5,)]
-    #[Groups(["read:spot:collection", "read:user:item", "read:user:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     // #[Assert\Type(type: "numeric", message: 'le code postal doit être numérique!')]
     private $postalCode;
 
     #[ORM\Column(type: 'datetime')]
-    // #[Groups(["read:spot:collection",])]
     // #[Assert\Type(type: "DateTimeInterface", message: "CustomMessage")]
     private $createdAt;
 
     #[ORM\Column(type: 'datetime')]
     // #[Assert\Type(type: "DateTimeInterface", message: "CustomMessage")]
-    // #[Groups(["read:spot:collection",])]
     private $updatedAt;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:user:item", "read:user:collection"])]
+    #[Groups(["read:spot:collection", "read:user:item", "read:user:collection", "read:spot:item"])]
     private $details;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -128,17 +117,17 @@ class Spot
 
     #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
-    #[Groups(["read:spot:collection",])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
     private $type;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
-    #[Groups(["read:spot:collection", "read:spot:item"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
     private $category;
 
     #[ORM\ManyToOne(targetEntity: Flat::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
-    #[Groups(["read:spot:collection",])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
     private $flat;
 
     #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Like::class)]
@@ -146,11 +135,11 @@ class Spot
     private $likes;
 
     #[ORM\OneToMany(mappedBy: 'spot', targetEntity: Comment::class)]
-    #[Groups(["read:spot:collection",])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
     private $comments;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'spots')]
-    #[Groups(["read:spot:collection",])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection"])]
     private $tags;
 
     public function __construct()
