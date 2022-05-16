@@ -23,12 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                 "groups" => "read:spot:collection", 
             ]
         ], 
-        "POST" => [
-            "normalization_context" => 
-            [
-                "groups" => "read:spot:collection", 
-            ]
-        ],
+        "POST"
     ],
     itemOperations:
     [
