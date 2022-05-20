@@ -18,7 +18,6 @@
 
 h1 {
     font-size: 7rem;
-    // color: var(--white);
 }
 
 h2 {
@@ -30,15 +29,13 @@ h3 {
 }
 
 p {
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
-:root {
-    --white: #ffffff;
-    --yellow: #FFEDCB;
-    --black: #000000;
-    --grey: #36373B;
-}
+$white: #ffffff;
+$yellow: #FFEDCB;
+$black: #000000;
+$grey: #36373B;
 
 
 

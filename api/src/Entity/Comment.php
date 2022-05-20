@@ -24,7 +24,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
             [
                 "groups" => "read:comment:item",
             ]
-        ], 
+        ],
+        "PUT", 
+        "DELETE" 
     ],
     order: ["createdAt" => "DESC"]
 )]
@@ -55,7 +57,7 @@ class Comment
     private $spot;
 
     #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'comments')]
-    // #[Groups(["read:user:collection"])]
+    #[Groups(["read:comment:collection"])]
     // Crash getAll Users
     private $author;
 

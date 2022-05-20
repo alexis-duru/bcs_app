@@ -1,16 +1,18 @@
 import Navbar from './components/navbar';
-import { ReactDOM } from 'react';
+import {BrowserRouter, Routes} from "react-router-dom";
 import React from 'react';
 import Homepage from './pages/homepage';
 import Header from './components/header';
 
 function App() {
   return (
-  <div class="page">
-    <Header />
-    <Navbar/>
-    <Homepage />
-</div>
+    <BrowserRouter>
+      <main className="page">
+        <Header />
+        <Navbar/>
+        <Homepage />
+    </main>
+    </BrowserRouter>
   );
 }
 

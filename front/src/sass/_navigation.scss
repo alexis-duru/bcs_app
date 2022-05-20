@@ -3,18 +3,38 @@ header {
   position: fixed;
   width: 100%;
   height: 70px;
-  background: var(--black);
+  background: $black;
   font-family: 'adieu';
-  color: #fff;
-  justify-content: center;
+  color: $yellow;
+  justify-content: space-around;
   align-items: center;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   display: flex;
-  flex-direction: column;
   justify-content: space-evenly;
-  &::before {
-    content: url(../assets/img/logo-header.png);
-  }
+  flex-direction: column;
+    width: 100%;
+    &::before {
+      content: url(../assets/img/logo-header.png);
+      color: white;
+    }
+    p {
+      color: $white;
+    }
+    .container_connexion {
+      position: absolute;
+      right: 0;
+      a {
+        color: $white;
+        margin-right: 10px;
+        text-decoration: none;
+        transition: 0.3s ease-in-out;
+        font-size: 1.2rem;
+        &:hover {
+          opacity: 0.8;
+          color: $yellow;
+        }
+      }
+    }
 }
 
 #nav-container {
@@ -65,7 +85,7 @@ header {
   &:hover {
       transition: 0.3s ease-in-out;
       .icon-bar {
-        background: var(--white);
+        background: $white;
         &:nth-child(1) {
             width: 100%;
             
@@ -82,7 +102,7 @@ header {
     display: block;
     width: 100%;
     height: 1px;
-    background: var(--white);
+    background: $white;
     transition: .3s;
     transform: scaleY(0.7);
   }
@@ -148,7 +168,7 @@ header {
         a {
             transition: 0.4s ease-in-out;
             text-decoration: none;
-            color: rgb(0, 0, 0);
+            color: $black;
             font-family: 'adieu';
             font-size: 3rem;
         }
@@ -164,7 +184,7 @@ main {
     height: 100vh;
     width: 100vw;
     .content {
-       background-color: var(--black);
+       background-color: $black;
        width: 100%;
        height: 100%;
        display: flex;

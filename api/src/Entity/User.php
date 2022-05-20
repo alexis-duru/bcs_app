@@ -45,11 +45,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(["read:user:collection", "read:user:item"])]
+    #[Groups(["read:user:collection", "read:user:item", "read:comment:collection"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(["read:user:collection", "read:user:item", "read:spot:collection", "read:spot:item"])]
+    #[Groups(["read:user:collection", "read:user:item", "read:spot:collection", "read:spot:item","read:comment:collection"])]
     #[Assert\NotBlank(message: 'Email is required')]
     #[Assert\Email(
         message: 'The email {{ value }} is not a valid email.',
@@ -83,7 +83,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $spots;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class)]
-    #[Groups(["read:user:collection", "read:user:item", "read:comment:collection", "read:comment:item"])]
+    #[Groups(["read:user:collection", "read:user:item"])]
     private $comments;
 
     public function __construct()

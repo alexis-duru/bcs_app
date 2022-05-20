@@ -76,7 +76,7 @@ class Spot
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
     #[Assert\NotBlank(message: 'User is required')]
-    #[Groups(["read:spot:collection", "read:spot:item"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:comment:collection"])]
     private $user;
 
     #[Assert\NotBlank(message: 'The adress is required')]
@@ -136,7 +136,7 @@ class Spot
     private $comments;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'spots')]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item", "read:comment:collection"])]
     private $tags;
 
     public function __construct()
