@@ -1,17 +1,25 @@
-import Navbar from './components/navbar';
-import {BrowserRouter, Routes} from "react-router-dom";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import React from 'react';
-import Homepage from './pages/homepage';
+import Spots from './pages/Spots';
+import Profil from './pages/Profil';
+import Homepage from './pages/Homepage';
 import Header from './components/header';
+import Navbar from './components/navbar';
 
-function App() {
+// /users - Url des users
+
+// /spots - Url des spots
+
+const App = () => {
   return (
     <BrowserRouter>
-      <main className="page">
-        <Header />
-        <Navbar/>
-        <Homepage />
-    </main>
+     <Header />
+    <Navbar/>
+    <Routes>
+        <Route path="/" element={ <Homepage/> } />
+        <Route path="/profil" element={ <Profil/> } />
+        <Route path="/spots" element={ <Spots/> } />
+    </Routes>
     </BrowserRouter>
   );
 }
