@@ -82,9 +82,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ApiSubresource]
     private $spots;
 
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class)]
+    #[Groups(["read:user:collection", "read:user:item", "read:comment:collection", "read:comment:item"])]
+    private $comments;
+
     public function __construct()
     {
         $this->spots = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -209,6 +214,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($spot->getUser() === $this) {
                 $spot->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getAuthor() === $this) {
+                $comment->setAuthor(null);
             }
         }
 

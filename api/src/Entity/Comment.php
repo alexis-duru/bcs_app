@@ -46,13 +46,18 @@ class Comment
     private $updatedAt;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item", "read:comment:collection"])]
     private $content;
 
     #[ORM\ManyToOne(targetEntity: Spot::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: true)]
     #[Groups(["read:comment:collection"])]
     private $spot;
+
+    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'comments')]
+    // #[Groups(["read:user:collection"])]
+    // Crash getAll Users
+    private $author;
 
     public function getId(): ?int
     {
@@ -103,6 +108,18 @@ class Comment
     public function setSpot(?Spot $spot): self
     {
         $this->spot = $spot;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?user
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?user $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

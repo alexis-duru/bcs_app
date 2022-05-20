@@ -39,12 +39,13 @@ use Symfony\Component\Validator\Constraints as Assert;
                 "groups" => "read:spot:item",
             ]
         ], 
-        "DELETE" => [
-            "normalization_context" => 
-            [
-                "groups" => "read:spot:item",
-            ]
-        ], 
+        "DELETE" 
+        // => [
+        //     "normalization_context" => 
+        //     [
+        //         "groups" => "read:spot:item",
+        //     ]
+        // ], 
     ],
     order: ["createdAt" => "DESC"],
 )]
@@ -62,7 +63,7 @@ class Spot
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item", "read:category:collection", "read:type:collection", "read:type:item"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item", "read:category:collection", "read:type:collection", "read:type:item", "read:comment:collection"])]
     #[Assert\NotBlank(message: 'The name is required')]
     #[Assert\Length(
         min: 5,

@@ -13,8 +13,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     collectionOperations:[
         "GET" => [
-            "normalization_context" => ["groups" => "read:tag:collection",]
-        ]],
+            "normalization_context" => ["groups" => "read:tag:collection"]
+        ]
+    ],
 )]
 
 class Tag
