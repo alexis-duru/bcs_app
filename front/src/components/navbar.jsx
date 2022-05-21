@@ -13,7 +13,7 @@ const Navbar  = (props) => {
           <div id="nav-content" tabindex="0">
             <ul>
               <li><Link to="/">Home</Link></li>
-              <li><Link to="spot">Spot</Link></li>
+              <li><Link to="spots">Spot</Link></li>
               <li><Link to="profil">Profil</Link></li>
             </ul>
           </div>

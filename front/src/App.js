@@ -13,7 +13,7 @@ import Navbar from './components/navbar';
 const App = () => {
   return (
     <BrowserRouter>
-     <Header />
+    <Header />
     <Navbar/>
     <Routes>
         <Route path="/" element={ <Homepage/> } />

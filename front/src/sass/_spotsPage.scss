@@ -1,0 +1,79 @@
+.spotsPage {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-items: flex-end;
+    .leftSideBar {
+        z-index: -1;
+        min-width: 20%;
+        height: 100%;
+        background-image: url(../assets/img/navigation.png);
+        filter: brightness(50%);
+        background-attachment:fixed;
+    }
+    .spotsPageWrapper {
+        display: flex;
+        width: 80%;
+        height: 100vh;
+        background: $white;
+        flex-direction: column;
+        .spotsPageHeader {
+            min-height: 10vh;
+            width: 100%;
+            background: $grey2;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 7vh;
+            p {
+                color: white;
+                font-family: 'lorinReg';
+                letter-spacing: 1px;
+            }
+        }
+        .spotsPageWrapperCards {
+            background-color: $black;
+            height: auto;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            // padding: 0% 10%;
+            overflow-y: scroll;
+            .spotsPageCards {
+                height: 50vh;
+                width: 20vw;
+                min-width: 300px;
+                margin: 50px;
+                background: $grey;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .spotsPageCardsInfos {
+                    height: 80%;
+                    width: 80%;
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: flex-start;
+                    flex-direction: column;
+                    H2, p {
+                        color: $white;
+                    }
+                }
+                .spotsPageCardsMedia {
+                    height: 10%;
+                    width: 80%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: $white;
+                    border-radius: 5px;
+                }
+            }
+
+        }
+    }
+}

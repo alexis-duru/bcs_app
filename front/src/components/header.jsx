@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const Header = () => {
     return ( 
         <header>
-            <div>
-                <p>BORDEAUX CITY SKATEBOARD</p>
+            <div className="logo_header">
+                <Link to="/">BORDEAUX CITY SKATEBOARD</Link>
             </div>
             <div className="container_connexion">
                 <Link to="/">Inscription</Link>
