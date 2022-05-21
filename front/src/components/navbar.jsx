@@ -5,12 +5,12 @@ const Navbar  = (props) => {
     return (  
         <div id="nav-container">
           <div className="bg"></div>
-          <div className="button" tabindex="0">
+          <div className="button" tabIndex="0">
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>  
           </div>
-          <div id="nav-content" tabindex="0">
+          <div id="nav-content" tabIndex="0">
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="spots">Spot</Link></li>
