@@ -23,6 +23,7 @@ const Spots = () => {
                             <p>Postal code</p>
                             <p>Created At</p>
                             <p>Details</p>
+                            <button className="deleteButton">Delete</button>
                         </div>
                         <div className='spotsPageCardsMedia'></div>
                     </div>
