@@ -3,8 +3,8 @@ import React from 'react';
 import Spots from './pages/Spots';
 import Profil from './pages/Profil';
 import Homepage from './pages/Homepage';
-import Header from './components/header';
-import Navbar from './components/navbar';
+import Header from './components/Header';
+import Navbar from './components/Navbar';
 
 // /users - Url des users
 

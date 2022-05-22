@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from "axios";
+import Pagination from "../components/Pagination";
 
 const Spots = props => {
 
@@ -35,13 +36,12 @@ const Spots = props => {
     }
 
     const itemsPerPage = 10;
-    const pagesCount = Math.ceil(spots.length / itemsPerPage);
-    const pages = [];
+    
+    // console.log(pages)
 
-    for(let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
-    console.log(pages)
+    // GESTION DE MA PAGINATION
+    
+    const paginatedSpots = Pagination.getData(spots, currentPage, itemsPerPage);
 
     return (
         <>
@@ -57,7 +57,7 @@ const Spots = props => {
                     <p>Filter</p>
                 </div>
                 <div className="spotsPageWrapperCards">
-                    {spots.map(spot => 
+                    {paginatedSpots.map(spot => 
                         <div key={spot.id} className="spotsPageCards">
                             <div className='spotsPageCardsInfos'>
                                 <h2>{spot.name}</h2>
@@ -75,38 +75,17 @@ const Spots = props => {
                         </div>
                     )}
                 </div>
-                <ul className="paginationContainer">
-                    <li className={"pageItem " + (currentPage === 1 &&  " disabled")}>
-                        <button 
-                            className="pageLink arrow" 
-                            onClick={ () => handlePageChange(currentPage - 1)}>
-                            <svg width="18" height="18"><use href="#left" /></svg>
-                        <span className="arrowText">Previous</span> 
-                        </button>
-                    </li>
-                {pages.map(page => (
-                    <li key={page} className={"pageItem " + (currentPage === page && " active")}>
-                        <button className="pageLink" onClick={() => handlePageChange(page)} >
-                        {page}
-                        </button>
-                    </li>
-                ))}
-                    <li className={"pageItem " + (currentPage === pagesCount &&  " disabled")}>
-                        <button 
-                            className="pageLink " 
-                            onClick={ () => handlePageChange(currentPage + 1)}> 
-                            <svg width="18" height="18">
-                        <use href="#right" />
-                        </svg> 
-                        </button>
-                    </li>
-                <div className="hide_arrow_container">
-                        <svg className="hide">
-                            <symbol id="left" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></symbol>
-                            <symbol id="right" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></symbol>
-                        </svg>
-                </div>
-                </ul>
+
+                {/* PAGINATION */}
+
+                <Pagination 
+                    currentPage={currentPage} 
+                    itemsPerPage={itemsPerPage} 
+                    length={spots.length}
+                    onPageChanged={handlePageChange}
+                 />
+
+                {/* PAGINATION */}
             </div>
         </div>
         </>

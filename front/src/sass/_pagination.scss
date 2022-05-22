@@ -17,24 +17,8 @@
   }
   .pageItem {
     width: auto;
-    height: 32px;
-    margin: 10px;
-    border-radius: 6px;
-    background: $grey2;
-    max-width: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'lorinReg';
-    cursor: pointer;
-    padding: 0 6px;
-    text-decoration: none;
-    color: $white;
-    transition: 0.1s ease-in-out;
-    opacity: 0.5;
-    &:hover {
-      opacity: 0.8;
-    }
+    height: 100%;
+    margin: 0px 10px;
   }
   .hide_arrow_container {
       display: none;
@@ -43,23 +27,33 @@
   .active {
     color: black;
     opacity: 1;
+    background: $grey2;
   }
 
 }
   
 .pageLink {
-  background: transparent;
   width: 100%;
   height: 100%;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
   text-decoration: none;
   color: $white;
   font-family: 'lorinReg';
   border: 0px;
-  height: 100%;
+  color: white;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  transition: 0.1s ease-in-out;
+  &:hover {
+    &:hover {
+      background: $grey2;
+      opacity: 0.8;
+    }
+
+  }
 }
 
 .disabled {
