@@ -20,13 +20,17 @@
         background: $white;
         flex-direction: column;
         .spotsPageHeader {
-            min-height: 10vh;
+            min-height: 5vh;
             width: 100%;
-            background: $grey2;
+            background: $black;
             display: flex;
             justify-content: space-around;
             align-items: center;
             margin-top: 7vh;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+
             p {
                 color: white;
                 font-family: 'lorinReg';
@@ -52,6 +56,11 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                transform: scale(1);
+                transition: 0.3s ease-in-out;
+                &:hover {
+                    transform: scale(1.01);
+                }
                 .spotsPageCardsInfos {
                     height: 80%;
                     width: 80%;
