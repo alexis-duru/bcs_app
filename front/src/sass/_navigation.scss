@@ -15,6 +15,7 @@ header {
     width: 100%;
     &::before {
       content: url(../assets/img/logo-header.png);
+      cursor: pointer;
       color: white;
     }
     .logo_header {

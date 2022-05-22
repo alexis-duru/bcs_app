@@ -5,7 +5,7 @@ import axios from "axios";
 const Spots = props => {
 
     const [spots, setSpots] = useState([]);
-    const [currentPage, setcurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/spots")
@@ -31,7 +31,7 @@ const Spots = props => {
     };
 
     const handlePageChange = (page) => {
-        setcurrentPage(page);
+        setCurrentPage(page);
     }
 
     const itemsPerPage = 10;
@@ -74,40 +74,40 @@ const Spots = props => {
                             <div className='spotsPageCardsMedia'></div>
                         </div>
                     )}
-            </div>
-                <div className="paginationContainer">
-                    <div className="pageItem arrow">
-                        <svg width="18" height="18">
-                        <use href="#left" />
-                        </svg>
+                </div>
+                <ul className="paginationContainer">
+                    <li className={"pageItem " + (currentPage === 1 &&  " disabled")}>
+                        <button 
+                            className="pageLink arrow" 
+                            onClick={ () => handlePageChange(currentPage - 1)}>
+                            <svg width="18" height="18"><use href="#left" /></svg>
                         <span className="arrowText">Previous</span> 
-                    </div>
-
-                    {pages.map(page => (
-                        <li key={page} className={"pageItem"}>
-                            {/* + (currentPage === page && "active") */}
-                            <button 
-                                className="pageLink" 
-                                onClick={() => handlePageChange(page)}
-                            >
-                            {page}
-                            </button>
-                        </li>
-                    ))}
-                    
-                    <div className="pageItem arrow">
-                        <svg width="18" height="18">
+                        </button>
+                    </li>
+                {pages.map(page => (
+                    <li key={page} className={"pageItem " + (currentPage === page && " active")}>
+                        <button className="pageLink" onClick={() => handlePageChange(page)} >
+                        {page}
+                        </button>
+                    </li>
+                ))}
+                    <li className={"pageItem " + (currentPage === pagesCount &&  " disabled")}>
+                        <button 
+                            className="pageLink " 
+                            onClick={ () => handlePageChange(currentPage + 1)}> 
+                            <svg width="18" height="18">
                         <use href="#right" />
-                        </svg>
-                    </div>
-                    <div className="hide_arrow_container">
+                        </svg> 
+                        </button>
+                    </li>
+                <div className="hide_arrow_container">
                         <svg className="hide">
                             <symbol id="left" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></symbol>
                             <symbol id="right" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></symbol>
                         </svg>
-                    </div>
-                    </div>
                 </div>
+                </ul>
+            </div>
         </div>
         </>
     )
