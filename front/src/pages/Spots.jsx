@@ -1,7 +1,6 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
-import axios from "axios";
 import Pagination from "../components/Pagination";
+import spotsAPI from '../services/spotsAPI';
 
 const Spots = props => {
 
@@ -9,44 +8,68 @@ const Spots = props => {
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
 
-    useEffect(() => {
-        axios.get("http://localhost:8000/api/spots")
-        .then(response => response.data['hydra:member'])
-        .then(data => setSpots(data))
-        .catch(error => console.log(error.response));
+
+    // Récupération de l'ensemble de mes spots
+
+    const fetchSpots = async () => {
+        try {
+            const data = await spotsAPI.findAll()
+            setSpots(data)
+        } catch (error) {
+            console.log(error.response)
+        }
+    }
+
+
+    useEffect( () => {
+        fetchSpots();
     }, []);
 
-    const handleDelete = id => {
+    //  Gestion de la suppression d'un spot 
+
+    const handleDelete = async id =>  {
         const originalSpots = [...spots];
 
         setSpots(spots.filter(spot => spot.id !== id));
 
-        axios
-            .delete("http://localhost:8000/api/spots/" + id)
-            .then(response => 
-                console.log("spot is delete, ok !")
-            )
-            .catch(error => {
-                setSpots(originalSpots);
-                console.log(error.response + "sorry, spot can't be deleted");
-            })
+        try {
+            await spotsAPI.delete(id)
+            console.log("spot is delete, ok !")
+        } catch (error) {
+            setSpots(originalSpots);
+            console.log(error.response + "sorry, spot can't be deleted");
+        }
     };
+
+        // FIRST VERSION
+        // .then(response => console.log("spot is delete, ok !"))
+        // .catch(error => {
+        //     setSpots(originalSpots);
+        //     console.log(error.response + "sorry, spot can't be deleted");
+        // });
+
+    //  Gestion du changement de page
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
-    }
+    };
 
-    const handleSearch = event => {
-        const value = event.currentTarget.value;
-        setSearch(value);
+    // Gestion de la recherche
+
+    const handleSearch = ({currentTarget}) => {
+        setSearch(currentTarget.value);
         setCurrentPage(1);
     };
 
     const itemsPerPage = 10;
 
+    // Filtre des spots en fonction de la recherche
+
     const filteredSpots = spots.filter(s => 
         s.name.toLowerCase().includes(search.toLowerCase())
     );
+
+    // Gestion de la pagination
 
     const paginatedSpots = Pagination.getData(
         // spots, 
@@ -66,12 +89,9 @@ const Spots = props => {
                     <div className="searchBar">
                         <input type="text" onChange={handleSearch} value={search} placeholder="Rechercher ..." className="searchBarControl" />
                     </div>
-                    {/* <p>Filter</p>
-                    <p>Filter</p>
-                    <p>Filter</p>
-                    <p>Filter</p> */}
                 </div>
                 <div className="spotsPageWrapperCards">
+                <div className="spotsPageWrapperCards_overlay"></div>
                     {paginatedSpots.map(spot => 
                         <div key={spot.id} className="spotsPageCards">
                             <div className='spotsPageCardsInfos'>
@@ -82,7 +102,9 @@ const Spots = props => {
                                     <p>{spot.city}</p>
                                     <p>{spot.postalCode}</p>
                                     <p>{spot.details}</p>
-                                    <hr></hr>
+                                    <p>{spot.type.name}</p>
+                                    <p>{spot.category.name}</p>
+                                    <p>{spot.flat.name}</p>
                                     <button 
                                         onClick={() => handleDelete(spot.id)} 
                                         className="deleteButton">Delete

@@ -1,0 +1,29 @@
+main {
+    height: 100vh;
+    width: 100vw;
+    background-image: url(../../assets/img/noise.gif);
+    .content {
+       background-color: rgba(0, 0, 0, 0.97);
+       width: 100%;
+       height: 100%;
+       display: flex;
+        justify-content: center;
+        align-items: center;
+
+       img {
+           max-width: 50%;
+           max-height: 50%;
+           animation: fadeInBackgroundImg 2s;
+           transition: 0.3s ease-in-out;
+           cursor: pointer;
+           &:hover {
+             opacity: 0.5;
+           }
+
+        @keyframes fadeInBackgroundImg {
+            0% {opacity:0;}
+            100% {opacity:1;}
+        }
+       }
+    }
+}

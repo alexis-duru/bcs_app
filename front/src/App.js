@@ -1,14 +1,9 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import React from 'react';
-import Spots from './pages/Spots';
-import Profil from './pages/Profil';
-import Homepage from './pages/Homepage';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from './components/Header';
 import Navbar from './components/Navbar';
-
-// /users - Url des users
-
-// /spots - Url des spots
+import Homepage from './pages/Homepage';
+import Profil from './pages/Profil';
+import Spots from './pages/Spots';
 
 const App = () => {
   return (

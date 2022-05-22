@@ -13,6 +13,7 @@ header {
   justify-content: space-evenly;
   flex-direction: column;
     width: 100%;
+    z-index: 999;
     &::before {
       content: url(../assets/img/logo-header.png);
       cursor: pointer;
@@ -71,6 +72,7 @@ header {
   width: 100%;
   pointer-events: none;
   top: 0;
+  z-index: 999;
 }
 
 #nav-container .bg {
@@ -207,33 +209,4 @@ header {
 
 #nav-container:focus-within #nav-content {
   transform: none;
-}
-
-main {
-    height: 100vh;
-    width: 100vw;
-    .content {
-       background-color: $black;
-       width: 100%;
-       height: 100%;
-       display: flex;
-        justify-content: center;
-        align-items: center;
-
-       img {
-           max-width: 50%;
-           max-height: 50%;
-           animation: fadeInBackgroundImg 2s;
-           transition: 0.3s ease-in-out;
-           cursor: pointer;
-           &:hover {
-             opacity: 0.5;
-           }
-
-        @keyframes fadeInBackgroundImg {
-            0% {opacity:0;}
-            100% {opacity:1;}
-        }
-       }
-    }
 }

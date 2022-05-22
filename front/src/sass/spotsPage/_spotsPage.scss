@@ -29,6 +29,7 @@
             margin-top: 7vh;
             border-top: 1px solid rgba(255, 255, 255, 0.5);
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            z-index: 10;
             p {
                 color: white;
                 font-family: 'lorinReg';
@@ -38,12 +39,17 @@
         }
         .spotsPageWrapperCards {
             background: $black;
+            // position: relative;
             min-height: 83vh;
             width: 100%;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             overflow-y: scroll;
+            background-image: url(../../assets/img/noise.gif);
+            z-index: 1;
+
+
             .spotsPageCards {
                 height: 50vh;
                 min-height: 50vh;
@@ -113,12 +119,22 @@
             }
 
         }
+        .spotsPageWrapperCards_overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 20%;
+            background-color: rgba(0, 0, 0, 0.935);
+            z-index: -999;
+        }
         .fullPaginationContainer {
             background-color: $black;
             width: 100%;
             height: 100%;
             border-top: 1px solid rgba(255, 255, 255, 0.5);
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            z-index: 999;
         }
     }
 }
