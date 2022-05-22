@@ -65,8 +65,13 @@ const Spots = props => {
 
     // Filtre des spots en fonction de la recherche
 
-    const filteredSpots = spots.filter(s => 
-        s.name.toLowerCase().includes(search.toLowerCase())
+    const filteredSpots = spots.filter(
+        s => 
+        s.name.toLowerCase().includes(search.toLowerCase()) ||
+        s.type.name.toLowerCase().includes(search.toLowerCase()) ||
+        s.category.name.toLowerCase().includes(search.toLowerCase()) ||
+        s.flat.name.toLowerCase().includes(search.toLowerCase())
+        // s.type.name.toLowerCase().includes(search.toLowerCase())
     );
 
     // Gestion de la pagination
@@ -96,15 +101,17 @@ const Spots = props => {
                         <div key={spot.id} className="spotsPageCards">
                             <div className='spotsPageCardsInfos'>
                                 <p className="spotNumber">{spot.id}</p>
+                                {/* <p className="spotType">{spot.type.name}</p> */}
                                 <div className="overlay">
                                     <h2>{spot.name}</h2>
                                     <p>{spot.address}</p>
                                     <p>{spot.city}</p>
                                     <p>{spot.postalCode}</p>
                                     <p>{spot.details}</p>
+                                    <p>{spot.user.email}</p>
                                     <p>{spot.type.name}</p>
                                     <p>{spot.category.name}</p>
-                                    <p>{spot.flat.name}</p>
+                                   <p>{spot.flat.name}</p>
                                     <button 
                                         onClick={() => handleDelete(spot.id)} 
                                         className="deleteButton">Delete
