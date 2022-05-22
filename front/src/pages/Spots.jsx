@@ -7,6 +7,7 @@ const Spots = props => {
 
     const [spots, setSpots] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/spots")
@@ -35,13 +36,24 @@ const Spots = props => {
         setCurrentPage(page);
     }
 
-    const itemsPerPage = 10;
-    
-    // console.log(pages)
+    const handleSearch = event => {
+        const value = event.currentTarget.value;
+        setSearch(value);
+        setCurrentPage(1);
+    };
 
-    // GESTION DE MA PAGINATION
-    
-    const paginatedSpots = Pagination.getData(spots, currentPage, itemsPerPage);
+    const itemsPerPage = 10;
+
+    const filteredSpots = spots.filter(s => 
+        s.name.toLowerCase().includes(search.toLowerCase())
+    );
+
+    const paginatedSpots = Pagination.getData(
+        // spots, 
+        filteredSpots, 
+        currentPage, 
+        itemsPerPage
+    );
 
     return (
         <>
@@ -51,41 +63,48 @@ const Spots = props => {
             </div>
             <div className="spotsPageWrapper">
                 <div className="spotsPageHeader">
+                    <div className="searchBar">
+                        <input type="text" onChange={handleSearch} value={search} placeholder="Rechercher ..." className="searchBarControl" />
+                    </div>
+                    {/* <p>Filter</p>
                     <p>Filter</p>
                     <p>Filter</p>
-                    <p>Filter</p>
-                    <p>Filter</p>
+                    <p>Filter</p> */}
                 </div>
                 <div className="spotsPageWrapperCards">
                     {paginatedSpots.map(spot => 
                         <div key={spot.id} className="spotsPageCards">
                             <div className='spotsPageCardsInfos'>
-                                <h2>{spot.name}</h2>
-                                <p>{spot.id}</p>
-                                <p>{spot.address}</p>
-                                <p>{spot.city}</p>
-                                <p>{spot.postalCode}</p>
-                                <p>{spot.details}</p>
-                                <button 
-                                    onClick={() => handleDelete(spot.id)} 
-                                    className="deleteButton">Delete
-                                </button>
+                                <p className="spotNumber">{spot.id}</p>
+                                <div className="overlay">
+                                    <h2>{spot.name}</h2>
+                                    <p>{spot.address}</p>
+                                    <p>{spot.city}</p>
+                                    <p>{spot.postalCode}</p>
+                                    <p>{spot.details}</p>
+                                    <hr></hr>
+                                    <button 
+                                        onClick={() => handleDelete(spot.id)} 
+                                        className="deleteButton">Delete
+                                    </button>
+                                </div>
                             </div>
-                            <div className='spotsPageCardsMedia'></div>
+                            {/* <div className='spotsPageCardsMedia'></div> */}
                         </div>
                     )}
                 </div>
+                <div className="fullPaginationContainer">
+                    {itemsPerPage < filteredSpots.length && (
+                        <Pagination 
+                            currentPage={currentPage} 
+                            itemsPerPage={itemsPerPage} 
+                            length={filteredSpots.length}
+                            // length={spots.length}
+                            onPageChanged={handlePageChange}
+                        />
+                    )}
 
-                {/* PAGINATION */}
-
-                <Pagination 
-                    currentPage={currentPage} 
-                    itemsPerPage={itemsPerPage} 
-                    length={spots.length}
-                    onPageChanged={handlePageChange}
-                 />
-
-                {/* PAGINATION */}
+                </div>
             </div>
         </div>
         </>

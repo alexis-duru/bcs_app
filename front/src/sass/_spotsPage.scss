@@ -24,66 +24,101 @@
             width: 100%;
             background: $black;
             display: flex;
-            justify-content: space-around;
+            justify-content: flex-end;
             align-items: center;
             margin-top: 7vh;
             border-top: 1px solid rgba(255, 255, 255, 0.5);
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-
-
             p {
                 color: white;
                 font-family: 'lorinReg';
                 letter-spacing: 1px;
+                visibility: hidden;
             }
         }
         .spotsPageWrapperCards {
-            background-color: $black;
-            height: auto;
+            background: $black;
+            min-height: 83vh;
             width: 100%;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            // padding: 0% 10%;
             overflow-y: scroll;
             .spotsPageCards {
                 height: 50vh;
                 min-height: 50vh;
                 width: 20vw;
                 min-width: 300px;
-                margin: 50px;
-                background: $grey;
+                margin: 40px;
+                border: 1px solid rgba(255, 255, 255, 0.193);
                 border-radius: 10px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 transform: scale(1);
                 transition: 0.3s ease-in-out;
-                &:hover {
-                    transform: scale(1.01);
+                cursor: pointer;
+                position: relative;
+                .overlay {
+                    position: absolute;
+                    background: $black;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    transition: 0.3s ease-in-out;
+                    opacity: 0;
+                    &:hover {
+                        opacity: 1;
+                        background-color: rgba(0, 0, 0, 0.58);
+                    }
                 }
                 .spotsPageCardsInfos {
-                    height: 80%;
-                    width: 80%;
+                    height: 100%;
+                    width: 100%;
                     display: flex;
                     justify-content: space-evenly;
                     align-items: flex-start;
                     flex-direction: column;
+                    background-image: url(../assets/img/navigation.png);
+                    background-size: cover;
+                    position: relative;
+                    .spotNumber {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        color: black;
+                    }
                     H2, p {
                         color: $white;
+                        margin: 10px;
+                        font-family: 'lorinReg';
+                    }
+                    p {
+                        font-size: 1.5rem;
                     }
                 }
                 .spotsPageCardsMedia {
                     height: 10%;
-                    width: 80%;
+                    width: 100%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     background: $white;
-                    border-radius: 5px;
                 }
             }
 
+        }
+        .fullPaginationContainer {
+            background-color: $black;
+            width: 100%;
+            height: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
         }
     }
 }
