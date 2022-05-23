@@ -3,20 +3,19 @@ import React from 'react';
 const LoginPage = (props) => {
     return (  
         <>
-          <div className="spotsPage">
+          <div className="globalPage">
             <div className="leftSideBar">
 
             </div>
-            <div className="spotsPageWrapper">
-                <div className="spotsPageHeader">
+            <div className="globalPageWrapper">
+                <div className="globalPageHeader">
                     <div className="searchBar">
-                        {/* <input type="text" onChange={handleSearch} value={search} placeholder="Rechercher ..." className="searchBarControl" /> */}
                     </div>
                 </div>
-                <div className="spotsPageWrapperCards">
-                <div className="spotsPageWrapperCards_overlay"></div>
+                <div className="globalPageWrapperCards">
+                <div className="globalPageWrapperCards_overlay"></div>
                 </div>
-                <div className="fullPaginationContainer">
+                <div className="globalFullPaginationContainer">
                 </div>
             </div>
         </div>
