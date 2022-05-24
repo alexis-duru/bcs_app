@@ -5,8 +5,15 @@ form {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    min-width: 50%;
-    min-height: 50%;
+    width: 40%;
+    max-width: 650px;
+    min-width: 500px;
+    height: 70%;
+    min-height: 350px;
+    max-height: 400px;
+    margin: 50px;
+    padding: 10px 0px;
+
     background-image: url(../../assets/img/noise.gif);
     position: relative;
     .form_overlay {
@@ -60,6 +67,19 @@ form {
             opacity: 0.3;
 
         }
+        .invalid-message {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: $white;
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+        }
+        .is-invalid {
+            color: $red;
+            text-decoration: line-through;
+        }
+
         button {
             width: 100%;
             border: 0px;

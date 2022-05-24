@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import axios from 'axios';
-import spotsAPI from '../services/spotsAPI';
+import authAPI from '../services/authAPI';
 
 const LoginPage = (props) => {
 
@@ -12,9 +11,8 @@ const LoginPage = (props) => {
 
     const [error, setError] = useState('');
 
-    const handleChange = (event) => {
-        const value = event.currentTarget.value;
-        const email = event.currentTarget.name;
+    const handleChange = ({currentTarget}) => {
+        const {value, email} = currentTarget
 
         setCredentials({...credentials, [email]: value});
     }
@@ -23,24 +21,12 @@ const LoginPage = (props) => {
         event.preventDefault();
 
         try {
-            const token = await axios
-                .post("http://localhost:8000/api/login_check", credentials)
-                .then(response => response.data.token)
-                // .then(response => console.log(response));
-            setError('');
-
-            window.localStorage.setItem('authToken', token);
-
-            axios.defaults.headers["Authorization"] = "Bearer " + token;
-
-            const data = await spotsAPI.findAll();
-            console.log(data)
+           await authAPI.authenticate(credentials);
+           setError("");
         } catch (error) { 
             console.log(error.response + "sorry, you can't access")
             setError("Aucun compte ne possède cette adresse");
         }
-
-        console.log(credentials);
     }
 
 
