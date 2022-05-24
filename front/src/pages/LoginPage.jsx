@@ -12,9 +12,12 @@ const LoginPage = (props) => {
     const [error, setError] = useState('');
 
     const handleChange = ({currentTarget}) => {
-        const {value, email} = currentTarget
+        const {value, name} = currentTarget
+        
+        // const value = event.currentTarget.value;
+        // const email = event.currentTarget.name;
 
-        setCredentials({...credentials, [email]: value});
+        setCredentials({...credentials, [name]: value});
     }
 
     const handleSubmit = async event => {

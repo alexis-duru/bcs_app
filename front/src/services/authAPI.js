@@ -1,4 +1,11 @@
 import axios from 'axios';
+import spotAPI from '../services/spotsAPI';
+
+function logout() {
+    window.localStorage.removeItem("authToken");
+    delete axios.defaults.headers["Authorization"];
+    // spotAPI.findAll().then(console.log)
+}
 
 function authenticate(credentials) {
     return axios
@@ -10,12 +17,13 @@ function authenticate(credentials) {
 
             axios.defaults.headers["Authorization"] = "Bearer " + token;
 
-            return true;
+            // spotAPI.findAll().then(console.log)
     });
 }
 
 const exportAPI = {
-    authenticate
+    authenticate,
+    logout,
 }
 
 export default exportAPI
