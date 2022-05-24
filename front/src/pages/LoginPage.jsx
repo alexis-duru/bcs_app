@@ -1,22 +1,44 @@
 import React from 'react';
 import { useState } from 'react';
+import axios from 'axios';
+import spotsAPI from '../services/spotsAPI';
 
 const LoginPage = (props) => {
 
     const [credentials, setCredentials] = useState({
-        username: "",
-        password: "",
+        email: '',
+        password: '',
     });
 
-    const handleChange = event => {
-        const value = event.currentTarget.value;
-        const name = event.currentTarget.name;
+    const [error, setError] = useState('');
 
-        setCredentials({...credentials, [name]: value});
+    const handleChange = (event) => {
+        const value = event.currentTarget.value;
+        const email = event.currentTarget.name;
+
+        setCredentials({...credentials, [email]: value});
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
+
+        try {
+            const token = await axios
+                .post("http://localhost:8000/api/login_check", credentials)
+                .then(response => response.data.token)
+                // .then(response => console.log(response));
+            setError('');
+
+            window.localStorage.setItem('authToken', token);
+
+            axios.defaults.headers["Authorization"] = "Bearer " + token;
+
+            const data = await spotsAPI.findAll();
+            console.log(data)
+        } catch (error) { 
+            console.log(error.response + "sorry, you can't access")
+            setError("Aucun compte ne possède cette adresse");
+        }
 
         console.log(credentials);
     }
@@ -36,15 +58,16 @@ const LoginPage = (props) => {
                 <form onSubmit={handleSubmit}>
                     <div className="form_overlay"></div>
                     <div className="form-group">
-                        <label htmlFor="_username">Email adress</label>
+                        <label htmlFor="email">Email adress</label>
                         <input 
-                            value={credentials.username} 
+                            value={credentials.email} 
                             onChange={handleChange}
                             type="email"  
                             placeholder="email adress" 
-                            name="username" 
-                            className="form-control" />
-                    </div>
+                            name="email" 
+                            className={"form-control" + (error && " is-invalid")} />
+                        {error &&<p className="invalid-message">{error}</p>}
+                    </div> 
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input 
