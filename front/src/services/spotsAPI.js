@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import API from "./api";
 
 function findAll() {
@@ -16,8 +16,8 @@ function findOne(id) {
 
 
 function deleteSpots(id) {
-    return axios 
-    .delete("http://localhost:8000/api/spots/" + id);
+    return API
+    .delete(`/spots/${id}`);
 }
 
 const exportAPI =  {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar  = (props) => {
+
     return (  
         <div id="nav-container">
           <div className="bg"></div>
@@ -13,8 +14,7 @@ const Navbar  = (props) => {
           <div id="nav-content" tabIndex="0">
             <ul>
               <li><Link to="/">Home</Link></li>
-              <li><Link to="spots">Spot</Link></li>
-              <li><Link to="login">Login</Link></li>
+              <li><Link to="spots">Spots</Link></li>
               <li><Link to="profil">Profil</Link></li>
             </ul>
           </div>

@@ -32,10 +32,10 @@ function setup() {
         const {exp: expiration} = jwtDecode(token)
         if(expiration * 1000 > new Date().getTime()){
             axios.defaults.headers["Authorization"] = "Bearer " + token;
-            console.log('Connexion établis')
+            console.log('Vous êtes connecté')
         }else{
            logout();
-           console.log('Vous êtes connecté')
+           console.log('Vous êtes déconnecté')
         }
     }else{
         logout();

@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import authAPI from '../services/authAPI';
 
-const LoginPage = (props) => {
+const LoginPage = ({onLogin}) => {
 
     const [credentials, setCredentials] = useState({
         email: '',
@@ -26,8 +26,9 @@ const LoginPage = (props) => {
         try {
            await authAPI.authenticate(credentials);
            setError("");
+           onLogin(true);
         } catch (error) { 
-            console.log(error.response + "sorry, you can't access")
+            // console.log(error.response + "sorry, you can't access")
             setError("Aucun compte ne possède cette adresse");
         }
     }
