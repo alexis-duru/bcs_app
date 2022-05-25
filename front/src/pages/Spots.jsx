@@ -117,9 +117,12 @@ const Spots = props => {
                                         onClick={() => handleDelete(spot.id)} 
                                         className="deleteButton">Delete
                                     </button>
-                                    <Link to={`/spots/${spot.id}`}>
-                                        Voir plus
-                                    </Link>
+                                    <div className="moreInfosButton">
+                                        <Link to={`/spots/${spot.id}`}>
+                                            Plus d'informations
+                                        </Link>
+
+                                    </div>
                                 </div>
                             </div>
                             {/* <div className='spotsPageCardsMedia'></div> */}

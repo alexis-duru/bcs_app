@@ -6,9 +6,9 @@ import LoginPage from "./pages/LoginPage";
 import Profil from './pages/Profil';
 import SpotDetails from "./pages/SpotDetails";
 import Spots from './pages/Spots';
-// import authAPI from "./services/authAPI";
+import authAPI from "./services/authAPI";
 
-// authAPI.setup();
+authAPI.setup();
 
 const App = () => {
   return (

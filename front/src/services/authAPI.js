@@ -1,5 +1,6 @@
 import axios from 'axios';
 import API from "./api";
+import jwtDecode from "jwt-decode"; 
 
 // import spotAPI from '../services/spotsAPI';
 
@@ -23,16 +24,29 @@ function authenticate(credentials) {
     });
 }
 
-// function setup() {
-//     const token = window.localStorage.getItem("authToken")
+function setup() {
+    const token = window.localStorage.getItem("authToken")
 
-//     if(token && ... )
-// }
+    
+    if(token) {
+        const {exp: expiration} = jwtDecode(token)
+        if(expiration * 1000 > new Date().getTime()){
+            axios.defaults.headers["Authorization"] = "Bearer " + token;
+            console.log('Connexion établis')
+        }else{
+           logout();
+           console.log('Vous êtes connecté')
+        }
+    }else{
+        logout();
+        console.log('Vous êtes déconnecté')
+    }
+}
 
 const exportAPI = {
     authenticate,
     logout,
-    // setup,
+    setup,
 }
 
 export default exportAPI
