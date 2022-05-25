@@ -1,5 +1,7 @@
 import axios from 'axios';
-import spotAPI from '../services/spotsAPI';
+import API from "./api";
+
+// import spotAPI from '../services/spotsAPI';
 
 function logout() {
     window.localStorage.removeItem("authToken");
@@ -8,8 +10,8 @@ function logout() {
 }
 
 function authenticate(credentials) {
-    return axios
-        .post("http://localhost:8000/api/login_check", credentials)
+    return API
+        .post("/login_check", credentials)
         .then(response => response.data.token)
         .then(token => {
             
@@ -21,9 +23,16 @@ function authenticate(credentials) {
     });
 }
 
+// function setup() {
+//     const token = window.localStorage.getItem("authToken")
+
+//     if(token && ... )
+// }
+
 const exportAPI = {
     authenticate,
     logout,
+    // setup,
 }
 
 export default exportAPI

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Pagination from "../components/Pagination";
 import spotsAPI from '../services/spotsAPI';
 
@@ -116,6 +117,9 @@ const Spots = props => {
                                         onClick={() => handleDelete(spot.id)} 
                                         className="deleteButton">Delete
                                     </button>
+                                    <Link to={`/spots/${spot.id}`}>
+                                        Voir plus
+                                    </Link>
                                 </div>
                             </div>
                             {/* <div className='spotsPageCardsMedia'></div> */}

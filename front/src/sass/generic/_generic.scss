@@ -39,7 +39,6 @@
         }
         .globalPageWrapperCards {
             background: $black;
-            // position: relative;
             min-height: 83vh;
             width: 100%;
             display: flex;
@@ -47,8 +46,6 @@
             flex-wrap: wrap;
             overflow-y: scroll;
             align-items: center;
-            // background-image: url(../../assets/img/noise.gif);
-            // z-index: 1;
         }
         .globalFullPaginationContainer {
             background-color: $black;
