@@ -7,7 +7,6 @@ import jwtDecode from "jwt-decode";
 function logout() {
     window.localStorage.removeItem("authToken");
     delete axios.defaults.headers["Authorization"];
-    // spotAPI.findAll().then(console.log)
 }
 
 function authenticate(credentials) {
@@ -20,33 +19,39 @@ function authenticate(credentials) {
 
             axios.defaults.headers["Authorization"] = "Bearer " + token;
 
-            // spotAPI.findAll().then(console.log)
     });
 }
 
 function setup() {
-    const token = window.localStorage.getItem("authToken")
-
     
+    const token = window.localStorage.getItem("authToken");
+
     if(token) {
-        const {exp: expiration} = jwtDecode(token)
+        const {exp: expiration} = jwtDecode(token);
         if(expiration * 1000 > new Date().getTime()){
             axios.defaults.headers["Authorization"] = "Bearer " + token;
-            console.log('Vous êtes connecté')
-        }else{
-           logout();
-           console.log('Vous êtes déconnecté')
         }
-    }else{
-        logout();
-        console.log('Vous êtes déconnecté')
     }
+}
+
+function isAuthenticated() {
+    const token = window.localStorage.getItem("authToken");
+
+    if(token) {
+        const {exp: expiration} = jwtDecode(token);
+        if(expiration * 1000 > new Date().getTime()){
+            return true;
+        }
+        return false;
+    }
+    return false;
 }
 
 const exportAPI = {
     authenticate,
     logout,
     setup,
+    isAuthenticated
 }
 
 export default exportAPI

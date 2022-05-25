@@ -1,11 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import authAPI from '../services/authAPI';
 
 const Header = ({isAuthenticated, onLogout}) => {
+
+    const navigate = useNavigate();
+
     const handleLogout = () => {
         authAPI.logout();
         onLogout(false);
+        navigate('/login', {replace: true});
     };
      
     return ( 
@@ -16,7 +20,7 @@ const Header = ({isAuthenticated, onLogout}) => {
             <div className="container_connexion">
                  {(!isAuthenticated && (
                  <>
-                    <Link to="/">Inscription</Link>
+                    <Link to="/register">Inscription</Link>
                     <Link to="/login">Login</Link>
                  </>)) || (
                      <button onClick={handleLogout} className="logoutButton">Deconnexion</button>

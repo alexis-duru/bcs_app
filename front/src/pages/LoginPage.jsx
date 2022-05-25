@@ -1,23 +1,23 @@
 import React from 'react';
 import { useState } from 'react';
 import authAPI from '../services/authAPI';
+import { useNavigate } from 'react-router-dom';
 
-const LoginPage = ({onLogin}) => {
+const LoginPage = ({ onLogin }) => {
+
+    const navigate = useNavigate();
 
     const [credentials, setCredentials] = useState({
-        email: '',
-        password: '',
+        email: "",
+        password: "",
     });
 
-    const [error, setError] = useState('');
+    const [error, setError] = useState("");
 
     const handleChange = ({currentTarget}) => {
-        const {value, name} = currentTarget
-        
-        // const value = event.currentTarget.value;
-        // const email = event.currentTarget.name;
+        const {value, name} = currentTarget;
 
-        setCredentials({...credentials, [name]: value});
+        setCredentials({ ...credentials, [name]: value});
     }
 
     const handleSubmit = async event => {
@@ -27,8 +27,8 @@ const LoginPage = ({onLogin}) => {
            await authAPI.authenticate(credentials);
            setError("");
            onLogin(true);
+           navigate("/spots", {replace: true})
         } catch (error) { 
-            // console.log(error.response + "sorry, you can't access")
             setError("Aucun compte ne possède cette adresse");
         }
     }

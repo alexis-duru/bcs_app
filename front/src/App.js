@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Homepage from './pages/HomePage';
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 import Profil from './pages/Profil';
 import SpotDetails from "./pages/SpotDetails";
 import Spots from './pages/Spots';
@@ -13,14 +14,12 @@ authAPI.setup();
 
 const App = () => {
 
-  // TODO : il faut demander a notre authAPI si on est connecté ou pas //
-
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-
-  console.log(isAuthenticated)
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    authAPI.isAuthenticated()
+  ); 
   
   return (
-    <BrowserRouter>
+    <BrowserRouter >
       <Header  isAuthenticated={isAuthenticated} onLogout={setIsAuthenticated} />
       <Navbar/>
       <Routes>
@@ -28,7 +27,8 @@ const App = () => {
           <Route path="/" element={ <Homepage/> } />
           <Route path="/login" 
           element= { <LoginPage/>} 
-          render={props => <LoginPage isAuthenticated={isAuthenticated} onLogin={setIsAuthenticated} /> } />
+          render={props => <LoginPage onLogin={setIsAuthenticated} {...props} /> } />
+          <Route path="/register" element={ <RegisterPage/> } />
           <Route path="/profil" element={ <Profil/> } />
           <Route path="/spots" element={ <Spots/> } />
           <Route path="/spots/:id" element={ <SpotDetails/> } />
