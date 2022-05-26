@@ -26,7 +26,7 @@ const LoginPage = ( { onLogin } ) => {
         try {
            await authAPI.authenticate(credentials);
         //    setError("");
-           onLogin();
+           onLogin(true);
            navigate("/spots", {replace: true})
         } catch (error) { 
             setError("Aucun compte ne possède cette adresse");
