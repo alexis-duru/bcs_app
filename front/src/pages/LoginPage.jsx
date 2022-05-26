@@ -3,7 +3,7 @@ import { useState } from 'react';
 import authAPI from '../services/authAPI';
 import { useNavigate } from 'react-router-dom';
 
-const LoginPage = ({ onLogin }) => {
+const LoginPage = ( { onLogin } ) => {
 
     const navigate = useNavigate();
 
@@ -25,8 +25,8 @@ const LoginPage = ({ onLogin }) => {
 
         try {
            await authAPI.authenticate(credentials);
-           setError("");
-           onLogin(true);
+        //    setError("");
+           onLogin();
            navigate("/spots", {replace: true})
         } catch (error) { 
             setError("Aucun compte ne possède cette adresse");

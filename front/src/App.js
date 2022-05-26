@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import Homepage from './pages/HomePage';
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import Profil from './pages/Profil';
+import Profile from './pages/ProfilePage';
 import SpotDetails from "./pages/SpotDetails";
 import Spots from './pages/Spots';
 import authAPI from "./services/authAPI";
@@ -25,11 +25,9 @@ const App = () => {
       <Routes>
           
           <Route path="/" element={ <Homepage/> } />
-          <Route path="/login" 
-          element= { <LoginPage/>} 
-          render={props => <LoginPage onLogin={setIsAuthenticated} {...props} /> } />
+          <Route path="/login" element={ <LoginPage onLogin={setIsAuthenticated} /> } />
           <Route path="/register" element={ <RegisterPage/> } />
-          <Route path="/profil" element={ <Profil/> } />
+          <Route path="/profile" element={ <Profile/> } />
           <Route path="/spots" element={ <Spots/> } />
           <Route path="/spots/:id" element={ <SpotDetails/> } />
       </Routes>

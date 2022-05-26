@@ -9,8 +9,8 @@ function logout() {
     delete axios.defaults.headers["Authorization"];
 }
 
-function authenticate(credentials) {
-    return API
+const authenticate = async (credentials) => {
+    await API
         .post("/login_check", credentials)
         .then(response => response.data.token)
         .then(token => {
@@ -48,10 +48,10 @@ function isAuthenticated() {
 }
 
 const exportAPI = {
-    authenticate,
-    logout,
     setup,
-    isAuthenticated
+    authenticate,
+    isAuthenticated,
+    logout
 }
 
-export default exportAPI
+export default exportAPI;
