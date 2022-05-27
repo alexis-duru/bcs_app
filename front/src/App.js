@@ -2,12 +2,12 @@ import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from './components/Header';
 import Navbar from './components/Navbar';
-import Homepage from './pages/HomePage';
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import Profile from './pages/ProfilePage';
-import SpotDetails from "./pages/SpotDetails";
-import Spots from './pages/Spots';
+import Homepage from './pages/home/HomePage';
+import LoginPage from "./pages/user/authentication/LoginPage";
+import RegisterPage from "./pages/user/registration/RegisterPage";
+import Profile from './pages/user/profile/ProfilePage';
+import SpotDetails from "./pages/spot/SpotDetails";
+import Spots from './pages/spot/Spots';
 import authAPI from "./services/authAPI";
 
 authAPI.setup();

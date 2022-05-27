@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react'
+import React from 'react';
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import spotsAPI from '../services/spotsAPI';
+import spotsAPI from '../../services/spotsAPI';
 
 const SpotDetails  = props => {
 
     const { id } = useParams();
 
     useEffect( () => {
+        
         fetchSpot();
+        // eslint-disable-next-line
     }, []);
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
-import authAPI from '../services/authAPI';
 import { useNavigate } from 'react-router-dom';
+import authAPI from '../../../services/authAPI';
 
 const LoginPage = ( { onLogin } ) => {
 

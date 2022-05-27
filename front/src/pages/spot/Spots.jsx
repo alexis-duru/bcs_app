@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Pagination from "../components/Pagination";
-import spotsAPI from '../services/spotsAPI';
+import Pagination from "../../components/Pagination";
+import spotsAPI from '../../services/spotsAPI';
 
 const Spots = props => {
 
