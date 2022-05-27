@@ -72,7 +72,6 @@ const Spots = props => {
         s.type.name.toLowerCase().includes(search.toLowerCase()) ||
         s.category.name.toLowerCase().includes(search.toLowerCase()) ||
         s.flat.name.toLowerCase().includes(search.toLowerCase())
-        // s.type.name.toLowerCase().includes(search.toLowerCase())
     );
 
     // Gestion de la pagination
@@ -112,7 +111,7 @@ const Spots = props => {
                                     <p>{spot.user.email}</p>
                                     <p>{spot.type.name}</p>
                                     <p>{spot.category.name}</p>
-                                   <p>{spot.flat.name}</p>
+                                    <p>{spot.flat.name}</p>
                                     <button 
                                         onClick={() => handleDelete(spot.id)} 
                                         className="deleteButton">Delete

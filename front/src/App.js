@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Homepage from './pages/home/HomePage';
@@ -9,6 +9,7 @@ import Profile from './pages/user/profile/ProfilePage';
 import SpotDetails from "./pages/spot/SpotDetails";
 import Spots from './pages/spot/Spots';
 import authAPI from "./services/authAPI";
+
 
 authAPI.setup();
 
@@ -27,7 +28,7 @@ const App = () => {
           <Route path="/" element={ <Homepage/> } />
           <Route path="/login" element={ <LoginPage onLogin={setIsAuthenticated} /> } />
           <Route path="/register" element={ <RegisterPage/> } />
-          <Route path="/profile" element={ <Profile/> } />
+          <Route path="/profile" element={ <Profile/> }/>
           <Route path="/spots" element={ <Spots/> } />
           <Route path="/spots/:id" element={ <SpotDetails/> } />
       </Routes>
