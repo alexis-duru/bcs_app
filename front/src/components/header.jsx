@@ -11,7 +11,7 @@ const Header = ({isAuthenticated, onLogout}) => {
         onLogout(false);
         navigate('/login', {replace: true});
     };
-     
+    
     return ( 
         <header>
             <div className="logo_header">

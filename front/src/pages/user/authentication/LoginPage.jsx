@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Field from '../../../components/forms/field';
 import authAPI from '../../../services/authAPI';
 
 const LoginPage = ( { onLogin } ) => {
@@ -47,7 +48,7 @@ const LoginPage = ( { onLogin } ) => {
                 <div className="globalPageWrapperCards">
                 <form onSubmit={handleSubmit}>
                     <div className="form_overlay"></div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label htmlFor="email">Email adress</label>
                         <input 
                             value={credentials.email} 
@@ -57,8 +58,14 @@ const LoginPage = ( { onLogin } ) => {
                             name="email" 
                             className={"form-control" + (error && " is-invalid")} />
                         {error &&<p className="invalid-message">{error}</p>}
-                    </div> 
-                    <div className="form-group">
+                    </div>  */}
+
+                    <Field label="Email adress" name="email" value={credentials.email} onChange={handleChange} placeholder="Email adress" error={error}  />
+
+                    <Field label="Password" name="password" value={credentials.password} onChange={handleChange} type="password" placeholder="Password" error={error}  />
+
+
+                    {/* <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input 
                             value={credentials.password} 
@@ -68,7 +75,7 @@ const LoginPage = ( { onLogin } ) => {
                             name="password" 
                             id="password" 
                             className="form-control" />
-                    </div>
+                    </div> */}
                     <div className="form-group">
                        <button type="submit" className="submitBtn">Login</button>
                     </div>

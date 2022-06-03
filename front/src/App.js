@@ -9,11 +9,14 @@ import Profile from './pages/user/profile/ProfilePage';
 import SpotDetails from "./pages/spot/SpotDetails";
 import Spots from './pages/spot/Spots';
 import authAPI from "./services/authAPI";
+// import ProtectedRoutes from "./ProtectedRoutes";
 
 
 authAPI.setup();
 
+
 const App = () => {
+
 
   const [isAuthenticated, setIsAuthenticated] = useState(
     authAPI.isAuthenticated()
@@ -21,17 +24,20 @@ const App = () => {
   
   return (
     <BrowserRouter >
+
       <Header  isAuthenticated={isAuthenticated} onLogout={setIsAuthenticated} />
+
       <Navbar/>
+
       <Routes>
-          
           <Route path="/" element={ <Homepage/> } />
           <Route path="/login" element={ <LoginPage onLogin={setIsAuthenticated} /> } />
           <Route path="/register" element={ <RegisterPage/> } />
           <Route path="/profile" element={ <Profile/> }/>
-          <Route path="/spots" element={ <Spots/> } />
+          <Route path="/spots"  element={ <Spots/> } />
           <Route path="/spots/:id" element={ <SpotDetails/> } />
       </Routes>
+
     </BrowserRouter>
   );
 }
