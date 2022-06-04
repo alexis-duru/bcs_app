@@ -7,13 +7,17 @@ function findAll() {
         .then(response => response.data['hydra:member'])
 };
 
-function findOne(id) {
+const findOne = async (id) => {
     return API
         .get(`/spots/${id}`)
         .then(response => response.data)
 };
 
-
+const createSpot = (credentials) => {
+    return API  
+        .post('/spots', credentials)
+        .then(response => response.data)
+}
 
 function deleteSpots(id) {
     return API
@@ -24,6 +28,7 @@ const exportAPI =  {
     findAll,
     delete: deleteSpots,
     findOne,
+    createSpot
 };
 
 export default exportAPI;

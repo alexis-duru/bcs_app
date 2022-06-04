@@ -15,7 +15,7 @@ const Header = ({isAuthenticated, onLogout}) => {
     return ( 
         <header>
             <div className="logo_header">
-                <Link to="/">BORDEAUX CITY SKATEBOARD</Link>
+                <Link to="/">SPOTED</Link>
             </div>
             <div className="container_connexion">
                 {

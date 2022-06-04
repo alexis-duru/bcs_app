@@ -9,6 +9,7 @@ import Profile from './pages/user/profile/ProfilePage';
 import SpotDetails from "./pages/spot/SpotDetails";
 import Spots from './pages/spot/Spots';
 import authAPI from "./services/authAPI";
+import SpotCreate from './pages/spot/SpotCreate';
 // import ProtectedRoutes from "./ProtectedRoutes";
 
 
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/profile" element={ <Profile/> }/>
           <Route path="/spots"  element={ <Spots/> } />
           <Route path="/spots/:id" element={ <SpotDetails/> } />
+          <Route path="/spots/create" element={ <SpotCreate />} />
       </Routes>
 
     </BrowserRouter>

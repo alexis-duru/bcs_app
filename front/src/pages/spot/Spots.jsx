@@ -90,7 +90,10 @@ const Spots = props => {
 
             </div>
             <div className="spotsPageWrapper">
-                <div className="spotsPageHeader">
+                <div className="spotsPageHeader">`
+                    <div>
+                        <Link to='/spots/create'>Création d'un spot</Link>
+                    </div>`
                     <div className="searchBar">
                         <input type="text" onChange={handleSearch} value={search} placeholder="Rechercher ..." className="searchBarControl" />
                     </div>

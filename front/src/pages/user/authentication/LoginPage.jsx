@@ -48,34 +48,11 @@ const LoginPage = ( { onLogin } ) => {
                 <div className="globalPageWrapperCards">
                 <form onSubmit={handleSubmit}>
                     <div className="form_overlay"></div>
-                    {/* <div className="form-group">
-                        <label htmlFor="email">Email adress</label>
-                        <input 
-                            value={credentials.email} 
-                            onChange={handleChange}
-                            type="email"  
-                            placeholder="email adress" 
-                            name="email" 
-                            className={"form-control" + (error && " is-invalid")} />
-                        {error &&<p className="invalid-message">{error}</p>}
-                    </div>  */}
 
                     <Field label="Email adress" name="email" value={credentials.email} onChange={handleChange} placeholder="Email adress" error={error}  />
 
                     <Field label="Password" name="password" value={credentials.password} onChange={handleChange} type="password" placeholder="Password" error={error}  />
 
-
-                    {/* <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input 
-                            value={credentials.password} 
-                            onChange={handleChange}
-                            type="password" 
-                            placeholder="password" 
-                            name="password" 
-                            id="password" 
-                            className="form-control" />
-                    </div> */}
                     <div className="form-group">
                        <button type="submit" className="submitBtn">Login</button>
                     </div>
