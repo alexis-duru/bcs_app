@@ -10,18 +10,24 @@ import SpotDetails from "./pages/spot/SpotDetails";
 import Spots from './pages/spot/Spots';
 import authAPI from "./services/authAPI";
 import SpotCreate from './pages/spot/SpotCreate';
-// import ProtectedRoutes from "./ProtectedRoutes";
-
+// useEffect useNavigate
 
 authAPI.setup();
 
-
 const App = () => {
-
 
   const [isAuthenticated, setIsAuthenticated] = useState(
     authAPI.isAuthenticated()
   ); 
+
+
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //     if(isAuthenticated === false) {
+  //       navigate("/login", {replace: true});
+  //     }
+  // }, [isAuthenticated])
+  
   
   return (
     <BrowserRouter >
@@ -31,11 +37,17 @@ const App = () => {
       <Navbar/>
 
       <Routes>
+          {/* HOMEPAGE */}
           <Route path="/" element={ <Homepage/> } />
+
+          {/* USERROUTES */}
           <Route path="/login" element={ <LoginPage onLogin={setIsAuthenticated} /> } />
           <Route path="/register" element={ <RegisterPage/> } />
           <Route path="/profile" element={ <Profile/> }/>
-          <Route path="/spots"  element={ <Spots/> } />
+          
+          {/* SPOTSROUTES */}
+    
+          <Route path="/spots"  element={isAuthenticated && <Spots/>  } />
           <Route path="/spots/:id" element={ <SpotDetails/> } />
           <Route path="/spots/create" element={ <SpotCreate />} />
       </Routes>

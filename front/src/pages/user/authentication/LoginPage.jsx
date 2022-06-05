@@ -46,12 +46,12 @@ const LoginPage = ( { onLogin } ) => {
                     </div>
                 </div>
                 <div className="globalPageWrapperCards">
-                <form onSubmit={handleSubmit}>
+                <form className="loginForm" onSubmit={handleSubmit}>
                     <div className="form_overlay"></div>
 
                     <Field label="Email adress" name="email" value={credentials.email} onChange={handleChange} placeholder="Email adress" error={error}  />
 
-                    <Field label="Password" name="password" value={credentials.password} onChange={handleChange} type="password" placeholder="Password" error={error}  />
+                    <Field label="Password" name="password" value={credentials.password} onChange={handleChange} type="password" placeholder="Password" error={error}/>
 
                     <div className="form-group">
                        <button type="submit" className="submitBtn">Login</button>

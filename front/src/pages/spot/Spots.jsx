@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import Pagination from "../../components/Pagination";
 import spotsAPI from '../../services/spotsAPI';
 
-const Spots = props => {
+
+
+const Spots = () => {
 
     const [spots, setSpots] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -42,13 +44,6 @@ const Spots = props => {
         }
     };
 
-        // FIRST VERSION
-        // .then(response => console.log("spot is delete, ok !"))
-        // .catch(error => {
-        //     setSpots(originalSpots);
-        //     console.log(error.response + "sorry, spot can't be deleted");
-        // });
-
     //  Gestion du changement de page
 
     const handlePageChange = (page) => {
@@ -85,66 +80,65 @@ const Spots = props => {
 
     return (
         <>
-        <div className="spotsPage">
-            <div className="leftSideBar">
+            <div className="spotsPage">
+                <div className="leftSideBar">
 
-            </div>
-            <div className="spotsPageWrapper">
-                <div className="spotsPageHeader">`
-                    <div>
-                        <Link to='/spots/create'>Création d'un spot</Link>
-                    </div>`
-                    <div className="searchBar">
-                        <input type="text" onChange={handleSearch} value={search} placeholder="Rechercher ..." className="searchBarControl" />
-                    </div>
                 </div>
-                <div className="spotsPageWrapperCards">
-                <div className="spotsPageWrapperCards_overlay"></div>
-                    {paginatedSpots.map(spot => 
-                        <div key={spot.id} className="spotsPageCards">
-                            <div className='spotsPageCardsInfos'>
-                                <p className="spotNumber">{spot.id}</p>
-                                {/* <p className="spotType">{spot.type.name}</p> */}
-                                <div className="overlay">
-                                    <h2>{spot.name}</h2>
-                                    <p>{spot.address}</p>
-                                    <p>{spot.city}</p>
-                                    <p>{spot.postalCode}</p>
-                                    <p>{spot.details}</p>
-                                    <p>{spot.user.email}</p>
-                                    <p>{spot.type.name}</p>
-                                    <p>{spot.category.name}</p>
-                                    <p>{spot.flat.name}</p>
-                                    <button 
-                                        onClick={() => handleDelete(spot.id)} 
-                                        className="deleteButton">Delete
-                                    </button>
-                                    <div className="moreInfosButton">
-                                        <Link to={`/spots/${spot.id}`}>
-                                            Plus d'informations
-                                        </Link>
+                <div className="spotsPageWrapper">
+                    <div className="spotsPageHeader">
+                        <div className="spotsCreate">
+                            <Link to='/spots/create'>Création d'un spot</Link>
+                        </div>
+                        <div className="searchBar">
+                            <input type="text" onChange={handleSearch} value={search} placeholder="Rechercher ..." className="searchBarControl" />
+                        </div>
+                    </div>
+                    <div className="spotsPageWrapperCards">
+                    <div className="spotsPageWrapperCards_overlay"></div>
+                        {paginatedSpots.map(spot => 
+                            <div key={spot.id} className="spotsPageCards">
+                                <div className='spotsPageCardsInfos'>
+                                    <p className="spotNumber">{spot.id}</p>
+                                    {/* <p className="spotType">{spot.type.name}</p> */}
+                                    <div className="overlay">
+                                        <h2>{spot.name}</h2>
+                                        <p>{spot.address}</p>
+                                        <p>{spot.city}</p>
+                                        <p>{spot.postalCode}</p>
+                                        <p>{spot.details}</p>
+                                        <p>{spot.user.email}</p>
+                                        <p>{spot.type.name}</p>
+                                        <p>{spot.category.name}</p>
+                                        <p>{spot.flat.name}</p>
+                                        <button 
+                                            onClick={() => handleDelete(spot.id)} 
+                                            className="deleteButton">Delete
+                                        </button>
+                                        <div className="moreInfosButton">
+                                            <Link to={`/spots/${spot.id}`}>
+                                                Plus d'informations
+                                            </Link>
 
+                                        </div>
                                     </div>
                                 </div>
+                                {/* <div className='spotsPageCardsMedia'></div> */}
                             </div>
-                            {/* <div className='spotsPageCardsMedia'></div> */}
-                        </div>
-                    )}
-                </div>
-                <div className="fullPaginationContainer">
-                    {itemsPerPage < filteredSpots.length && (
-                        <Pagination 
-                            currentPage={currentPage} 
-                            itemsPerPage={itemsPerPage} 
-                            length={filteredSpots.length}
-                            // length={spots.length}
-                            onPageChanged={handlePageChange}
-                        />
-                    )}
-
+                        )}
+                    </div>
+                    <div className="fullPaginationContainer">
+                        {itemsPerPage < filteredSpots.length && (
+                            <Pagination 
+                                currentPage={currentPage} 
+                                itemsPerPage={itemsPerPage} 
+                                length={filteredSpots.length}
+                                // length={spots.length}
+                                onPageChanged={handlePageChange}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
         </>
     )
 }

@@ -14,10 +14,11 @@ const findOne = async (id) => {
 };
 
 const createSpot = (credentials) => {
-    return API  
+    return API 
         .post('/spots', credentials)
         .then(response => response.data)
 }
+
 
 function deleteSpots(id) {
     return API
@@ -28,7 +29,7 @@ const exportAPI =  {
     findAll,
     delete: deleteSpots,
     findOne,
-    createSpot
+    createSpot,
 };
 
 export default exportAPI;
