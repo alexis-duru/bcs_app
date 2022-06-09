@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Field from '../../components/forms/Field';
 import spotsAPI from '../../services/spotsAPI';
-import axios from "axios";
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import createSpot from "../../services/spotsAPI";
@@ -46,30 +45,27 @@ const SpotCreate = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        
         try {
-
             spot.postalCode = parseInt(spot.postalCode)
-            var config = {
-                method: 'post',
-                url: 'http://localhost:8000/api/spots',
-                headers: { 
-                    'Accept': 'application/json', 
-                    'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
-                    'Content-Type': 'application/json'
-                },
-                data : JSON.stringify(spot)
-            };
-            axios(config)
-            .then(function (response) {
-            console.log(JSON.stringify(response.data));
-            })
-            // const response = await spotsAPI.createSpot()
+            const response = await spotsAPI.createSpot(JSON.stringify(spot))
+            console.log(response)
+            console.log('Le spot a bien été crée')
             
-            // console.log(response);
-            // headers: window.localStorage.getItem('authToken')}
         } catch (error) {
-            console.log(error.response);
+          console.log('La requête à échoué')
+          console.log(error.response.data.violations)
+          console.log(error)
+            if(error.response.data.violations) {
+                const apiErrors = {};
+                error.response.data.violations.forEach(violation => {
+                    apiErrors[violation.propertyPath] = violation.message;
+                });
+
+                setErrors(apiErrors)
+            }
         }
+        
     }
 
 

@@ -109,21 +109,25 @@ class Spot
     private $details;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Image is required')]
     #[Groups(["read:spot:collection",])]
     private $media;
 
     #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Assert\NotBlank(message: 'Spot type is required')]
     #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $type;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Assert\NotBlank(message: 'Spot category is required')]
     #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $category;
 
     #[ORM\ManyToOne(targetEntity: Flat::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Assert\NotBlank(message: 'Spot flat quality is required')]
     #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $flat;
 

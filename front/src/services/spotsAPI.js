@@ -13,12 +13,12 @@ const findOne = async (id) => {
         .then(response => response.data)
 };
 
-// const createSpot = (credentials) => {
+const createSpot = (credentials) => {
 
-//     return API 
-//         .post('/spots', credentials)
-//         .then(response => response.data)
-// }
+    return API 
+        .post('/spots', credentials)
+        .then(response => response.data)
+}
 
 
 function deleteSpots(id) {
@@ -30,7 +30,7 @@ const exportAPI =  {
     findAll,
     delete: deleteSpots,
     findOne,
-    // createSpot,
+    createSpot,
 };
 
 export default exportAPI;
