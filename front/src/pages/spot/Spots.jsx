@@ -4,13 +4,11 @@ import Pagination from "../../components/Pagination";
 import spotsAPI from '../../services/spotsAPI';
 
 
-
 const Spots = () => {
 
     const [spots, setSpots] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
-
 
     // Récupération de l'ensemble de mes spots
 
@@ -34,6 +32,7 @@ const Spots = () => {
         const originalSpots = [...spots];
 
         setSpots(spots.filter(spot => spot.id !== id));
+        
 
         try {
             await spotsAPI.delete(id)
@@ -78,6 +77,7 @@ const Spots = () => {
         itemsPerPage
     );
 
+
     return (
         <>
             <div className="spotsPage">
@@ -110,10 +110,18 @@ const Spots = () => {
                                         <p>{spot.type.name}</p>
                                         <p>{spot.category.name}</p>
                                         <p>{spot.flat.name}</p>
+
+                                        {/* { spot.user.email === "administrateur@test.com" ? */}
+                                        {/* {isAuthenticated === spot.user.id ? */}
+                                        {/* { spot.user.email === spot.id} */}
+                                        
                                         <button 
                                             onClick={() => handleDelete(spot.id)} 
                                             className="deleteButton">Delete
-                                        </button>
+                                        </button> : <p></p> 
+                                        {/* : <p>NON</p>} */}
+
+
                                         <div className="moreInfosButton">
                                             <Link to={`/spots/${spot.id}`}>
                                                 Plus d'informations

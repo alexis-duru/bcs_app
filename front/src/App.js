@@ -19,15 +19,6 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
     authAPI.isAuthenticated()
   ); 
-
-
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //     if(isAuthenticated === false) {
-  //       navigate("/login", {replace: true});
-  //     }
-  // }, [isAuthenticated])
-  
   
   return (
     <BrowserRouter >
@@ -43,13 +34,13 @@ const App = () => {
           {/* USERROUTES */}
           <Route path="/login" element={ <LoginPage onLogin={setIsAuthenticated} /> } />
           <Route path="/register" element={ <RegisterPage/> } />
-          <Route path="/profile" element={ <Profile/> }/>
+          <Route path="/profile" element={isAuthenticated ? <Profile/> : <LoginPage/> }/>
           
           {/* SPOTSROUTES */}
     
-          <Route path="/spots"  element={isAuthenticated && <Spots/>  } />
-          <Route path="/spots/:id" element={ <SpotDetails/> } />
-          <Route path="/spots/create" element={ <SpotCreate />} />
+          <Route path="/spots"  element={isAuthenticated ? <Spots/> : <LoginPage /> } />
+          <Route path="/spots/:id" element={isAuthenticated ? <SpotDetails/> : <LoginPage /> } />
+          <Route path="/spots/create" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
       </Routes>
 
     </BrowserRouter>

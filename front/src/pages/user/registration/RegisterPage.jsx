@@ -1,7 +1,7 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Field from '../../../components/forms/field';
+import Field from '../../../components/forms/Field';
 import usersAPI from "../../../services/usersAPI";
 
 const RegisterPage = (props) => {

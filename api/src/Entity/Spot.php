@@ -47,7 +47,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         //     ]
         // ], 
     ],
-    order: ["createdAt" => "DESC"],
+    order: ["id" => "DESC"],
 )]
 
 

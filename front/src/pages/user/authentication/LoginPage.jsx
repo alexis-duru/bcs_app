@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Field from '../../../components/forms/field';
+import Field from '../../../components/forms/Field';
 import authAPI from '../../../services/authAPI';
 
 const LoginPage = ( { onLogin } ) => {

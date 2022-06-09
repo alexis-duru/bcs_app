@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Field from '../../components/forms/field';
-import { useState } from 'react';
+import Field from '../../components/forms/Field';
 import spotsAPI from '../../services/spotsAPI';
+import axios from "axios";
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
-// import { createSpot } from "../../services/spotsAPI";
+// import createSpot from "../../services/spotsAPI";
 
 
-const SpotCreate = () => {
+const SpotCreate = (props) => {
 
     const [spot, setSpot] = useState({
         name: "",
-        adress: "",
+        address: "",
         city: "",
         postalCode: "",
         details: "",
         media: "",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
         category: "",
         type: "",
         flat: "",
@@ -24,11 +26,13 @@ const SpotCreate = () => {
 
     const [errors, setErrors] = useState({
         name: "",
-        adress: "",
+        address: "",
         city: "",
         postalCode: "",
         details: "",
         media: "",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
         category: "",
         type: "",
         flat: "",
@@ -43,12 +47,29 @@ const SpotCreate = () => {
         event.preventDefault();
 
         try {
-            const response = await spotsAPI.createSpot()
-            console.log(response.data);
+
+            spot.postalCode = parseInt(spot.postalCode)
+            var config = {
+                method: 'post',
+                url: 'http://localhost:8000/api/spots',
+                headers: { 
+                    'Accept': 'application/json', 
+                    'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                },
+                data : JSON.stringify(spot)
+            };
+            axios(config)
+            .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            })
+            // const response = await spotsAPI.createSpot()
+            
+            // console.log(response);
+            // headers: window.localStorage.getItem('authToken')}
         } catch (error) {
             console.log(error.response);
         }
-        // console.log(spot)
     }
 
 
@@ -68,12 +89,12 @@ const SpotCreate = () => {
                 />
 
                 <Field 
-                    name="adress" 
-                    label="adress" 
-                    placeholder="adress" 
-                    value={spot.adress} 
+                    name="address" 
+                    label="address" 
+                    placeholder="address" 
+                    value={spot.address} 
                     onChange={handleChange}  
-                    error={errors.adress}
+                    error={errors.address}
                 />
 
                 <Field
@@ -90,6 +111,7 @@ const SpotCreate = () => {
                     label="postalCode" 
                     placeholder="postalCode"
                     value={spot.postalCode} 
+                    type="number"
                     onChange={handleChange}  
                     error={errors.postalCode}
                 />

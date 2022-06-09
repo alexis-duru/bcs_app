@@ -8,7 +8,7 @@ import jwtDecode from "jwt-decode";
 // DECONNEXION (SUPPRESION DU TOKEN DU LOCALSTORAGE ET SUR AXIOS
 
 function logout() {
-    window.localStorage.removeItem("authToken");
+    window.localStorage.removeItem("token");
     delete axios.defaults.headers["Authorization"];
 }
 
@@ -19,7 +19,7 @@ const authenticate = async (credentials) => {
         .post("/login_check", credentials)
         .then(response => response.data.token)
         .then(token => {
-            window.localStorage.setItem('authToken', token);
+            window.localStorage.setItem('token', token);
             axios.defaults.headers["Authorization"] = "Bearer " + token;
     });
 }
@@ -28,7 +28,7 @@ const authenticate = async (credentials) => {
 
 function setup() {
     
-    const token = window.localStorage.getItem("authToken");
+    const token = window.localStorage.getItem("token");
 
     if(token) {
         const {exp: expiration} = jwtDecode(token);
@@ -41,7 +41,7 @@ function setup() {
 // PERMET DE SAVOIR SI ON EST AUTHENTIFIÉ OU PAS
 
 function isAuthenticated() {
-    const token = window.localStorage.getItem("authToken");
+    const token = window.localStorage.getItem("token");
 
     if(token) {
         const {exp: expiration} = jwtDecode(token);
