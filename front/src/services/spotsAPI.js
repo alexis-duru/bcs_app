@@ -1,6 +1,12 @@
 // import axios from "axios";
 import API from "./api";
 
+function findAllCategories() {
+    return API 
+        .get("/categories")
+        .then(response => response.data['hydra:member'])
+    };
+    
 function findAll() {
     return API 
         .get("/spots")
@@ -20,6 +26,12 @@ const createSpot = (credentials) => {
         .then(response => response.data)
 }
 
+function updateSpot (id, credentials) {
+    return API
+        .put(`/spots/${id}`, credentials)
+        .then(response => response.data)
+};
+
 
 function deleteSpots(id) {
     return API
@@ -28,9 +40,11 @@ function deleteSpots(id) {
 
 const exportAPI =  {
     findAll,
+    findAllCategories,
     delete: deleteSpots,
     findOne,
     createSpot,
+    updateSpot
 };
 
 export default exportAPI;

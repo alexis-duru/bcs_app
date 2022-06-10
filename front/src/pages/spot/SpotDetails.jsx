@@ -24,6 +24,11 @@ const SpotDetails  = props => {
         }
     }
 
+    
+
+
+
+
     return (
       <h1>SpotDetails</h1>
     )

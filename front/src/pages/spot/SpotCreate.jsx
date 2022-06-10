@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Field from '../../components/forms/Field';
+import Select from '../../components/forms/Select';
 import spotsAPI from '../../services/spotsAPI';
+
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import createSpot from "../../services/spotsAPI";
@@ -10,6 +12,8 @@ import spotsAPI from '../../services/spotsAPI';
 const SpotCreate = (props) => {
 
     const navigate = useNavigate();
+
+    console.log(props)
 
     const [spot, setSpot] = useState({
         name: "",
@@ -37,7 +41,24 @@ const SpotCreate = (props) => {
         category: "",
         type: "",
         flat: "",
-    })
+    });
+
+    const [categories, setCategories] = useState([]);
+
+    const fetchCategories = async () => {
+        try {
+           const data = await spotsAPI.findAllCategories();
+           setCategories(data);
+           console.log(data)
+        } catch (error) {
+            console.log(error.response)
+            
+        } 
+    }
+
+    useEffect(() => {
+        fetchCategories();
+    }, []) 
 
     const handleChange = ({currentTarget}) => {
         const {name, value} = currentTarget;
@@ -163,6 +184,48 @@ const SpotCreate = (props) => {
                     onChange={handleChange}  
                     error={errors.flat}
                 />
+
+                <Select 
+                    name={"category"} 
+                    label="category" 
+                    placeholder="category" 
+                    value={spot.category} 
+                    error={errors.category}
+                    onChange={handleChange}  
+                >
+                  {categories.map(category =>
+                    <option 
+                        key={category.id} 
+                        value={category.id}>
+                        {category.name}
+                    </option>
+                  )}
+                </Select>
+
+                <Select 
+                    name="type" 
+                    label="type" 
+                    placeholder="type" 
+                    value={spot.type} 
+                    error={errors.type}
+                    onChange={handleChange}  
+                >
+                   <option value="street">Street</option>
+                   <option value="skatepark">Skatepark</option>
+                </Select>
+
+                <Select 
+                    name="flat" 
+                    label="flat" 
+                    placeholder="flat" 
+                    value={spot.flat} 
+                    error={errors.flat}
+                    onChange={handleChange}  
+                >
+                   <option value="good">Good</option>
+                   <option value="bad">Bad</option>
+                </Select>
+
 
                 <div>
                     <button type="submit">

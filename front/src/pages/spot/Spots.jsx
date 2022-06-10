@@ -26,6 +26,10 @@ const Spots = (props) => {
         fetchSpots();
     }, []);
 
+    // Gestion de l'update d'un spot
+
+
+
     //  Gestion de la suppression d'un spot 
 
     const handleDelete = async id =>  {
@@ -118,19 +122,19 @@ const Spots = (props) => {
                                         <button 
                                             onClick={() => handleDelete(spot.id)} 
                                             className="deleteButton">Delete
-                                        </button> : <p></p> 
-                                        {/* : <p>NON</p>} */}
-
+                                        </button>
+{/*                                         
+                                        <Link to="/spots/update">
+                                            <button className="btn-green">UPDATE</button>
+                                        </Link> */}
 
                                         <div className="moreInfosButton">
                                             <Link to={`/spots/${spot.id}`}>
                                                 Plus d'informations
                                             </Link>
-
                                         </div>
                                     </div>
                                 </div>
-                                {/* <div className='spotsPageCardsMedia'></div> */}
                             </div>
                         )}
                     </div>

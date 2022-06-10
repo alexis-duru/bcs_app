@@ -24,6 +24,7 @@ header {
       a {
         color: $white;
         cursor: pointer;
+        letter-spacing: 5px;
         transition: 0.3s ease-in-out;
         &:hover {
           opacity: 0.8;
@@ -60,7 +61,6 @@ header {
           background: white;
         }
         &:hover {
-          opacity: 0.8;
           color: $yellow;
           &::after {
             content: "";

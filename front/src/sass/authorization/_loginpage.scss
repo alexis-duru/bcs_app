@@ -1,4 +1,4 @@
-.loginForm {
+.formContainer{
     color: white;
     font-family: 'adieu';
     flex-direction: column;
@@ -77,7 +77,6 @@
         }
         .is-invalid {
             color: $red;
-            text-decoration: line-through;
         }
 
         button {
@@ -91,6 +90,39 @@
             &:hover {
                 opacity: 0.8;
             }
+        }
+    }
+    .already_account {
+        border-bottom: 0px;
+        &::after {
+            height: 0px;
+        }
+    }
+    #already_account_btn {
+        color: $yellow;
+        z-index: 999;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        span {
+            display: flex;
+            flex-direction: column;
+            margin-left: 5px;
+            &:hover {
+                opacity: 0.7;
+            }
+            &:after {
+                content: '';
+                width: fit-content;
+                height: 10px;
+                background: white;
+                width: 100%;
+                position: inherit;
+                height: 1px;
+                margin-top: 2px;
+
+            }
+            // border-bottom: 1px solid white;
         }
     }
 }

@@ -21,10 +21,10 @@ const Header = ({isAuthenticated, onLogout}) => {
                 {
                     (!isAuthenticated && (
                     <>
-                        <Link to="/register">Inscription</Link>
+                        <Link to="/register">Register</Link>
                         <Link to="/login">Login</Link>
                     </>)) || (
-                        <button onClick={handleLogout} className="logoutButton">Deconnexion</button>
+                        <button onClick={handleLogout} className="logoutButton">Logout</button>
                     )
                 }
             </div>
