@@ -5,7 +5,20 @@ function findAllCategories() {
     return API 
         .get("/categories")
         .then(response => response.data['hydra:member'])
-    };
+};
+
+function findAllTypes() {
+    return API 
+        .get("/types")
+        .then(response => response.data['hydra:member'])
+};
+
+function findAllFlats() {
+    return API
+        .get("/flats")
+        .then(response => response.data['hydra:member'])
+}
+
     
 function findAll() {
     return API 
@@ -41,6 +54,8 @@ function deleteSpots(id) {
 const exportAPI =  {
     findAll,
     findAllCategories,
+    findAllTypes,
+    findAllFlats,
     delete: deleteSpots,
     findOne,
     createSpot,

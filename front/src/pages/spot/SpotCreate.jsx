@@ -13,7 +13,7 @@ const SpotCreate = (props) => {
 
     const navigate = useNavigate();
 
-    console.log(props)
+    // console.log(props)
 
     const [spot, setSpot] = useState({
         name: "",
@@ -44,11 +44,36 @@ const SpotCreate = (props) => {
     });
 
     const [categories, setCategories] = useState([]);
+    const [types, setTypes] = useState([]);
+    const [flats, setFlats] = useState([]);
+
 
     const fetchCategories = async () => {
         try {
            const data = await spotsAPI.findAllCategories();
            setCategories(data);
+        //    console.log(data)
+        } catch (error) {
+            console.log(error.response)
+            
+        } 
+    }
+
+    const fetchTypes = async () => {
+        try {
+           const data = await spotsAPI.findAllTypes();
+           setTypes(data);
+        //    console.log(data)
+        } catch (error) {
+            console.log(error.response)
+            
+        } 
+    }
+
+    const fetchFlats = async () => {
+        try {
+           const data = await spotsAPI.findAllFlats();
+           setFlats(data);
            console.log(data)
         } catch (error) {
             console.log(error.response)
@@ -58,6 +83,8 @@ const SpotCreate = (props) => {
 
     useEffect(() => {
         fetchCategories();
+        fetchTypes();
+        fetchFlats();
     }, []) 
 
     const handleChange = ({currentTarget}) => {
@@ -155,36 +182,6 @@ const SpotCreate = (props) => {
                     error={errors.media}
                 />
 
-
-                <Field 
-                    name="category" 
-                    label="category" 
-                    placeholder="category" 
-                    value={spot.category} 
-                    onChange={handleChange}  
-                    error={errors.category}
-                />
-
-
-                <Field 
-                    name="type" 
-                    label="type" 
-                    placeholder="type" 
-                    value={spot.type} 
-                    onChange={handleChange}  
-                    error={errors.type}
-                />
-
-
-                <Field 
-                    name="flat" 
-                    label="flat" 
-                    placeholder="flat" 
-                    value={spot.flat} 
-                    onChange={handleChange}  
-                    error={errors.flat}
-                />
-
                 <Select 
                     name={"category"} 
                     label="category" 
@@ -210,8 +207,13 @@ const SpotCreate = (props) => {
                     error={errors.type}
                     onChange={handleChange}  
                 >
-                   <option value="street">Street</option>
-                   <option value="skatepark">Skatepark</option>
+                    {types.map(type =>
+                        <option 
+                            key={type.id} 
+                            value={type.id}>
+                            {type.name}
+                        </option>
+                      )}
                 </Select>
 
                 <Select 
@@ -222,10 +224,14 @@ const SpotCreate = (props) => {
                     error={errors.flat}
                     onChange={handleChange}  
                 >
-                   <option value="good">Good</option>
-                   <option value="bad">Bad</option>
+                  {flats.map(flat => 
+                  <option
+                    key={flat.id}
+                    value={flat.id}>
+                    {flat.name}
+                  </option>
+                )}
                 </Select>
-
 
                 <div>
                     <button type="submit">
