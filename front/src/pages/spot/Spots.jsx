@@ -4,7 +4,7 @@ import Pagination from "../../components/Pagination";
 import spotsAPI from '../../services/spotsAPI';
 
 
-const Spots = () => {
+const Spots = (props) => {
 
     const [spots, setSpots] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);

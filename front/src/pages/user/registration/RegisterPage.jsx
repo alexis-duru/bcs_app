@@ -1,15 +1,22 @@
-// import axios from 'axios';
+import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Field from '../../../components/forms/Field';
 import usersAPI from "../../../services/usersAPI";
 
+// useNavigate
+
+
 const RegisterPage = (props) => {
+
+    const navigate = useNavigate();
 
     const [user, setUser] = useState({
         email: "",
         password: "",
         passwordConfirm: "",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
 
     });
 
@@ -17,6 +24,8 @@ const RegisterPage = (props) => {
         email: "",
         password: "",
         passwordConfirm: "",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
 
     });
 
@@ -24,11 +33,38 @@ const RegisterPage = (props) => {
         event.preventDefault();
 
         try {
-            const response = await usersAPI.createUser()
+            const response = await usersAPI.createUser(JSON.stringify(user))
+            console.log('Le compte à bien été crée')
+            navigate("/spots", {replace: true})
         } catch (error) {
-            console.log(error.response)
-            const {violations} = error.response.data
+        console.log('La requête à échoué')
+            console.log(error.response.data.violations)
+            console.log(error)
+            if(error.response.data.violations) {
+                const apiErrors = {};
+                error.response.data.violations.forEach(violation => {
+                    apiErrors[violation.propertyPath] = violation.message;
+                });
+
+                setErrors(apiErrors)
+            }
         }
+
+        // var config = {
+        //     method: 'post',
+        //     url: 'http://localhost:8000/api/users',
+        //     headers: { 
+        //         'Accept': 'application/json', 
+        //         'Authorization': window.localStorage.getItem('token'),
+        //         'Content-Type': 'application/json'
+        //     },
+        //     data : JSON.stringify(user)
+        // };
+        // axios(config)
+        // .then(function (response) {
+        // console.log(JSON.stringify(response.data));
+        // })
+
         console.log(user)
     }
 
