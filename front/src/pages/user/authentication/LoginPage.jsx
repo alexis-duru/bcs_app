@@ -29,6 +29,7 @@ const LoginPage = ( { onLogin } ) => {
         //    setError("");
            onLogin(true);
            navigate("/spots", {replace: true})
+           console.log("Vous êtes maintenant connecté")
         } catch (error) { 
             setError("Aucun compte ne possède cette adresse");
         }

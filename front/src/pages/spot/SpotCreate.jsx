@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Field from '../../components/forms/Field';
 import spotsAPI from '../../services/spotsAPI';
 // import { useState } from "react";
@@ -8,6 +8,8 @@ import spotsAPI from '../../services/spotsAPI';
 
 
 const SpotCreate = (props) => {
+
+    const navigate = useNavigate();
 
     const [spot, setSpot] = useState({
         name: "",
@@ -51,6 +53,7 @@ const SpotCreate = (props) => {
             const response = await spotsAPI.createSpot(JSON.stringify(spot))
             console.log(response)
             console.log('Le spot a bien été crée')
+            navigate("/spots", {replace: true})
             
         } catch (error) {
           console.log('La requête à échoué')

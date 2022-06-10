@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Field from '../../../components/forms/Field';
@@ -34,8 +33,8 @@ const RegisterPage = (props) => {
 
         try {
             const response = await usersAPI.createUser(JSON.stringify(user))
-            console.log('Le compte à bien été crée')
-            navigate("/spots", {replace: true})
+            console.log('Le compte à bien été créé')
+            navigate("/login", {replace: true})
         } catch (error) {
         console.log('La requête à échoué')
             console.log(error.response.data.violations)
@@ -49,23 +48,6 @@ const RegisterPage = (props) => {
                 setErrors(apiErrors)
             }
         }
-
-        // var config = {
-        //     method: 'post',
-        //     url: 'http://localhost:8000/api/users',
-        //     headers: { 
-        //         'Accept': 'application/json', 
-        //         'Authorization': window.localStorage.getItem('token'),
-        //         'Content-Type': 'application/json'
-        //     },
-        //     data : JSON.stringify(user)
-        // };
-        // axios(config)
-        // .then(function (response) {
-        // console.log(JSON.stringify(response.data));
-        // })
-
-        console.log(user)
     }
 
     const handleChange = ({currentTarget}) => {

@@ -16,7 +16,7 @@ class FlatFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        for ($j=0; $j < 10 ; $j++) { 
+        for ($j=0; $j < 2 ; $j++) { 
             $flat = new Flat();
             $flat->setName(FLAT[rand(0,1)]);
             

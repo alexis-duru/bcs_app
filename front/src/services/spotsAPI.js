@@ -14,7 +14,7 @@ const findOne = async (id) => {
 };
 
 const createSpot = (credentials) => {
-
+    // API.Authorization = ""
     return API 
         .post('/spots', credentials)
         .then(response => response.data)

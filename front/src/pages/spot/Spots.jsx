@@ -36,10 +36,10 @@ const Spots = (props) => {
 
         try {
             await spotsAPI.delete(id)
-            console.log("spot is delete, ok !")
+            console.log("Le spot a été correctement supprimé")
         } catch (error) {
             setSpots(originalSpots);
-            console.log(error.response + "sorry, spot can't be deleted");
+            console.log(error.response + "Désolé, le spot n'a pas pu être supprimé");
         }
     };
 

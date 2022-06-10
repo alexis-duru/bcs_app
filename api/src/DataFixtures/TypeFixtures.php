@@ -16,7 +16,7 @@ class TypeFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        for ($j=0; $j < 10 ; $j++) { 
+        for ($j=0; $j < 2 ; $j++) { 
             $type = new Type();
             $type
             ->setName(TYPE[rand(0,1)]);
