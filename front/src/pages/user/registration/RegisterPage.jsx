@@ -33,10 +33,10 @@ const RegisterPage = (props) => {
 
         try {
             const response = await usersAPI.createUser(JSON.stringify(user))
-            console.log('Le compte à bien été créé')
+            console.log('The account has been successfully created')
             navigate("/login", {replace: true})
         } catch (error) {
-        console.log('La requête à échoué')
+        console.log('The request failed')
             console.log(error.response.data.violations)
             console.log(error)
             if(error.response.data.violations) {

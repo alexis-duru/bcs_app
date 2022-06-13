@@ -34,7 +34,7 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(["read:category:collection"])]
+    #[Groups(["read:category:collection", "read:spot:collection", "read:category:item", "read:spot:item"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -42,7 +42,7 @@ class Category
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Spot::class)]
-    #[Groups(["read:category:collection",])]
+    #[Groups(["read:category:collection", "read:category:item"])]
     private $spots;
 
     public function __construct()

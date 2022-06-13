@@ -39,7 +39,7 @@ const createSpot = (credentials) => {
         .then(response => response.data)
 }
 
-function updateSpot (id, credentials) {
+function updateSpot(id, credentials) {
     return API
         .put(`/spots/${id}`, credentials)
         .then(response => response.data)

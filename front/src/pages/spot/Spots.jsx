@@ -40,12 +40,13 @@ const Spots = (props) => {
 
         try {
             await spotsAPI.delete(id)
-            console.log("Le spot a été correctement supprimé")
+            console.log("The spot was successfully deleted")
         } catch (error) {
             setSpots(originalSpots);
-            console.log(error.response + "Désolé, le spot n'a pas pu être supprimé");
+            console.log(error.response + "Sorry, the spot could not be deleted");
         }
     };
+
 
     //  Gestion du changement de page
 
@@ -122,15 +123,15 @@ const Spots = (props) => {
                                         <button 
                                             onClick={() => handleDelete(spot.id)} 
                                             className="deleteButton">Delete
-                                        </button>
-{/*                                         
-                                        <Link to="/spots/update">
+                                        </button> 
+                                                                                
+                                        <Link to={'/spots/update/' + spot.id}>
                                             <button className="btn-green">UPDATE</button>
-                                        </Link> */}
+                                        </Link>
 
                                         <div className="moreInfosButton">
                                             <Link to={`/spots/${spot.id}`}>
-                                                Plus d'informations
+                                                More informations
                                             </Link>
                                         </div>
                                     </div>

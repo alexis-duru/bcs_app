@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Field from '../../components/forms/Field';
+// import UploadField from '../../components/forms/UploadField';
 import Select from '../../components/forms/Select';
 import spotsAPI from '../../services/spotsAPI';
 
@@ -13,20 +14,30 @@ const SpotCreate = (props) => {
 
     const navigate = useNavigate();
 
+    const spotId = useParams('id').id // Objet ID
+
     // console.log(props)
 
     const [spot, setSpot] = useState({
+        // name: "Nouveau spot sudffsfsdf dimanche5",
+        // address: "107, rue de saint genes",
+        // city: "Bordeaux",
+        // postalCode: 33000,
+        // createdAt: "2022-02-13T11:27:15.738Z",
+        // updatedAt: "2022-03-13T11:27:15.738Z",
+        // details: "Un petit détail"
+
         name: "",
         address: "",
         city: "",
         postalCode: "",
         details: "",
-        media: "",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         category: "",
         type: "",
         flat: "",
+        media: "",
     });
 
     const [errors, setErrors] = useState({
@@ -35,12 +46,12 @@ const SpotCreate = (props) => {
         city: "",
         postalCode: "",
         details: "",
-        media: "",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         category: "",
         type: "",
         flat: "",
+        media: "",
     });
 
     const [categories, setCategories] = useState([]);
@@ -50,203 +61,275 @@ const SpotCreate = (props) => {
 
     const fetchCategories = async () => {
         try {
-           const data = await spotsAPI.findAllCategories();
-           setCategories(data);
-        //    console.log(data)
+            const data = await spotsAPI.findAllCategories(JSON.stringify(categories));
+            setCategories(data);
+            //    console.log(data)
         } catch (error) {
             console.log(error.response)
-            
-        } 
+
+        }
     }
 
     const fetchTypes = async () => {
         try {
-           const data = await spotsAPI.findAllTypes();
-           setTypes(data);
-        //    console.log(data)
+            const data = await spotsAPI.findAllTypes(JSON.stringify(types));
+            setTypes(data);
+            //    console.log(data)
         } catch (error) {
             console.log(error.response)
-            
-        } 
+
+        }
     }
 
     const fetchFlats = async () => {
         try {
-           const data = await spotsAPI.findAllFlats();
-           setFlats(data);
-           console.log(data)
+            const data = await spotsAPI.findAllFlats(JSON.stringify(flats));
+            setFlats(data);
+            //    console.log(data)
         } catch (error) {
             console.log(error.response)
-            
-        } 
+
+        }
+    }
+
+    const fetchSpot = async () => {
+        if (spotId) {
+            try {
+                const data = await spotsAPI.findOne(parseInt(spotId));
+                setSpot(
+                    {
+                        name: data.name,
+                        address: data.address,
+                        city: data.city,
+                        postalCode: data.postalCode,
+                        details: data.details,
+                        type: data.type.id,
+                        category: data.category.id,
+                        flat: data.flat.id,
+                        media: data.media
+                    }
+                );
+                console.log(data)
+            } catch (error) {
+                console.log(error.response)
+
+            }
+        } else {
+            return
+        }
+
     }
 
     useEffect(() => {
         fetchCategories();
         fetchTypes();
         fetchFlats();
-    }, []) 
+        fetchSpot();
+    }, [])
 
-    const handleChange = ({currentTarget}) => {
-        const {name, value} = currentTarget;
-        setSpot({...spot, [name]: value})
+    const handleChange = ({ currentTarget }) => {
+        const { name, value } = currentTarget;
+        setSpot({ ...spot, [name]: value })
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(spot)
 
-        
+
         try {
+            // spot.media = spot.media.replace(/^.*\\/, "");
+            // console.log(spot.media);
             spot.postalCode = parseInt(spot.postalCode)
-            const response = await spotsAPI.createSpot(JSON.stringify(spot))
-            console.log(response)
+            spotId ? await spotsAPI.updateSpot(parseInt(spotId), spot) : await spotsAPI.createSpot(JSON.stringify(spot))
+            // console.log(response)
             console.log('Le spot a bien été crée')
-            navigate("/spots", {replace: true})
-            
-        } catch (error) {
-          console.log('La requête à échoué')
-          console.log(error.response.data.violations)
-          console.log(error)
-            if(error.response.data.violations) {
-                const apiErrors = {};
-                error.response.data.violations.forEach(violation => {
-                    apiErrors[violation.propertyPath] = violation.message;
-                });
+            // console.log(spot.media)
+            navigate("/spots", { replace: true })
 
-                setErrors(apiErrors)
-            }
+        } catch (error) {
+            console.log('La requête à échoué')
+            // console.log(error.response.data.violations)
+            // console.log(error)
+            // if (error.response.data.violations) {
+            //     const apiErrors = {};
+            //     error.response.data.violations.forEach(violation => {
+            //         apiErrors[violation.propertyPath] = violation.message;
+            //     });
+
+            //     setErrors(apiErrors)
+            // }
         }
-        
+
     }
 
 
-    return (  
+    return (
         <>
             <div className="createSpots">
-            <h1>Création d'un spot</h1>
+                <h1>Upload spot</h1>
 
-            <form onSubmit={handleSubmit}>
-                <Field 
-                    name="name" 
-                    label="name" 
-                    placeholder="spot name" 
-                    value={spot.name} 
-                    onChange={handleChange} 
-                    error={errors.name}
-                />
+                <form onSubmit={handleSubmit}>
+                    <Field
+                        name="name"
+                        label="name"
+                        placeholder="spot name"
+                        value={spot.name}
+                        onChange={handleChange}
+                        error={errors.name}
+                    />
 
-                <Field 
-                    name="address" 
-                    label="address" 
-                    placeholder="address" 
-                    value={spot.address} 
-                    onChange={handleChange}  
-                    error={errors.address}
-                />
+                    <Field
+                        name="address"
+                        label="address"
+                        placeholder="address"
+                        value={spot.address}
+                        onChange={handleChange}
+                        error={errors.address}
+                    />
 
-                <Field
-                    name="city" 
-                    label="city" 
-                    placeholder="city" 
-                    value={spot.city} 
-                    onChange={handleChange} 
-                    error={errors.city} 
-                />
+                    <Field
+                        name="city"
+                        label="city"
+                        placeholder="city"
+                        value={spot.city}
+                        onChange={handleChange}
+                        error={errors.city}
+                    />
 
-                <Field 
-                    name="postalCode" 
-                    label="postalCode" 
-                    placeholder="postalCode"
-                    value={spot.postalCode} 
-                    type="number"
-                    onChange={handleChange}  
-                    error={errors.postalCode}
-                />
+                    <Field
+                        name="postalCode"
+                        label="postalCode"
+                        placeholder="postalCode"
+                        value={spot.postalCode}
+                        type="number"
+                        onChange={handleChange}
+                        error={errors.postalCode}
+                    />
 
 
-                <Field 
-                    name="details" 
-                    label="details" 
-                    placeholder="details" 
-                    value={spot.details} 
-                    onChange={handleChange}  
-                    error={errors.details}
-                />
+                    <Field
+                        name="details"
+                        label="details"
+                        placeholder="details"
+                        value={spot.details}
+                        onChange={handleChange}
+                        error={errors.details}
+                    />
 
-                <Field 
+                    {/* <UploadField
                     name="media" 
                     label="media" 
                     placeholder="media" 
                     value={spot.media} 
                     onChange={handleChange}  
                     error={errors.media}
-                />
+                /> */}
 
-                <Select 
-                    name={"category"} 
+                    <Field
+                        name="media"
+                        label="media"
+                        placeholder="media"
+                        value={spot.media}
+                        onChange={handleChange}
+                        error={errors.media}
+                    />
+
+                    {/* <Field 
+                    name="category" 
                     label="category" 
                     placeholder="category" 
                     value={spot.category} 
-                    error={errors.category}
                     onChange={handleChange}  
-                >
-                  {categories.map(category =>
-                    <option 
-                        key={category.id} 
-                        value={category.id}>
-                        {category.name}
-                    </option>
-                  )}
-                </Select>
+                    error={errors.category}
+                />
 
-                <Select 
+
+                <Field 
                     name="type" 
                     label="type" 
                     placeholder="type" 
                     value={spot.type} 
-                    error={errors.type}
                     onChange={handleChange}  
-                >
-                    {types.map(type =>
-                        <option 
-                            key={type.id} 
-                            value={type.id}>
-                            {type.name}
-                        </option>
-                      )}
-                </Select>
+                    error={errors.type}
+                />
 
-                <Select 
+
+                <Field 
                     name="flat" 
                     label="flat" 
                     placeholder="flat" 
                     value={spot.flat} 
-                    error={errors.flat}
                     onChange={handleChange}  
-                >
-                  {flats.map(flat => 
-                  <option
-                    key={flat.id}
-                    value={flat.id}>
-                    {flat.name}
-                  </option>
-                )}
-                </Select>
+                    error={errors.flat}
+                /> */}
 
-                <div>
-                    <button type="submit">
-                        SAVE
-                    </button>
-                </div>
 
-                <div>
-                    <Link to="/spots">Back to spots</Link>
-                </div>
-            </form>
+                    <Select
+                        name={"category"}
+                        label="category"
+                        placeholder="category"
+                        value={spot.category.id}
+                        error={errors.category}
+                        onChange={handleChange}
+                    >
+                        {categories.map(category =>
+                            <option
+                                key={category.id}
+                                value={category.id}>
+                                {category.name}
+                            </option>
+                        )}
+                    </Select>
+
+                    <Select
+                        name="type"
+                        label="type"
+                        placeholder="type"
+                        value={spot.type.id}
+                        error={errors.type}
+                        onChange={handleChange}
+                    >
+                        {types.map(type =>
+                            <option
+                                key={type.id}
+                                value={type.id}>
+                                {type.name}
+                            </option>
+                        )}
+                    </Select>
+
+                    <Select
+                        name="flat"
+                        label="flat"
+                        placeholder="flat"
+                        value={spot.flat.id}
+                        error={errors.flat}
+                        onChange={handleChange}
+                    >
+                        {flats.map(flat =>
+                            <option
+                                key={flat.id}
+                                value={flat.id}>
+                                {flat.name}
+                            </option>
+                        )}
+                    </Select>
+
+                    <div>
+                        <button type="submit">
+                            SAVE
+                        </button>
+                    </div>
+
+                    <div>
+                        <Link to="/spots">Back to spots</Link>
+                    </div>
+                </form>
             </div>
-           
+
         </>
     );
 }
- 
+
 export default SpotCreate;

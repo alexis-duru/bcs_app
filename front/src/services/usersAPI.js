@@ -27,8 +27,8 @@ function deleteUser(id) {
 
 const exportAPI =  {
     findAllUsers,
-    delete: deleteUser,
     findOneUser,
+    delete: deleteUser,
     createUser,
 };
 

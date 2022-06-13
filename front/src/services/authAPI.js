@@ -10,7 +10,7 @@ import jwtDecode from "jwt-decode";
 function logout() {
     window.localStorage.removeItem("token");
     delete axios.defaults.headers["Authorization"];
-    console.log('Vous êtes deconnecté')
+    console.log('You have been successfully disconnected')
 }
 
 // REQUÊTE HTTP D'AUTHENTIFICATION ET STOCKAGE DU TOKEN SUR AXIOS
@@ -53,7 +53,6 @@ function isAuthenticated() {
     }
     return false;
 }
-
 
 const exportAPI = {
     setup,

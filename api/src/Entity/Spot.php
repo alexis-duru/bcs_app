@@ -3,17 +3,21 @@
 namespace App\Entity;
 
 use App\Entity\Flat;
+use App\Entity\Like;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SpotRepository;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: SpotRepository::class)]
+#[Vich\Uploadable]
 #[ApiResource(
     collectionOperations:
     [
@@ -50,6 +54,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     order: ["id" => "DESC"],
 )]
 
+// #[ORM\Entity(repositoryClass: SpotRepository::class)]
+
 
 
 // #[ApiFilter(SearchFilter::class, properties: ['category' => 'partial', 'type' => 'partial', 'flat' => 'partial'])]
@@ -63,7 +69,7 @@ class Spot
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item", "read:category:collection", "read:type:collection", "read:type:item", "read:comment:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item", "read:category:collection","read:category:item", "read:type:collection", "read:type:item", "read:comment:collection"])]
     #[Assert\NotBlank(message: 'The name is required')]
     #[Assert\Length(
         min: 5,
@@ -108,10 +114,21 @@ class Spot
     #[Groups(["read:spot:collection", "read:user:item", "read:user:collection", "read:spot:item"])]
     private $details;
 
+    // MEDIA VICHFILE
+
+    #[Vich\UploadableField(mapping: 'media', fileNameProperty: 'media')]
+    private ?File $imageFile = null;
+
+    // MEDIA VICHFILE
+
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'Image is required')]
     #[Groups(["read:spot:collection",])]
     private $media;
+
+    // #[ORM\Column(type: 'string', nullable: true)]
+    // private ?string $imageName = null;
+
 
     #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
@@ -139,15 +156,10 @@ class Spot
     #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $comments;
 
-    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'spots')]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item", "read:comment:collection"])]
-    private $tags;
-
     public function __construct()
     {
         $this->likes = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->tags = new ArrayCollection();
     }
 
 
@@ -239,6 +251,41 @@ class Spot
 
         return $this;
     }
+
+        /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    // public function setImageName(?string $imageName): void
+    // {
+    //     $this->imageName = $imageName;
+    // }
+
+    // public function getImageName(): ?string
+    // {
+    //     return $this->imageName;
+    // }
 
     public function getMedia(): ?string
     {
@@ -360,27 +407,4 @@ class Spot
         return $this;
     }
 
-    /**
-     * @return Collection<int, Tag>
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
-
-    public function addTag(Tag $tag): self
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags[] = $tag;
-        }
-
-        return $this;
-    }
-
-    public function removeTag(Tag $tag): self
-    {
-        $this->tags->removeElement($tag);
-
-        return $this;
-    }
 }

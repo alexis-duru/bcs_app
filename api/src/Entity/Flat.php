@@ -35,7 +35,7 @@ class Flat
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(["read:flat:collection",])]
+    #[Groups(["read:flat:collection", "read:spot:collection", "read:spot:item"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]

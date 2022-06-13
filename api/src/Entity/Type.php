@@ -36,7 +36,7 @@ class Type
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(["read:type:collection",])]
+    #[Groups(["read:type:collection", "read:spot:collection", "read:spot:item", "read:type:item"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -44,7 +44,7 @@ class Type
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Spot::class)]
-    #[Groups(["read:type:collection"])]
+    #[Groups(["read:type:collection", "read:type:item"])]
     private $spots;
 
     public function __construct()
