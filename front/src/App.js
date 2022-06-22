@@ -38,8 +38,8 @@ const App = () => {
           
           {/* SPOTSROUTES */}
     
-          <Route path="/spots"  element={isAuthenticated ? <Spots/> : <LoginPage /> } />
-          <Route path="/spots/:id" element={isAuthenticated ? <SpotDetails/> : <LoginPage /> } />
+          <Route path="/spots"  element={ <Spots/> } />
+          <Route path="/spots/:id" element={ <SpotDetails/> } />
           <Route path="/spots/create" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
           <Route path="/spots/update/:id" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
       </Routes>

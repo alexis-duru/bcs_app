@@ -82,7 +82,7 @@ class Spot
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'spots')]
     #[ORM\JoinColumn(nullable: true)]
     #[Assert\NotBlank(message: 'User is required')]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:comment:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:comment:collection", "read:user:item"])]
     private $user;
 
     #[Assert\NotBlank(message: 'The adress is required')]

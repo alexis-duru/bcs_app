@@ -26,8 +26,6 @@ const Profile  = (props) => {
         }
     }
 
-
-
     return (
         <>
         <div className='spotDetails'>

@@ -149,16 +149,16 @@ const SpotCreate = (props) => {
 
         } catch (error) {
             console.log('La requête à échoué')
-            // console.log(error.response.data.violations)
-            // console.log(error)
-            // if (error.response.data.violations) {
-            //     const apiErrors = {};
-            //     error.response.data.violations.forEach(violation => {
-            //         apiErrors[violation.propertyPath] = violation.message;
-            //     });
+            console.log(error.response.data.violations)
+            console.log(error)
+            if (error.response.data.violations) {
+                const apiErrors = {};
+                error.response.data.violations.forEach(violation => {
+                    apiErrors[violation.propertyPath] = violation.message;
+                });
 
-            //     setErrors(apiErrors)
-            // }
+                setErrors(apiErrors)
+            }
         }
 
     }
