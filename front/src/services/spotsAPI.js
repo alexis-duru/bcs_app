@@ -19,6 +19,7 @@ function findAllFlats() {
         .then(response => response.data['hydra:member'])
 }
 
+// Find All Spots of the application
     
 function findAll() {
     return API 
@@ -26,11 +27,15 @@ function findAll() {
         .then(response => response.data['hydra:member'])
 };
 
+// Find One spot of the application
+
 const findOne = async (id) => {
     return API
         .get(`/spots/${id}`)
         .then(response => response.data)
 };
+
+// Create a new Spot
 
 const createSpot = (credentials) => {
     // API.Authorization = ""
@@ -39,12 +44,15 @@ const createSpot = (credentials) => {
         .then(response => response.data)
 }
 
+// Update a Spot
+
 function updateSpot(id, credentials) {
     return API
         .put(`/spots/${id}`, credentials)
         .then(response => response.data)
 };
 
+// Delete a Spot by the ID of the application
 
 function deleteSpots(id) {
     return API

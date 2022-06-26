@@ -63,20 +63,22 @@ const Spots = (props) => {
 
     const itemsPerPage = 10;
 
-    // Filtre des spots en fonction de la recherche
+    // Création d'un filtre des spots en fonction de la recherche
 
     const filteredSpots = spots.filter(
         s => 
         s.name.toLowerCase().includes(search.toLowerCase()) ||
         s.type.name.toLowerCase().includes(search.toLowerCase()) ||
         s.category.name.toLowerCase().includes(search.toLowerCase()) ||
-        s.flat.name.toLowerCase().includes(search.toLowerCase())
+        s.flat.name.toLowerCase().includes(search.toLowerCase()) ||
+        s.address.toLowerCase().includes(search.toLowerCase()) ||
+        s.city.toLowerCase().includes(search.toLowerCase()) ||
+        s.postalCode.toString().toLowerCase().includes(search.toLowerCase())
     );
 
     // Gestion de la pagination
 
     const paginatedSpots = Pagination.getData(
-        // spots, 
         filteredSpots, 
         currentPage, 
         itemsPerPage
@@ -92,10 +94,10 @@ const Spots = (props) => {
                 <div className="spotsPageWrapper">
                     <div className="spotsPageHeader">
                         <div className="spotsCreate">
-                            <Link to='/spots/create'>Création d'un spot</Link>
+                            <Link to='/spots/create'>Share a spot with community</Link>
                         </div>
                         <div className="searchBar">
-                            <input type="text" onChange={handleSearch} value={search} placeholder="Rechercher ..." className="searchBarControl" />
+                            <input type="text" onChange={handleSearch} value={search} placeholder="Search spot ..." className="searchBarControl" />
                         </div>
                     </div>
                     <div className="spotsPageWrapperCards">

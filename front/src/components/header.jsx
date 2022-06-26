@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import authAPI from '../services/authAPI';
+import image from "../assets/img/logo-header.png";
 
 const Header = ({isAuthenticated, onLogout}) => {
 
@@ -15,7 +16,10 @@ const Header = ({isAuthenticated, onLogout}) => {
     return ( 
         <header>
             <div className="logo_header">
-                <Link to="/">SPOTED</Link>
+                <Link to="/">
+                    <img src={image} />
+                    <p>SPOTTED</p>
+                </Link>
             </div>
             <div className="container_connexion">
                 {

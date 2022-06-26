@@ -25,7 +25,7 @@ const App = () => {
 
       <Header  isAuthenticated={isAuthenticated} onLogout={setIsAuthenticated} />
 
-      <Navbar/>
+      <Navbar isAuthenticated={isAuthenticated} onLogout={setIsAuthenticated} />
 
       <Routes>
           {/* HOMEPAGE */}

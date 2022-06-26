@@ -14,18 +14,33 @@ header {
   flex-direction: column;
     width: 100%;
     z-index: 999;
-    &::before {
-      content: url(../assets/img/logo-header.png);
-      cursor: pointer;
-      color: white;
-    }
+    // &::before {
+    //   content: url(../assets/img/logo-header.png);
+    //   cursor: pointer;
+    //   color: white;
+    // }
     .logo_header {
+      width: auto;
+      height: 100%;
       cursor: pointer;
       a {
         color: $white;
         cursor: pointer;
         letter-spacing: 5px;
         transition: 0.3s ease-in-out;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 100%;
+        width: auto;
+        img {
+          width: 25px;
+        }
+        p {
+          font-size: 13px;
+        }
         &:hover {
           opacity: 0.8;
         }
@@ -196,7 +211,7 @@ header {
     height: 60%;
     opacity: 1;
     display: flex;
-    justify-content: space-evenly;
+    // justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
     &:hover a {
@@ -209,6 +224,7 @@ header {
         transition: 0.2s ease-in-out;
         text-align: justify;
         opacity: 1;
+        margin-top: 8vh;
         a {
             transition: 0.4s ease-in-out;
             text-decoration: none;

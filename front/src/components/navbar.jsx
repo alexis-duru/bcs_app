@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import authAPI from "../services/authAPI";
+// import { useState } from 'react';
 
-const Navbar  = (props) => {
+const Navbar  = ({isAuthenticated}) => {
 
+ 
     return (  
         <div id="nav-container">
           <div className="bg"></div>
@@ -15,10 +18,12 @@ const Navbar  = (props) => {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="spots">Spots</Link></li>
-              <li><Link to="spots/create">Upload spot</Link></li>
-              <li>
+              { isAuthenticated  && <li>
+                <Link to="spots/create">Upload spot</Link>
+              </li>}
+              { isAuthenticated  && <li>
               <Link to="profile">Profile</Link>
-              </li>
+              </li>}
             </ul>
           </div>
         </div>
