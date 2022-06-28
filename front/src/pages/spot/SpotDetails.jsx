@@ -22,7 +22,7 @@ const SpotDetails  = (props) => {
             console.log(spot)
 
         } catch (error) {
-            console.log(error + "failed")
+            console.log(error + " failed")
         }
     }
 

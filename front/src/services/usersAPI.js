@@ -17,6 +17,20 @@ const findOneUser = async (id) => {
         .then(response => response.data)
 };
 
+// const getUserId 
+
+
+
+// find Spots by the ID of the user
+
+const findSpotOfUser = async (id) => {
+    return API
+        .get(`/users/${id}/spots`)
+        .then(response => response.data)
+};
+
+
+
 // Create a new User
 
 const createUser = (credentials) => {
@@ -24,6 +38,7 @@ const createUser = (credentials) => {
         .post('/users', credentials)
         .then(response => response.data)
 }
+
 
 // Delete a User by the ID of the application
 
@@ -37,6 +52,7 @@ const exportAPI =  {
     findOneUser,
     delete: deleteUser,
     createUser,
+    findSpotOfUser
 };
 
 export default exportAPI;

@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Field from '../../components/forms/Field';
-// import UploadField from '../../components/forms/UploadField';
 import Select from '../../components/forms/Select';
 import spotsAPI from '../../services/spotsAPI';
-
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+// import UploadField from '../../components/forms/UploadField';
 // import createSpot from "../../services/spotsAPI";
 
 
-const SpotCreate = (props) => {
+const SpotCreate = () => {
 
     const navigate = useNavigate();
 
@@ -120,11 +117,13 @@ const SpotCreate = (props) => {
 
     }
 
-    useEffect(() => {
+
+    useEffect( () => {
         fetchCategories();
         fetchTypes();
         fetchFlats();
         fetchSpot();
+        // eslint-disable-next-line
     }, [])
 
     const handleChange = ({ currentTarget }) => {
@@ -276,7 +275,7 @@ const SpotCreate = (props) => {
                         {categories.map(category =>
                             <option
                                 key={category.id}
-                                value={category.id}>
+                                value={"api/categories/" + category.id}>
                                 {category.name}
                             </option>
                         )}
@@ -293,7 +292,8 @@ const SpotCreate = (props) => {
                         {types.map(type =>
                             <option
                                 key={type.id}
-                                value={type.id}>
+                                value={"api/types/" + type.id}>
+                                {/* // value={type.id} */}
                                 {type.name}
                             </option>
                         )}
@@ -310,7 +310,8 @@ const SpotCreate = (props) => {
                         {flats.map(flat =>
                             <option
                                 key={flat.id}
-                                value={flat.id}>
+                                value={"api/flats/" + flat.id}>
+                                {/* // value={flat.id}> */}
                                 {flat.name}
                             </option>
                         )}
