@@ -3,15 +3,14 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import usersAPI from '../../../services/usersAPI';
-// import authAPI from '../../../services/authAPI';
 
-const Profile  = () => {
+const Profile  = (props) => {
 
     const [user, setUser] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);
-    // const [expJwt, setexpJwt] = useState([]);
 
     const findCurrentUser = () => {
+
         // Récupération de l'user en cours grâce à l'email unique
         const users =  usersAPI.findAllUsers()
 
@@ -21,44 +20,29 @@ const Profile  = () => {
                 setCurrentUser(identity)
             })
         })
+       
     }
+    findCurrentUser();
 
 
     useEffect( () => {
-        
+
         const decoded = jwtDecode(localStorage.getItem('token'));
         console.log(decoded)
-        // const { email } = decoded.email;
         setUser(decoded);
-
-        findCurrentUser();
-
-        
-
-        // console.log(response)
-        // const expJwt = new Date(0);
-        // expJwt.setUTCSeconds(decoded.exp);
-        // setexpJwt();
 
         // eslint-disable-next-line
     }, []);
 
-    // async function fetchUsers()  {
-    //     const response = await findAllUsers();
-    //     setUser(response)
-    // }
-
     return (
         <>
         <div className='spotDetails'>
-          <h1> User Details</h1>
-          <h2>
-            {currentUser.id}</h2>
-            <h2>{currentUser.email}</h2>
-          {/* <h3>{user.roles[1]}</h3> */}
-          {/* <h4>ton token s'autodétruira dans : {expJwt}</h4> */}
-              <Link to='/spots'>
-                  All Spots
+          <h1> Hello, {currentUser.email}</h1>
+          <h2>Your id : {currentUser.id}</h2>
+            <h2>Email : {currentUser.email}</h2>
+            {/* <h3>Role : {user.roles + 1 }</h3> */}
+              <Link to='/profile/spots'>
+                  <p>My Spots</p>
               </Link>
           </div>
         </>

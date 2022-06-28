@@ -20,7 +20,6 @@ const findOneUser = async (id) => {
 // const getUserId 
 
 
-
 // find Spots by the ID of the user
 
 const findSpotOfUser = async (id) => {

@@ -10,6 +10,7 @@ import SpotDetails from "./pages/spot/SpotDetails";
 import Spots from './pages/spot/Spots';
 import authAPI from "./services/authAPI";
 import SpotCreate from './pages/spot/SpotCreate';
+import UserSpots from './pages/user/profile/UserSpots';
 // useEffect useNavigate
 
 authAPI.setup();
@@ -29,12 +30,15 @@ const App = () => {
 
       <Routes>
           {/* HOMEPAGE */}
+          
           <Route path="/" element={ <Homepage/> } />
 
           {/* USERROUTES */}
+
           <Route path="/login" element={ <LoginPage onLogin={setIsAuthenticated} /> } />
           <Route path="/register" element={ <RegisterPage/> } />
           <Route path="/profile" element={isAuthenticated ? <Profile/> : <LoginPage/> }/>
+          <Route  path="/profile/spots" element={isAuthenticated ? <UserSpots/> : <LoginPage/> }/>
           
           {/* SPOTSROUTES */}
     
