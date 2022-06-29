@@ -11,6 +11,8 @@ const Profile  = (props) => {
 
     const findCurrentUser = () => {
 
+        console.log('bfjhds')
+
         // Récupération de l'user en cours grâce à l'email unique
         const users =  usersAPI.findAllUsers()
 
@@ -20,19 +22,20 @@ const Profile  = (props) => {
                 setCurrentUser(identity)
             })
         })
-       
     }
-    findCurrentUser();
-
 
     useEffect( () => {
-
         const decoded = jwtDecode(localStorage.getItem('token'));
         console.log(decoded)
         setUser(decoded);
-
         // eslint-disable-next-line
     }, []);
+
+
+    useEffect(() => {
+        findCurrentUser();
+        // eslint-disable-next-line
+    }, [user])
 
     return (
         <>

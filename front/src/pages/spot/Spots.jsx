@@ -32,20 +32,20 @@ const Spots = (props) => {
 
     //  Gestion de la suppression d'un spot 
 
-    const handleDelete = async id =>  {
-        const originalSpots = [...spots];
+    // const handleDelete = async id =>  {
+    //     const originalSpots = [...spots];
 
-        setSpots(spots.filter(spot => spot.id !== id));
+    //     setSpots(spots.filter(spot => spot.id !== id));
         
 
-        try {
-            await spotsAPI.delete(id)
-            console.log("The spot was successfully deleted")
-        } catch (error) {
-            setSpots(originalSpots);
-            console.log(error.response + "Sorry, the spot could not be deleted");
-        }
-    };
+    //     try {
+    //         await spotsAPI.delete(id)
+    //         console.log("The spot was successfully deleted")
+    //     } catch (error) {
+    //         setSpots(originalSpots);
+    //         console.log(error.response + "Sorry, the spot could not be deleted");
+    //     }
+    // };
 
 
     //  Gestion du changement de page
@@ -122,14 +122,14 @@ const Spots = (props) => {
                                         {/* {isAuthenticated === spot.user.id ? */}
                                         {/* { spot.user.email === spot.id} */}
                                         
-                                        <button 
+                                        {/* <button 
                                             onClick={() => handleDelete(spot.id)} 
                                             className="deleteButton">Delete
-                                        </button> 
+                                        </button>  */}
                                                                                 
-                                        <Link to={'/spots/update/' + spot.id}>
+                                        {/* <Link to={'/spots/update/' + spot.id}>
                                             <button className="btn-green">UPDATE</button>
-                                        </Link>
+                                        </Link> */}
 
                                         <div className="moreInfosButton">
                                             <Link to={`/spots/${spot.id}`}>

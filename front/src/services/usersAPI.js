@@ -3,14 +3,13 @@ import API from "./api";
 
 // Find All Users of the application
 
-function findAllUsers() {
+ function findAllUsers() {
     return API 
         .get("/users")
         .then(response => response.data['hydra:member'])
 };
 
 // Find One User by the ID of the application
-
 const findOneUser = async (id) => {
     return API
         .get(`/users/${id}`)
@@ -20,15 +19,13 @@ const findOneUser = async (id) => {
 // const getUserId 
 
 
-// find Spots by the ID of the user
+// find Spots by the ID of the user - Perf solution
 
-const findSpotOfUser = async (id) => {
+const findSpotOfUser = (id) => {
     return API
         .get(`/users/${id}/spots`)
-        .then(response => response.data)
+        .then(response => response.data['hydra:member'])
 };
-
-
 
 // Create a new User
 
@@ -37,7 +34,6 @@ const createUser = (credentials) => {
         .post('/users', credentials)
         .then(response => response.data)
 }
-
 
 // Delete a User by the ID of the application
 
