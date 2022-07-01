@@ -277,6 +277,7 @@ const SpotCreate = () => {
 
 
                     <Select
+                        category="category"
                         name={"category"}
                         label="category"
                         placeholder="category"
@@ -294,6 +295,7 @@ const SpotCreate = () => {
                     </Select>
 
                     <Select
+                        type="type"
                         name="type"
                         label="type"
                         placeholder="type"
@@ -312,6 +314,7 @@ const SpotCreate = () => {
                     </Select>
 
                     <Select
+                        flat="flat"
                         name="flat"
                         label="flat"
                         placeholder="flat"

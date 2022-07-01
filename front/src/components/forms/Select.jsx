@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Select = ({name, value, error, label, onChange, children}) => {
+const Select = ({name, value, error, label, onChange, children, category, type, flat}) => {
     return ( 
         <div className="formGroup">
         <label htmlFor={name}>{label}</label>
+        <option value="">--Select a {category}{type}{flat}--</option>
             <select 
                 onChange={onChange} 
                 name={name} 
