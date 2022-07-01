@@ -46,11 +46,17 @@ const createSpot = (credentials) => {
 
 // Update a Spot
 
+// function updateSpot(id, credentials) {
+//     credentials = {
+//         data: credentials,
+//         user: 'exemple'
+//     }
+//     return API
+//         .put(`/spots/${id}`, credentials)
+//         .then(response => response.data)
+// };
+
 function updateSpot(id, credentials) {
-    credentials = {
-        data: credentials,
-        user: 'bite'
-    }
     return API
         .put(`/spots/${id}`, credentials)
         .then(response => response.data)

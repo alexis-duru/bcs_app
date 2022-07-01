@@ -117,14 +117,26 @@ const SpotCreate = () => {
 
     }
 
-
     useEffect( () => {
-        fetchCategories();
-        fetchTypes();
-        fetchFlats();
         fetchSpot();
         // eslint-disable-next-line
     }, [])
+
+    useEffect( () => {
+        fetchCategories();
+        // eslint-disable-next-line
+    }, [])
+
+    useEffect( () => {
+        fetchTypes();
+        // eslint-disable-next-line
+    }, [])
+
+    useEffect( () => {
+        fetchFlats();
+        // eslint-disable-next-line
+    }, [])
+
 
     const handleChange = ({ currentTarget }) => {
         const { name, value } = currentTarget;
