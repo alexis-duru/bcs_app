@@ -36,7 +36,7 @@ class Comment
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(["read:comment:collection"])]
+    #[Groups(["read:comment:collection", "read:item:collection", "read:spot:collection", "read:spot:item", "read:user:collection", "read:use:item"])]
     private $id;
 
     #[ORM\Column(type: 'datetime')]
@@ -48,7 +48,7 @@ class Comment
     private $updatedAt;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item", "read:comment:collection"])]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item", "read:comment:collection", "read:comment:item"])]
     private $content;
 
     #[ORM\ManyToOne(targetEntity: Spot::class, inversedBy: 'comments')]
@@ -56,8 +56,9 @@ class Comment
     #[Groups(["read:comment:collection"])]
     private $spot;
 
-    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'comments')]
-    #[Groups(["read:comment:collection"])]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'comments')]
+    #[Groups(["read:spot:collection", "read:spot:item", "read:comment:collection", "read:comment:item"])]
+    // #[Groups(["read:comment:collection"])]
     // Crash getAll Users
     private $author;
 
@@ -114,12 +115,12 @@ class Comment
         return $this;
     }
 
-    public function getAuthor(): ?user
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?user $author): self
+    public function setAuthor(?User $author): self
     {
         $this->author = $author;
 

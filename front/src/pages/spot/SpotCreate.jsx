@@ -389,10 +389,11 @@ const SpotCreate = () => {
                     </div>
                 </form>
                 <div className="mapbox-container">
-                    <div className="sidebar">
-                    Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-                    </div>
+                        <div className="sidebar">
+                        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+                        </div>
                     <div ref={mapContainer} className="map-container" />
+                    
                     </div>
             </div>
 
