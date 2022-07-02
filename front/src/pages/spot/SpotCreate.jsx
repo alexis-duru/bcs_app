@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Field from '../../components/forms/Field';
 import Select from '../../components/forms/Select';
 import spotsAPI from '../../services/spotsAPI';
+import mapboxgl from 'mapbox-gl';
+
+
+mapboxgl.accessToken="pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxbzc5enlobmM0In0.Ed0S5ioc8PQZXqPIfK2CEg";
 // import UploadField from '../../components/forms/UploadField';
 // import createSpot from "../../services/spotsAPI";
 
@@ -11,19 +15,14 @@ const SpotCreate = () => {
 
     const navigate = useNavigate();
 
+
     const spotId = useParams('id').id // Objet ID
 
     // console.log(props)
 
+    const [lng, setLng] = useState(-0.594);
+    const [lat, setLat] = useState(44.8378);
     const [spot, setSpot] = useState({
-        // name: "Nouveau spot sudffsfsdf dimanche5",
-        // address: "107, rue de saint genes",
-        // city: "Bordeaux",
-        // postalCode: 33000,
-        // createdAt: "2022-02-13T11:27:15.738Z",
-        // updatedAt: "2022-03-13T11:27:15.738Z",
-        // details: "Un petit détail"
-
         name: "",
         address: "",
         city: "",
@@ -35,8 +34,8 @@ const SpotCreate = () => {
         type: "",
         flat: "",
         media: "",
-        latitude: "",
-        longitude: "",
+        latitude: lat,
+        longitude: lng,
     });
 
     const [errors, setErrors] = useState({
@@ -51,13 +50,22 @@ const SpotCreate = () => {
         type: "",
         flat: "",
         media: "",
-        latitude: "",
-        longitude: "",
+        latitude: lat,
+        longitude: lng,
     });
 
     const [categories, setCategories] = useState([]);
     const [types, setTypes] = useState([]);
     const [flats, setFlats] = useState([]);
+
+    // const [latitude, setLatitude] = useState(0);
+    // const [longitude, setLongitude] = useState(0);
+
+    const mapContainer = useRef(null);
+    const map = useRef(null);
+    // eslint-disable-next-line
+    const [zoom, setZoom] = useState(13);
+    const [marker, setMarker] = useState([]);
 
 
     const fetchCategories = async () => {
@@ -124,10 +132,47 @@ const SpotCreate = () => {
 
     }
 
+
+     useEffect( () => {
+            if (map.current) return; // initialize map only once
+            map.current = new mapboxgl.Map({
+            container: mapContainer.current,
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [lng, lat],
+            zoom: zoom
+            });
+            setMarker(new mapboxgl.Marker({
+                color: "##000000",
+                draggable: true
+            })
+            .setLngLat([lng, lat])
+            .addTo(map.current));
+    },[lng, lat, zoom]);
+
+    useEffect (() => {
+        // if (!map.current) return; // wait for map to initialize
+         map.current.flyTo({
+            center: [lng, lat],
+            essential : true
+        });
+        // console.log(map)
+
+    },)
+
     useEffect( () => {
         fetchSpot();
+        navigator.geolocation.getCurrentPosition((value) => {
+            setLat(value.coords.latitude);
+            setLng(value.coords.longitude);
+            setSpot({...spot, latitude: value.coords.latitude, longitude: value.coords.longitude});
+            if(marker !== undefined){
+            marker.setLngLat([lng, lat]);
+            }      
+        })
         // eslint-disable-next-line
-    }, [])
+    }, [lat])
+
+
 
     useEffect( () => {
         fetchCategories();
@@ -330,16 +375,36 @@ const SpotCreate = () => {
                         error={errors.longitude}
                     />
 
+                    
+
                     <div>
                         <button type="submit">
                             SAVE
                         </button>
                     </div>
 
+
                     <div>
                         <Link to="/spots">Back to spots</Link>
                     </div>
                 </form>
+                <div className="mapbox-container">
+                <div className="sidebar">
+                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+                </div>
+                 <div ref={mapContainer} className="map-container" />
+                        {/* <MapContainer center={[latitude, longitude]} zoom={13} scrollWheelZoom={false}>
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                        <Marker position={[latitude, longitude]}>
+                            <Popup>
+                            A pretty CSS3 popup. <br /> Easily customizable.
+                            </Popup>
+                        </Marker>
+                    </MapContainer> */}
+                </div>
             </div>
 
         </>
