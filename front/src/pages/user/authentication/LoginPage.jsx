@@ -31,7 +31,7 @@ const LoginPage = ( { onLogin } ) => {
            navigate("/spots", {replace: true})
            console.log("You are now connected")
         } catch (error) { 
-            setError("No account has this address");
+            setError("No account has this address or informations does not match");
         }
     }
 
@@ -50,9 +50,24 @@ const LoginPage = ( { onLogin } ) => {
                 <form className="formContainer" onSubmit={handleSubmit}>
                     <div className="form_overlay"></div>
             
-                    <Field label="Email adress" name="email" value={credentials.email} onChange={handleChange} placeholder="Email adress" error={error}  />
+                    <Field 
+                        label="Email adress" 
+                        name="email" 
+                        onChange={handleChange} 
+                        placeholder="Email adress"
+                        value={credentials.email} 
+                        error={error}
+                    />
 
-                    <Field label="Password" name="password" value={credentials.password} onChange={handleChange} type="password" placeholder="Password" error={error}/>
+                    <Field 
+                        label="Password" 
+                        name="password" 
+                        onChange={handleChange} 
+                        type="password" 
+                        placeholder="Password" 
+                        value={credentials.password} 
+                        error={error}
+                    />
 
                     <div className="form-group">
                        <button type="submit" className="submitBtn">Login</button>

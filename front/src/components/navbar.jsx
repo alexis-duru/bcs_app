@@ -17,12 +17,15 @@ const Navbar  = ({isAuthenticated}) => {
           <div id="nav-content" tabIndex="0">
             <ul>
               <li><Link to="/">Home</Link></li>
-              <li><Link to="spots">Spots</Link></li>
+              <li><Link to="spots">All spots</Link></li>
               { isAuthenticated  && <li>
-                <Link to="spots/create">Upload spot</Link>
+                <Link to="spots/create">Upload</Link>
               </li>}
               { isAuthenticated  && <li>
               <Link to="profile">Profile</Link>
+              </li>}
+              { isAuthenticated  && <li>
+                <Link to='/profile/spots'>My spots</Link>
               </li>}
             </ul>
           </div>

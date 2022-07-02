@@ -17,8 +17,8 @@ const Header = ({isAuthenticated, onLogout}) => {
         <header>
             <div className="logo_header">
                 <Link to="/">
-                    <img src={image} />
-                    <p>SPOTTED</p>
+                    <img src={image} alt="logo" />
+                    <p>SPOTED</p>
                 </Link>
             </div>
             <div className="container_connexion">

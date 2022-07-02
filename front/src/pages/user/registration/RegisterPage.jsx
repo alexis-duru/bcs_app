@@ -41,6 +41,7 @@ const RegisterPage = (props) => {
 
 
         try {
+            // eslint-disable-next-line
             const response = await usersAPI.createUser(JSON.stringify(user))
             console.log('The account has been successfully created')
             navigate("/login", {replace: true})

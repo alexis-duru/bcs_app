@@ -138,6 +138,8 @@ const UserSpots  = () => {
                                         <p>{spot.type.name}</p>
                                         <p>{spot.category.name}</p>
                                         <p>{spot.flat.name}</p>
+                                        <p>{spot.latitude}</p>
+                                        <p>{spot.longitude}</p>
                                         
                                         <button 
                                             onClick={() => handleDelete(spot.id)} 

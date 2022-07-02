@@ -113,7 +113,6 @@ const Spots = (props) => {
                                         <p>{spot.city}</p>
                                         <p>{spot.postalCode}</p>
                                         <p>{spot.details}</p>
-                                        <p>{spot.user.email}</p>
                                         <p>{spot.type.name}</p>
                                         <p>{spot.category.name}</p>
                                         <p>{spot.flat.name}</p>

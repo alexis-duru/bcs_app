@@ -156,6 +156,12 @@ class Spot
     #[Groups(["read:spot:collection", "read:spot:item", "read:user:collection", "read:user:item"])]
     private $comments;
 
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $longitude;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $latitude;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
@@ -403,6 +409,30 @@ class Spot
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
 
         return $this;
     }

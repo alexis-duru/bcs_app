@@ -4,7 +4,6 @@
 @import 'generic/reset';
 @import 'navigation.scss';
 @import 'homepage/homepage';
-@import 'profilpage';
 @import 'spotsPage/spotspage';
 @import 'generic/generic';
 @import 'generic/button';
@@ -13,3 +12,5 @@
 @import 'authorization/loginpage';
 @import 'spotspage/spotCreate';
 @import 'spotspage/spotDetails';
+@import 'profile/profilepage.scss';
+@import 'theme/globalTheme.scss';

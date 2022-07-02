@@ -74,10 +74,12 @@
             display: flex;
             align-items: flex-start;
             width: 100%;
-        }
-        .is-invalid {
             color: $red;
+
         }
+        // .is-invalid {
+        //     color: $red;
+        // }
 
         button {
             width: 100%;

@@ -39,14 +39,48 @@ const Profile  = (props) => {
 
     return (
         <>
-        <div className='spotDetails'>
-          <h1> Hello, {currentUser.email}</h1>
-          <h2>Your id : {currentUser.id}</h2>
-            <h2>Email : {currentUser.email}</h2>
-            {/* <h3>Role : {user.roles + 1 }</h3> */}
-              <Link to='/profile/spots'>
-                  <p>My Spots</p>
-              </Link>
+        <div className='profilePage'>
+            <div className="leftSideBar">
+
+            </div>
+            {/* <div className="profilePageWrapper">
+                <div className="profilePageTop">
+                    <p>SETTINGS</p>
+                </div>
+                <div className="profilePageMiddle">
+                    <h1> Hello, {currentUser.email}</h1>
+                    <h2>Your id : {currentUser.id}</h2>
+                        <h2>Email : {currentUser.email}</h2>
+                        <Link to='/profile/spots'>
+                            <p>My Spots</p>
+                        </Link>
+                </div>
+                <div className="profilePageBottom">
+                    <p>BOTTOM</p>
+                </div>
+            </div> */}
+            <div className="pageWrapper">
+                    <div className="pageHeader">
+                        <div className="pageWrapperHeader">
+                            <Link to='/spots/create'>Share a spot with community</Link>
+                        </div>
+                        <div className="searchBar">
+                           
+                        </div>
+                    </div>
+                    <div className="pageWrapperContainer">
+                    <h1> Hello, {currentUser.email}</h1>
+                    <h2>Your id : {currentUser.id}</h2>
+                        <h2>Email : {currentUser.email}</h2>
+                        <Link to='/profile/spots'>
+                            <p>My Spots</p>
+                        </Link>
+                       
+                    </div>
+                    <div className="pageBottomContainer">
+                      
+                    </div>
+                </div>
           </div>
         </>
     )

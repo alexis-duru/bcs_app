@@ -35,6 +35,8 @@ const SpotCreate = () => {
         type: "",
         flat: "",
         media: "",
+        latitude: "",
+        longitude: "",
     });
 
     const [errors, setErrors] = useState({
@@ -49,6 +51,8 @@ const SpotCreate = () => {
         type: "",
         flat: "",
         media: "",
+        latitude: "",
+        longitude: "",
     });
 
     const [categories, setCategories] = useState([]);
@@ -103,7 +107,10 @@ const SpotCreate = () => {
                         type: data.type.id,
                         category: data.category.id,
                         flat: data.flat.id,
-                        media: data.media
+                        media: data.media,
+                        latitude: data.latitude,
+                        longitude: data.longitude,
+
                     }
                 );
                 console.log(data)
@@ -152,6 +159,8 @@ const SpotCreate = () => {
             // spot.media = spot.media.replace(/^.*\\/, "");
             // console.log(spot.media);
             spot.postalCode = parseInt(spot.postalCode)
+            spot.latitude = parseFloat(spot.latitude)
+            spot.longitude = parseFloat(spot.longitude)
             spotId ? await spotsAPI.updateSpot(parseInt(spotId), spot) : await spotsAPI.createSpot(JSON.stringify(spot))
             // console.log(response)
             console.log('Le spot a bien été crée')
@@ -178,7 +187,7 @@ const SpotCreate = () => {
     return (
         <>
             <div className="createSpots">
-                <h1>Upload spot</h1>
+                <h1>CONTRIBUTION</h1>
 
                 <form onSubmit={handleSubmit}>
                     <Field
@@ -246,35 +255,6 @@ const SpotCreate = () => {
                         error={errors.media}
                     />
 
-                    {/* <Field 
-                    name="category" 
-                    label="category" 
-                    placeholder="category" 
-                    value={spot.category} 
-                    onChange={handleChange}  
-                    error={errors.category}
-                />
-
-
-                <Field 
-                    name="type" 
-                    label="type" 
-                    placeholder="type" 
-                    value={spot.type} 
-                    onChange={handleChange}  
-                    error={errors.type}
-                />
-
-
-                <Field 
-                    name="flat" 
-                    label="flat" 
-                    placeholder="flat" 
-                    value={spot.flat} 
-                    onChange={handleChange}  
-                    error={errors.flat}
-                /> */}
-
 
                     <Select
                         category="category"
@@ -331,6 +311,24 @@ const SpotCreate = () => {
                             </option>
                         )}
                     </Select>
+
+                    <Field
+                        name="latitude"
+                        label="latitude"
+                        placeholder="latitude"
+                        value={spot.latitude}
+                        onChange={handleChange}
+                        error={errors.latitude}
+                    />
+
+                    <Field
+                        name="longitude"
+                        label="longitude"
+                        placeholder="longitude"
+                        value={spot.longitude}
+                        onChange={handleChange}
+                        error={errors.longitude}
+                    />
 
                     <div>
                         <button type="submit">
