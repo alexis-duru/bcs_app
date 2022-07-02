@@ -31,6 +31,15 @@ const RegisterPage = (props) => {
     const handleSubmit = async event => {
         event.preventDefault();
 
+        const apiErrors = {};
+
+        if(user.password !== user.passwordConfirm) {
+            apiErrors.passwordConfirm = "passwords do not match";
+            setErrors(apiErrors);
+            return
+        }
+
+
         try {
             const response = await usersAPI.createUser(JSON.stringify(user))
             console.log('The account has been successfully created')
@@ -102,9 +111,9 @@ const RegisterPage = (props) => {
                             </button>
                         </div>
                         <div className='form-group already_account'>
-                        <Link to='/login' id='already_account_btn'>
-                            I have an already <span> account</span>
-                        </Link>
+                            <Link to='/login' id='already_account_btn'>
+                                I have an already <span> account</span>
+                            </Link>
                         </div>
                 </form>
                 <div className="globalPageWrapperCards_overlay"></div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Field from '../../../components/forms/Field';
 import authAPI from '../../../services/authAPI';
 
@@ -56,6 +56,12 @@ const LoginPage = ( { onLogin } ) => {
 
                     <div className="form-group">
                        <button type="submit" className="submitBtn">Login</button>
+                    </div>
+
+                    <div className='form-group already_account'>
+                        <Link to='/register' id='already_account_btn'>
+                            Create an <span> account</span>
+                        </Link>
                     </div>
                 </form>
                 <div className="globalPageWrapperCards_overlay"></div>
