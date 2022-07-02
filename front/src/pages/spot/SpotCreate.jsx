@@ -389,22 +389,11 @@ const SpotCreate = () => {
                     </div>
                 </form>
                 <div className="mapbox-container">
-                <div className="sidebar">
-                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-                </div>
-                 <div ref={mapContainer} className="map-container" />
-                        {/* <MapContainer center={[latitude, longitude]} zoom={13} scrollWheelZoom={false}>
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                        <Marker position={[latitude, longitude]}>
-                            <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
-                            </Popup>
-                        </Marker>
-                    </MapContainer> */}
-                </div>
+                    <div className="sidebar">
+                    Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+                    </div>
+                    <div ref={mapContainer} className="map-container" />
+                    </div>
             </div>
 
         </>
