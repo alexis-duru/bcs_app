@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from "../../components/Pagination";
 import spotsAPI from '../../services/spotsAPI';
+import { toast } from 'react-toastify';
+import CardLoaders from '../../components/loaders/CardLoaders';
 
 
 const Spots = (props) => {
@@ -9,6 +11,7 @@ const Spots = (props) => {
     const [spots, setSpots] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
+    const [loading, setLoading] = useState(true);
 
     // Récupération de l'ensemble de mes spots
 
@@ -16,7 +19,9 @@ const Spots = (props) => {
         try {
             const data = await spotsAPI.findAll()
             setSpots(data)
+            setLoading(false)
         } catch (error) {
+            toast.error("Sorry, the spots could not be found")
             console.log(error.response)
         }
     }
@@ -100,6 +105,7 @@ const Spots = (props) => {
                             <input type="text" onChange={handleSearch} value={search} placeholder="Search spot ..." className="searchBarControl" />
                         </div>
                     </div>
+                    {!loading &&
                     <div className="spotsPageWrapperCards">
                     <div className="spotsPageWrapperCards_overlay"></div>
                         {paginatedSpots.map(spot => 
@@ -139,7 +145,11 @@ const Spots = (props) => {
                                 </div>
                             </div>
                         )}
+                    </div>}
+                    <div className="loaders">
+                        {loading && <CardLoaders />}
                     </div>
+                    
                     <div className="fullPaginationContainer">
                         {itemsPerPage < filteredSpots.length && (
                             <Pagination 

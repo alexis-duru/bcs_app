@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Field from '../../../components/forms/Field';
 import usersAPI from "../../../services/usersAPI";
+import { toast } from 'react-toastify';
 
 // useNavigate
 
@@ -36,6 +37,7 @@ const RegisterPage = (props) => {
         if(user.password !== user.passwordConfirm) {
             apiErrors.passwordConfirm = "passwords do not match";
             setErrors(apiErrors);
+            toast.error('Passwords do not match !');
             return
         }
 
@@ -43,10 +45,11 @@ const RegisterPage = (props) => {
         try {
             // eslint-disable-next-line
             const response = await usersAPI.createUser(JSON.stringify(user))
-            console.log('The account has been successfully created')
+            toast.success('The account has been successfully created, you can now log in !');
+            console.log('The account has been successfully created, you can now log in !');
             navigate("/login", {replace: true})
         } catch (error) {
-        console.log('The request failed')
+             console.log('The request failed')
             console.log(error.response.data.violations)
             console.log(error)
             if(error.response.data.violations) {
@@ -54,7 +57,7 @@ const RegisterPage = (props) => {
                 error.response.data.violations.forEach(violation => {
                     apiErrors[violation.propertyPath] = violation.message;
                 });
-
+                toast.error('We detected an error, please retry !');
                 setErrors(apiErrors)
             }
         }

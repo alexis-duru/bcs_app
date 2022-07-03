@@ -11,6 +11,8 @@ import Spots from './pages/spot/Spots';
 import authAPI from "./services/authAPI";
 import SpotCreate from './pages/spot/SpotCreate';
 import UserSpots from './pages/user/profile/UserSpots';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // useEffect useNavigate
 
 authAPI.setup();
@@ -47,9 +49,13 @@ const App = () => {
           <Route path="/spots/create" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
           <Route path="/spots/update/:id" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
       </Routes>
+      
+    <ToastContainer position={toast.POSITION.BOTTOM_RIGHT } />
 
     </BrowserRouter>
-  );
+    
+    
+    );
 }
 
 export default App;

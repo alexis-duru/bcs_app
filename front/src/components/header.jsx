@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import authAPI from '../services/authAPI';
 import image from "../assets/img/logo-header.png";
+import { toast } from 'react-toastify';
 
 const Header = ({isAuthenticated, onLogout}) => {
 
@@ -10,6 +11,7 @@ const Header = ({isAuthenticated, onLogout}) => {
     const handleLogout = () => {
         authAPI.logout();
         onLogout(false);
+        toast.success("You have been successfully disconnected")
         navigate('/login', {replace: true});
     };
     

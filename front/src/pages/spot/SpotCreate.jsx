@@ -4,6 +4,7 @@ import Field from '../../components/forms/Field';
 import Select from '../../components/forms/Select';
 import spotsAPI from '../../services/spotsAPI';
 import mapboxgl from 'mapbox-gl';
+import { toast } from 'react-toastify';
 
 
 mapboxgl.accessToken="pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxbzc5enlobmM0In0.Ed0S5ioc8PQZXqPIfK2CEg";
@@ -206,14 +207,18 @@ const SpotCreate = () => {
             spot.postalCode = parseInt(spot.postalCode)
             spot.latitude = parseFloat(spot.latitude)
             spot.longitude = parseFloat(spot.longitude)
-            spotId ? await spotsAPI.updateSpot(parseInt(spotId), spot) : await spotsAPI.createSpot(JSON.stringify(spot))
-            // console.log(response)
-            console.log('Le spot a bien été crée')
+            spotId 
+            ? 
+            await spotsAPI.updateSpot(parseInt(spotId), spot) 
+            // navigate("/spots", { replace: true })
+            (toast.success("The spot has been successfully edited"), navigate("/profile/spots"), {replace : true}, console.log("The spot has been successfully edited"))
+            :
+            await spotsAPI.createSpot(JSON.stringify(spot))
+            (toast.success("The spot has been successfully created"), navigate("/spots"), {replace : true}, console.log("The spot has been successfully created"))
             // console.log(spot.media)
-            navigate("/spots", { replace: true })
 
         } catch (error) {
-            console.log('La requête à échoué')
+            // console.log('La requête à échoué')
             console.log(error.response.data.violations)
             console.log(error)
             if (error.response.data.violations) {
@@ -221,7 +226,7 @@ const SpotCreate = () => {
                 error.response.data.violations.forEach(violation => {
                     apiErrors[violation.propertyPath] = violation.message;
                 });
-
+                toast.error('We detected an error, please retry !');
                 setErrors(apiErrors)
             }
         }

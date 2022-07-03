@@ -1,0 +1,28 @@
+.Toastify__toast-body { 
+    background-color: $black;
+    
+}
+
+.Toastify__toast { 
+    background-color: $black;
+    font-family: $adieu;
+    color: $white;
+    border: 1px solid $white;
+}
+.Toastify__toast--rtl { 
+    background-color: $black;
+    font-family: $adieu;
+    color: $white;
+}
+
+.Toastify__toast-icon { 
+    color: $white;
+}
+
+.Toastify__progress-bar { 
+    background-color: $white;
+}
+
+.Toastify__toast-container--bottom-right { 
+    margin-bottom: 50px;
+}

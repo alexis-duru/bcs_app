@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import spotsAPI from '../../services/spotsAPI';
+import { toast } from 'react-toastify';
 
 const SpotDetails  = (props) => {
 
@@ -19,9 +20,10 @@ const SpotDetails  = (props) => {
         try {
             const spot = await spotsAPI.findOne(id)
             setSpot(spot)
-            console.log(spot)
+            // console.log(spot)
 
         } catch (error) {
+            toast.error("Sorry, the spot could not be found")
             console.log(error + " failed")
         }
     }

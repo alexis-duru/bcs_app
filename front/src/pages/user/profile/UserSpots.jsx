@@ -5,6 +5,8 @@ import usersAPI from '../../../services/usersAPI';
 import spotsAPI from '../../../services/spotsAPI';
 import { Link } from 'react-router-dom';
 import Pagination from '../../../components/Pagination';
+import { toast } from 'react-toastify';
+import CardLoaders from '../../../components/loaders/CardLoaders';
 
 const UserSpots  = () => {
 
@@ -14,6 +16,9 @@ const UserSpots  = () => {
     const [search, setSearch] = useState("");
      // eslint-disable-next-line
     const [spots, setSpots] = useState([]);
+    // eslint-disable-next-line
+    const [loading, setLoading] = useState(true);
+
 
     const findCurrentUser = () => {
         // Récupération de l'user en cours grâce à l'email unique
@@ -32,9 +37,11 @@ const UserSpots  = () => {
     const fetchSpots = async () => {
         try {
             const data = await usersAPI.findSpotOfUser(currentUser.id);
+            setLoading(false)
             setSpots(data)
-            console.log(data)
+            // console.log(data)
         } catch (error) {
+            toast.error("Sorry, the spots could not be found")
             console.log(error.response)
         }
     }
@@ -45,7 +52,7 @@ const UserSpots  = () => {
 
         const decoded = jwtDecode(localStorage.getItem('token'));
         setUser(decoded);   
-        console.log(decoded) 
+        // console.log(decoded) 
         
             // eslint-disable-next-line
     }, []); 
@@ -68,9 +75,11 @@ const UserSpots  = () => {
 
         try {
             await spotsAPI.delete(id)
+            toast.success("The spot was successfully deleted")
             console.log("The spot was successfully deleted")
         } catch (error) {
             setSpots(originalSpots);
+            toast.error("Sorry, the spot could not be deleted, please retry")
             console.log(error.response + "Sorry, the spot could not be deleted");
         }
     };
@@ -122,6 +131,7 @@ const UserSpots  = () => {
                             <input type="text" onChange={handleSearch} value={search} placeholder="Search spot ..." className="searchBarControl" />
                         </div>
                     </div>
+                    {!loading &&
                     <div className="spotsPageWrapperCards">
                     <div className="spotsPageWrapperCards_overlay"></div>
                         {paginatedSpots.map(spot => 
@@ -159,7 +169,12 @@ const UserSpots  = () => {
                                 </div>
                             </div>
                         )}
+                    </div>}
+
+                    <div className="loaders">
+                        {loading && <CardLoaders />}
                     </div>
+
                     <div className="fullPaginationContainer">
                         {itemsPerPage < filteredSpots.length && (
                             <Pagination 

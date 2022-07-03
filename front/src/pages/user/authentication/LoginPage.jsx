@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Field from '../../../components/forms/Field';
 import authAPI from '../../../services/authAPI';
 
@@ -28,10 +29,12 @@ const LoginPage = ( { onLogin } ) => {
            await authAPI.authenticate(credentials);
         //    setError("");
            onLogin(true);
+           toast.success("You are now logged in");
            navigate("/spots", {replace: true})
            console.log("You are now connected")
         } catch (error) { 
-            setError("No account has this address or informations does not match");
+            setError("No account has this address or informations does not match, please retry.");
+            toast.error("No account has this address or informations does not match, please retry.");
         }
     }
 
