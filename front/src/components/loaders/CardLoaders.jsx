@@ -6,7 +6,7 @@ const CardLoaders = ({
   heading = { width: 140, height: 24 },
   row = 2,
   column = 3,
-  padding = 12,
+  padding = 25,
   borderRadius = 4,
   ...props
 }) => {
@@ -16,11 +16,11 @@ const CardLoaders = ({
 
   for (let i = 1; i <= row; i++) {
     for (let j = 0; j < column; j++) {
-      const itemWidth = (width - padding * (column + 1)) / column
+      const itemWidth = (1200 - padding * (column + 1)) / column
 
       const x = padding + j * (itemWidth + padding)
 
-      const height1 = itemWidth
+      const height1 = 500
 
       const height2 = 20
 
@@ -45,7 +45,7 @@ const CardLoaders = ({
             width={itemWidth}
             height={height1}
           />
-          <rect x={x} y={y2} rx={0} ry={0} width={itemWidth} height={height2} />
+          {/* <rect x={x} y={y2} rx={0} ry={0} width={itemWidth} height={height2} />
           <rect
             x={x}
             y={y3}
@@ -53,7 +53,7 @@ const CardLoaders = ({
             ry={0}
             width={itemWidth * 0.6}
             height={height3}
-          />
+          /> */}
         </>
       )
 

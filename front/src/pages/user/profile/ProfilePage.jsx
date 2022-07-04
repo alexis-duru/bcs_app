@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import usersAPI from '../../../services/usersAPI';
-
+import profil_image from '../../../assets/img/profil_image.png'
 const Profile  = (props) => {
 
     const [user, setUser] = useState([]);
@@ -67,13 +67,33 @@ const Profile  = (props) => {
                         </div>
                     </div>
                     <div className="pageWrapperContainer">
-                    <h1> Hello, {currentUser.email}</h1>
-                    <h2>Your id : {currentUser.id}</h2>
-                        <h2>Email : {currentUser.email}</h2>
-                        <Link to='/profile/spots'>
-                            <p>My Spots</p>
-                        </Link>
-                       
+                        <div className="usersInfos">
+                            <div class="profile_image">
+                                <img src={profil_image} alt="avatar of the user" />
+                                <button className="profile_upload">UPLOAD AVATAR</button>
+                            </div>
+                            <h2> Hello, {currentUser.email}</h2>
+                            <h3>Email : {currentUser.email}</h3>
+                            <h3>ID : {currentUser.id}</h3>
+                            <div class="btnContainer">
+                                <button 
+                                    // onClick={() => handleDelete(spot.id)} 
+                                    className="deleteButton">Delete
+                                </button> 
+                                                                        
+                                <Link to={''}>
+                                    <button className="btn-green">UPDATE</button>
+                                </Link>
+                            </div>
+                            <div class="container">
+                                <div class="button-container">
+                                    <span class="mask">YOUR SPOTS</span>
+                                    <Link to='/profile/spots'>
+                                    <button type="button" name="Hover">YOUR SPOTS</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="pageBottomContainer">
                       
