@@ -31,9 +31,23 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
             z-index: 10;
             .spotsCreate {
+                background-color: $white;
+                padding: 10px;
+                margin-left: 20px;
+                transition: 0.3s ease-in-out;
+                border: 1px solid rgba(255, 255, 255, 0);
+                cursor: pointer;
+                &:hover {
+                    background-color: $black;
+                    border: 1px solid white;
+                     transition: 0.3s ease-in-out;
+                    a {
+                        color: $white;
+                    }
+                }
                 a {
                     margin-left: 20px;
-                    color: white;
+                    color: $black;
                     text-decoration: none;
                     font-family: $lorinReg;
                 }

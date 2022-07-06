@@ -50,14 +50,15 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     # access_control:
-    #     - { path: ^/admin, roles: ROLE_ADMIN }
-    #     - { path: ^/profile, roles: ROLE_USER }
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
     access_control:
         # Version sécurisé
         - { path: ~/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/users, roles: IS_AUTHENTICATED_FULLY, methods: [GET, PUT, DELETE ], } 
         - { path: ^/api/spots, roles: IS_AUTHENTICATED_FULLY, methods: [POST, PUT, DELETE ], }
         - { path: ^/api/spots, roles: PUBLIC_ACCESS, methods: [GET], }
+        # - { path: ^/api/media_objects, roles: PUBLIC_ACCESS, methods: [GET], }
 
         # Version non sécurisé POUR POSTMAN 
         # - { path: ^/api/users, roles: PUBLIC_ACCESS }

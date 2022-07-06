@@ -46,6 +46,40 @@
             flex-wrap: wrap;
             overflow-y: scroll;
             align-items: center;
+            flex-direction: column;
+            .text_infos {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+                h1 {
+                    color: $white;
+                    font-family: $adieu;
+                    font-size: 4rem;
+                    margin-bottom: 10px;
+                }
+                h2 {
+                    color: $white;
+                    font-family: $lorinReg;
+                    font-size: 2rem;
+                }
+                .fade-in {
+                    animation-name: FadeIn;
+                    animation-duration: 3s;
+                    transition-timing-function: linear;
+                  }
+                  
+                  @keyframes FadeIn {
+                    0% {
+                      opacity: 0;
+                    }
+                    100% {
+                      opacity: 1;
+                    }
+                  }
+            }
+        
         }
         .globalFullPaginationContainer {
             background-color: $black;

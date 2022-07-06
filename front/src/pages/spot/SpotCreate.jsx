@@ -7,7 +7,7 @@ import mapboxgl from 'mapbox-gl';
 import { toast } from 'react-toastify';
 
 
-mapboxgl.accessToken="pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxbzc5enlobmM0In0.Ed0S5ioc8PQZXqPIfK2CEg";
+mapboxgl.accessToken = "pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxbzc5enlobmM0In0.Ed0S5ioc8PQZXqPIfK2CEg";
 // import UploadField from '../../components/forms/UploadField';
 // import createSpot from "../../services/spotsAPI";
 
@@ -15,7 +15,6 @@ mapboxgl.accessToken="pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxbzc
 const SpotCreate = () => {
 
     const navigate = useNavigate();
-
 
     const spotId = useParams('id').id // Objet ID
 
@@ -34,7 +33,6 @@ const SpotCreate = () => {
         category: "",
         type: "",
         flat: "",
-        media: "",
         latitude: lat,
         longitude: lng,
     });
@@ -50,7 +48,6 @@ const SpotCreate = () => {
         category: "",
         type: "",
         flat: "",
-        media: "",
         latitude: lat,
         longitude: lng,
     });
@@ -116,7 +113,6 @@ const SpotCreate = () => {
                         type: data.type.id,
                         category: data.category.id,
                         flat: data.flat.id,
-                        media: data.media,
                         latitude: data.latitude,
                         longitude: data.longitude,
 
@@ -134,58 +130,58 @@ const SpotCreate = () => {
     }
 
 
-     useEffect( () => {
-            if (map.current) return; // initialize map only once
-            map.current = new mapboxgl.Map({
+    useEffect(() => {
+        if (map.current) return; // initialize map only once
+        map.current = new mapboxgl.Map({
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [lng, lat],
             zoom: zoom
-            });
-            setMarker(new mapboxgl.Marker({
-                color: "##000000",
-                draggable: true
-            })
+        });
+        setMarker(new mapboxgl.Marker({
+            color: "##000000",
+            draggable: true
+        })
             .setLngLat([lng, lat])
             .addTo(map.current));
-    },[lng, lat, zoom]);
+    }, [lng, lat, zoom]);
 
-    useEffect (() => {
+    useEffect(() => {
         // if (!map.current) return; // wait for map to initialize
-         map.current.flyTo({
+        map.current.flyTo({
             center: [lng, lat],
-            essential : true
+            essential: true
         });
         // console.log(map)
 
     },)
 
-    useEffect( () => {
+    useEffect(() => {
         fetchSpot();
         navigator.geolocation.getCurrentPosition((value) => {
             setLat(value.coords.latitude);
             setLng(value.coords.longitude);
-            setSpot({...spot, latitude: value.coords.latitude, longitude: value.coords.longitude});
-            if(marker !== undefined){
-            marker.setLngLat([lng, lat]);
-            }      
+            setSpot({ ...spot, latitude: value.coords.latitude, longitude: value.coords.longitude });
+            if (marker.setLngLat) {
+                marker.setLngLat([lng, lat]);
+            }
         })
         // eslint-disable-next-line
     }, [lat])
 
 
 
-    useEffect( () => {
+    useEffect(() => {
         fetchCategories();
         // eslint-disable-next-line
     }, [])
 
-    useEffect( () => {
+    useEffect(() => {
         fetchTypes();
         // eslint-disable-next-line
     }, [])
 
-    useEffect( () => {
+    useEffect(() => {
         fetchFlats();
         // eslint-disable-next-line
     }, [])
@@ -207,14 +203,14 @@ const SpotCreate = () => {
             spot.postalCode = parseInt(spot.postalCode)
             spot.latitude = parseFloat(spot.latitude)
             spot.longitude = parseFloat(spot.longitude)
-            spotId 
-            ? 
-            await spotsAPI.updateSpot(parseInt(spotId), spot) 
-            // navigate("/spots", { replace: true })
-            (toast.success("The spot has been successfully edited"), navigate("/profile/spots"), {replace : true}, console.log("The spot has been successfully edited"))
-            :
-            await spotsAPI.createSpot(JSON.stringify(spot))
-            (toast.success("The spot has been successfully created"), navigate("/spots"), {replace : true}, console.log("The spot has been successfully created"))
+            spotId
+                ?
+                await spotsAPI.updateSpot(parseInt(spotId), spot)
+                    // navigate("/spots", { replace: true })
+                    (toast.success("The spot has been successfully edited"), navigate("/profile/spots"), { replace: true }, console.log("The spot has been successfully edited"))
+                :
+                await spotsAPI.createSpot(JSON.stringify(spot))
+                    (toast.success("The spot has been successfully created"), navigate("/spots"), { replace: true }, console.log("The spot has been successfully created"))
             // console.log(spot.media)
 
         } catch (error) {
@@ -236,172 +232,191 @@ const SpotCreate = () => {
 
     return (
         <>
-            <div className="createSpots">
-                <h1>CONTRIBUTION</h1>
-
-                <form onSubmit={handleSubmit}>
-                    <Field
-                        name="name"
-                        label="name"
-                        placeholder="spot name"
-                        value={spot.name}
-                        onChange={handleChange}
-                        error={errors.name}
-                    />
-
-                    <Field
-                        name="address"
-                        label="address"
-                        placeholder="address"
-                        value={spot.address}
-                        onChange={handleChange}
-                        error={errors.address}
-                    />
-
-                    <Field
-                        name="city"
-                        label="city"
-                        placeholder="city"
-                        value={spot.city}
-                        onChange={handleChange}
-                        error={errors.city}
-                    />
-
-                    <Field
-                        name="postalCode"
-                        label="postalCode"
-                        placeholder="postalCode"
-                        value={spot.postalCode}
-                        type="number"
-                        onChange={handleChange}
-                        error={errors.postalCode}
-                    />
-
-
-                    <Field
-                        name="details"
-                        label="details"
-                        placeholder="details"
-                        value={spot.details}
-                        onChange={handleChange}
-                        error={errors.details}
-                    />
-
-                    {/* <UploadField
-                    name="media" 
-                    label="media" 
-                    placeholder="media" 
-                    value={spot.media} 
-                    onChange={handleChange}  
-                    error={errors.media}
-                /> */}
-
-                    <Field
-                        name="media"
-                        label="media"
-                        placeholder="media"
-                        value={spot.media}
-                        onChange={handleChange}
-                        error={errors.media}
-                    />
-
-
-                    <Select
-                        category="category"
-                        name={"category"}
-                        label="category"
-                        placeholder="category"
-                        value={spot.category.id}
-                        error={errors.category}
-                        onChange={handleChange}
-                    >
-                        {categories.map(category =>
-                            <option
-                                key={category.id}
-                                value={"api/categories/" + category.id}>
-                                {category.name}
-                            </option>
-                        )}
-                    </Select>
-
-                    <Select
-                        type="type"
-                        name="type"
-                        label="type"
-                        placeholder="type"
-                        value={spot.type.id}
-                        error={errors.type}
-                        onChange={handleChange}
-                    >
-                        {types.map(type =>
-                            <option
-                                key={type.id}
-                                value={"api/types/" + type.id}>
-                                {/* // value={type.id} */}
-                                {type.name}
-                            </option>
-                        )}
-                    </Select>
-
-                    <Select
-                        flat="flat"
-                        name="flat"
-                        label="flat"
-                        placeholder="flat"
-                        value={spot.flat.id}
-                        error={errors.flat}
-                        onChange={handleChange}
-                    >
-                        {flats.map(flat =>
-                            <option
-                                key={flat.id}
-                                value={"api/flats/" + flat.id}>
-                                {/* // value={flat.id}> */}
-                                {flat.name}
-                            </option>
-                        )}
-                    </Select>
-
-                    <Field
-                        name="latitude"
-                        label="latitude"
-                        placeholder="latitude"
-                        value={spot.latitude}
-                        onChange={handleChange}
-                        error={errors.latitude}
-                    />
-
-                    <Field
-                        name="longitude"
-                        label="longitude"
-                        placeholder="longitude"
-                        value={spot.longitude}
-                        onChange={handleChange}
-                        error={errors.longitude}
-                    />
-
-                    
-
-                    <div>
-                        <button type="submit">
-                            SAVE
-                        </button>
-                    </div>
-
-
-                    <div>
-                        <Link to="/spots">Back to spots</Link>
-                    </div>
-                </form>
-                <div className="mapbox-container">
-                        <div className="sidebar">
-                        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+            <div className="globalPage">
+                <div className="leftSideBar">
+                </div>
+                <div className="globalPageWrapper">
+                    <div className="globalPageHeader">
+                        <div className="searchBar">
                         </div>
-                    <div ref={mapContainer} className="map-container" />
-                    
                     </div>
-            </div>
+                    <div className="globalPageWrapperCards" id="createSpotForm">
+                    <div className="wrapper_createSpotForm">
+                        <div className="text_infos">
+                            <h1>CONTRIBUTION</h1>
+                            <h2 className="fade-in">Share a spot to our team and expands the community</h2>
+                        </div>
+                        <div>
+                        <form className="createSpotForm" onSubmit={handleSubmit}>
+                            <div className="wrapper_form_group">
+                                <Field
+                                    name="name"
+                                    label="name"
+                                    placeholder="spot name"
+                                    value={spot.name}
+                                    onChange={handleChange}
+                                    error={errors.name}
+                                />
 
+                                <Field
+                                    name="address"
+                                    label="address"
+                                    placeholder="address"
+                                    value={spot.address}
+                                    onChange={handleChange}
+                                    error={errors.address}
+                                />
+                            </div>
+                            <div className="wrapper_form_group">
+                                <Field
+                                    name="city"
+                                    label="city"
+                                    placeholder="city"
+                                    value={spot.city}
+                                    onChange={handleChange}
+                                    error={errors.city}
+                                />
+
+                                <Field
+                                    name="postalCode"
+                                    label="postalCode"
+                                    placeholder="postalCode"
+                                    value={spot.postalCode}
+                                    type="number"
+                                    onChange={handleChange}
+                                    error={errors.postalCode}
+                                />
+                            </div>
+                            <div className="wrapper_form_group">
+                                <Field
+                                    name="details"
+                                    label="details"
+                                    placeholder="details"
+                                    value={spot.details}
+                                    onChange={handleChange}
+                                    error={errors.details}
+                                />
+
+                                {/* <Field
+                                    name="media"
+                                    label="media"
+                                    placeholder="media"
+                                    value={spot.media ||""}
+                                    onChange={handleChange}
+                                    error={errors.media}
+                                /> */}
+                            </div>
+                            
+                            <div className="wrapper_form_group">
+                            <Select
+                                category="category"
+                                name={"category"}
+                                label="category"
+                                placeholder="category"
+                                value={spot.category.id}
+                                error={errors.category}
+                                onChange={handleChange}
+                            >
+                                {categories.map(category =>
+                                    <option
+                                        key={category.id}
+                                        value={"api/categories/" + category.id}>
+                                        {category.name}
+                                    </option>
+                                )}
+                            </Select>
+
+                            <Select
+                                type="type"
+                                name="type"
+                                label="type"
+                                placeholder="type"
+                                value={spot.type.id}
+                                error={errors.type}
+                                onChange={handleChange}
+                            >
+                                {types.map(type =>
+                                    <option
+                                        key={type.id}
+                                        value={"api/types/" + type.id}>
+                                        {/* // value={type.id} */}
+                                        {type.name}
+                                    </option>
+                                )}
+                            </Select>
+
+                            <Select
+                                flat="flat"
+                                name="flat"
+                                label="flat"
+                                placeholder="flat"
+                                value={spot.flat.id}
+                                error={errors.flat}
+                                onChange={handleChange}
+                            >
+                                {flats.map(flat =>
+                                    <option
+                                        key={flat.id}
+                                        value={"api/flats/" + flat.id}>
+                                        {/* // value={flat.id}> */}
+                                        {flat.name}
+                                    </option>
+                                )}
+                            </Select>
+                            </div>
+
+                            <div className="wrapper_form_group">
+                                <Field
+                                    name="latitude"
+                                    label="latitude"
+                                    placeholder="latitude"
+                                    value={spot.latitude}
+                                    onChange={handleChange}
+                                    error={errors.latitude}
+                                />
+
+                                <Field
+                                    name="longitude"
+                                    label="longitude"
+                                    placeholder="longitude"
+                                    value={spot.longitude}
+                                    onChange={handleChange}
+                                    error={errors.longitude}
+                                />
+                            </div>
+
+
+
+
+                            <div className="submit_group">
+                                <button type="submit">
+                                    SAVE
+                                </button>
+                            </div>
+
+
+                            <div>
+                                <Link to="/spots">Back to spots</Link>
+                            </div>
+                        </form>
+                        <div className="mapbox-container">
+                            <div className="sidebar">
+                                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+                            </div>
+                            <div ref={mapContainer} className="map-container" />
+                        </div>
+
+                        </div>
+
+                    </div>
+
+
+                    </div>
+                    <div className="globalPageWrapperCards_overlay"></div>
+                    <div className="globalFullPaginationContainer"></div>
+                </div>
+
+            </div>
         </>
     );
 }

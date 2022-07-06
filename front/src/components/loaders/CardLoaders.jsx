@@ -82,7 +82,7 @@ const CardLoaders = ({
 
         />
       )}
-      {list}
+      {/* {list} */}
     </ContentLoader>
   )
 }

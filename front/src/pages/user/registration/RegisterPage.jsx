@@ -79,47 +79,51 @@ const RegisterPage = (props) => {
                     </div>
                 </div>
                 <div className="globalPageWrapperCards">
-                <form className="formContainer" onSubmit={handleSubmit}>
-                    <div className="form_overlay"></div>
-                    
-                        <Field
-                            name= "email"
-                            label= "Email"
-                            type="email"
-                            placeholder="Email"
-                            error={error.email}
-                            value={user.email}
-                            onChange={handleChange}
-                        />
-                        <Field
-                            name= "password"
-                            label= "Password"
-                            type="password"
-                            placeholder="Password"
-                            error={error.password}
-                            value={user.password}
-                            onChange={handleChange}
-                        />
-                        <Field
-                            name= "passwordConfirm"
-                            label= "Password confirm"
-                            type="password"
-                            placeholder="Password confirm"
-                            error={error.passwordConfirm}
-                            value={user.passwordConfirm}
-                            onChange={handleChange}
-                        />
-                        <div className='form-group'>
-                            <button type="submit">
-                                    Sign In
-                            </button>
-                        </div>
-                        <div className='form-group already_account'>
-                            <Link to='/login' id='already_account_btn'>
-                                I have an already <span> account</span>
-                            </Link>
-                        </div>
-                </form>
+                    <div className="text_infos">
+                        <h1>Welcome</h1>
+                        <h2 className="fade-in">Fill the form to become a member of SPOTED APP</h2>
+                    </div>
+                    <form className="formContainer" onSubmit={handleSubmit}>
+                        <div className="form_overlay"></div>
+                        
+                            <Field
+                                name= "email"
+                                label= "Email"
+                                type="email"
+                                placeholder="Email"
+                                error={error.email}
+                                value={user.email}
+                                onChange={handleChange}
+                            />
+                            <Field
+                                name= "password"
+                                label= "Password"
+                                type="password"
+                                placeholder="Password"
+                                error={error.password}
+                                value={user.password}
+                                onChange={handleChange}
+                            />
+                            <Field
+                                name= "passwordConfirm"
+                                label= "Password confirm"
+                                type="password"
+                                placeholder="Password confirm"
+                                error={error.passwordConfirm}
+                                value={user.passwordConfirm}
+                                onChange={handleChange}
+                            />
+                            <div className='form-group'>
+                                <button type="submit">
+                                        Sign In
+                                </button>
+                            </div>
+                            <div className='form-group already_account'>
+                                <Link to='/login' id='already_account_btn'>
+                                    I have an already <span> account</span>
+                                </Link>
+                            </div>
+                    </form>
                 <div className="globalPageWrapperCards_overlay"></div>
                 </div>
                 <div className="globalFullPaginationContainer">

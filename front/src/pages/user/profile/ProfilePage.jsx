@@ -68,14 +68,14 @@ const Profile  = (props) => {
                     </div>
                     <div className="pageWrapperContainer">
                         <div className="usersInfos">
-                            <div class="profile_image">
+                            <div className="profile_image">
                                 <img src={profil_image} alt="avatar of the user" />
                                 <button className="profile_upload">UPLOAD AVATAR</button>
                             </div>
                             <h2> Hello, {currentUser.email}</h2>
                             <h3>Email : {currentUser.email}</h3>
                             <h3>ID : {currentUser.id}</h3>
-                            <div class="btnContainer">
+                            <div className="btnContainer">
                                 <button 
                                     // onClick={() => handleDelete(spot.id)} 
                                     className="deleteButton">Delete
@@ -85,9 +85,9 @@ const Profile  = (props) => {
                                     <button className="btn-green">UPDATE</button>
                                 </Link>
                             </div>
-                            <div class="container">
-                                <div class="button-container">
-                                    <span class="mask">YOUR SPOTS</span>
+                            <div className="container">
+                                <div className="button-container">
+                                    <span className="mask">YOUR SPOTS</span>
                                     <Link to='/profile/spots'>
                                     <button type="button" name="Hover">YOUR SPOTS</button>
                                     </Link>

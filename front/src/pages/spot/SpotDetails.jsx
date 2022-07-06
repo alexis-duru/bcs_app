@@ -41,7 +41,7 @@ const SpotDetails  = (props) => {
                 <p>{spot.category && spot.category.name}</p>
                 <p>{spot.type && spot.type.name}</p>
                 <p>{spot.flat && spot.flat.name}</p>
-                <img src={spot.media} alt="" />
+                {/* <img src={spot.media} alt="" /> */}
                 <div className="moreInfosButton">
                     <Link to='/spots/'>
                         Previous page
