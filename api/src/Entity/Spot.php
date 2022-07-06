@@ -38,11 +38,12 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
                 "groups" => "read:spot:item",
             ]
         ], 
-        "PUT" => [
+        "PUT" => 
+        [
             "normalization_context" => 
             [
                 "groups" => "read:spot:item",
-            ]
+            ],
         ], 
         "DELETE" 
         // => [
@@ -154,6 +155,7 @@ class Spot
     #[ORM\ManyToOne(targetEntity: MediaObject::class)]
     #[ORM\JoinColumn(nullable: true)]
     #[ApiProperty(iri: 'http://schema.org/image')]
+    #[Groups(["read:spot:collection", "read:user:item", "read:user:collection", "read:spot:item"])]
     public ?MediaObject $image = null;
 
     public function __construct()

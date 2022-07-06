@@ -89,6 +89,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(targetEntity: MediaObject::class)]
     #[ORM\JoinColumn(nullable: true)]
+    #[Groups(["read:spot:collection", "read:user:item", "read:user:collection", "read:spot:item"])]
     #[ApiProperty(iri: 'http://schema.org/image')]
     public ?MediaObject $image = null;
 

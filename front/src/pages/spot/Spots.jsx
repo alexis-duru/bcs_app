@@ -12,6 +12,7 @@ const Spots = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(true);
+    const [medias, setMedias] = useState([]);
 
     // Récupération de l'ensemble de mes spots
 
@@ -20,8 +21,19 @@ const Spots = (props) => {
             const data = await spotsAPI.findAll()
             setSpots(data)
             setLoading(false)
+            console.log(data)
         } catch (error) {
             toast.error("Sorry, the spots could not be found")
+            console.log(error.response)
+        }
+    }
+
+    const fetchMedia = async () => {
+        try {
+            const data = await spotsAPI.findAllMedia()
+            setMedias(data)
+            console.log(data)
+        } catch (error) {
             console.log(error.response)
         }
     }
@@ -29,6 +41,7 @@ const Spots = (props) => {
 
     useEffect( () => {
         fetchSpots();
+        fetchMedia();
     }, []);
 
     // Gestion de l'update d'un spot
@@ -122,6 +135,8 @@ const Spots = (props) => {
                                         <p>{spot.type.name}</p>
                                         <p>{spot.category.name}</p>
                                         <p>{spot.flat.name}</p>
+                                        <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" />
+                                        {/* <img src="IMG_8818.jpg"  alt="spot" /> */}
 
                                         {/* { spot.user.email === "administrateur@test.com" ? */}
                                         {/* {isAuthenticated === spot.user.id ? */}

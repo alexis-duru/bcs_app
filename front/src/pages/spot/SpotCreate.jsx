@@ -115,7 +115,6 @@ const SpotCreate = () => {
                         flat: data.flat.id,
                         latitude: data.latitude,
                         longitude: data.longitude,
-
                     }
                 );
                 console.log(data)
@@ -153,7 +152,6 @@ const SpotCreate = () => {
             essential: true
         });
         // console.log(map)
-
     },)
 
     useEffect(() => {

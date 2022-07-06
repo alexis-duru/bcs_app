@@ -27,6 +27,13 @@ function findAll() {
         .then(response => response.data['hydra:member'])
 };
 
+function findAllMedia() {
+    return API 
+        .get("/media_objects")
+        .then(response => response.data
+        )
+};
+
 // Find One spot of the application
 
 const findOne = async (id) => {
@@ -77,7 +84,8 @@ const exportAPI =  {
     delete: deleteSpots,
     findOne,
     createSpot,
-    updateSpot
+    updateSpot,
+    findAllMedia
 };
 
 export default exportAPI;
