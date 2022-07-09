@@ -5,10 +5,10 @@ import Select from '../../components/forms/Select';
 import spotsAPI from '../../services/spotsAPI';
 import mapboxgl from 'mapbox-gl';
 import { toast } from 'react-toastify';
-
+import UploadField from '../../components/forms/UploadField';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxbzc5enlobmM0In0.Ed0S5ioc8PQZXqPIfK2CEg";
-// import UploadField from '../../components/forms/UploadField';
+
 // import createSpot from "../../services/spotsAPI";
 
 
@@ -16,12 +16,16 @@ const SpotCreate = () => {
 
     const navigate = useNavigate();
 
-    const spotId = useParams('id').id // Objet ID
-
-    // console.log(props)
-
+    /* --------MAPBOX------- */
     const [lng, setLng] = useState(-0.594);
     const [lat, setLat] = useState(44.8378);
+    const mapContainer = useRef(null);
+    const map = useRef(null);
+    const [zoom, setZoom] = useState(13);
+    const [marker, setMarker] = useState([]);
+
+     /* -------- SPOT ------- */
+    const spotId = useParams('id').id // Object ID
     const [spot, setSpot] = useState({
         name: "",
         address: "",
@@ -35,6 +39,7 @@ const SpotCreate = () => {
         flat: "",
         latitude: lat,
         longitude: lng,
+
     });
 
     const [errors, setErrors] = useState({
@@ -55,16 +60,7 @@ const SpotCreate = () => {
     const [categories, setCategories] = useState([]);
     const [types, setTypes] = useState([]);
     const [flats, setFlats] = useState([]);
-
-    // const [latitude, setLatitude] = useState(0);
-    // const [longitude, setLongitude] = useState(0);
-
-    const mapContainer = useRef(null);
-    const map = useRef(null);
-    // eslint-disable-next-line
-    const [zoom, setZoom] = useState(13);
-    const [marker, setMarker] = useState([]);
-
+    const [medias, setMedias] = useState([]);
 
     const fetchCategories = async () => {
         try {
@@ -99,6 +95,26 @@ const SpotCreate = () => {
         }
     }
 
+    const fetchMedias = async () => {
+        try {
+            const data = await spotsAPI.createMedia(JSON.stringify(medias));
+               console.log(data)
+        } catch (error) {
+            console.log(error.response)
+
+        }
+    }
+
+    // const fetchMedias = async (_media) => {
+    //     try {
+    //         var data = new FormData();
+    //         data.append('file', _media);
+    //         const mediaData = await spotsAPI.createMedia(data);
+    //     } catch (error) {
+    //         console.log(error.response)
+    //     }
+    // } 
+
     const fetchSpot = async () => {
         if (spotId) {
             try {
@@ -130,6 +146,7 @@ const SpotCreate = () => {
 
 
     useEffect(() => {
+        /* ADD MAP ON DOM ELEMENT AND MARKER */
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
@@ -146,7 +163,7 @@ const SpotCreate = () => {
     }, [lng, lat, zoom]);
 
     useEffect(() => {
-        // if (!map.current) return; // wait for map to initialize
+        /* FLY FEATURES ON MAP */
         map.current.flyTo({
             center: [lng, lat],
             essential: true
@@ -156,6 +173,7 @@ const SpotCreate = () => {
 
     useEffect(() => {
         fetchSpot();
+        /* GEOLOCATION FEATURES ON MAP */
         navigator.geolocation.getCurrentPosition((value) => {
             setLat(value.coords.latitude);
             setLng(value.coords.longitude);
@@ -184,11 +202,47 @@ const SpotCreate = () => {
         // eslint-disable-next-line
     }, [])
 
+    // useEffect(() => {
+    //     console.log(medias)
+    //     fetchMedia(medias);
+    // }, [medias])
+
+    // useEffect(() => {
+    //     fetchMedias();
+    // }, [])
 
     const handleChange = ({ currentTarget }) => {
         const { name, value } = currentTarget;
         setSpot({ ...spot, [name]: value })
     }
+
+            
+        
+
+
+    // const handleChangeMedia = ({ currentTarget }) => {
+
+    //     const file = currentTarget.files[0]
+
+    //     const result = new Promise((resolve, reject) => {
+
+    //         const reader = new FileReader();
+    
+    //         reader.onload = (event) => {
+    //             resolve(event.target.result);
+    //         };
+    
+    //         reader.onerror = (err) => {
+    //             reject(err);
+    //         };
+    
+    //         reader.readAsDataURL(file);
+    //     });
+
+    //     result.then(mediaData => setMedias(mediaData))
+
+
+    // }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -361,6 +415,27 @@ const SpotCreate = () => {
                                     </option>
                                 )}
                             </Select>
+                            </div>
+                            
+                            <div className="wrapper_form_group">
+
+                            
+                                <UploadField 
+                                    name="medias"
+                                    label="medias"
+                                    placeholder="medias"
+                                    onChange={handleChange}
+                                    error={errors.medias}
+                                />
+
+                                {/* <label htmlFor="avatar">Choose a profile picture:</label> */}
+
+                                {/* <input type="file"
+                                    id="avatar" name="avatar"
+                                    accept="image/png, image/jpeg"
+                                    onChange={handleChangeMedia}
+                                />  */}
+
                             </div>
 
                             <div className="wrapper_form_group">

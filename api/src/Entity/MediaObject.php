@@ -49,6 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class MediaObject
 {
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
+    #[Groups(['media_object:read', "read:spot:item"])]
     private ?int $id = null;
 
     #[ApiProperty(iri: 'http://schema.org/contentUrl')]

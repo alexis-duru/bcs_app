@@ -37,6 +37,7 @@ const UserSpots  = () => {
     const fetchSpots = async () => {
         try {
             const data = await usersAPI.findSpotOfUser(currentUser.id);
+            console.log(data)
             setLoading(false)
             setSpots(data)
             // console.log(data)
@@ -150,7 +151,8 @@ const UserSpots  = () => {
                                         <p>{spot.flat.name}</p>
                                         <p>{spot.latitude}</p>
                                         <p>{spot.longitude}</p>
-                                        
+                                        <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" />
+
                                         <button 
                                             onClick={() => handleDelete(spot.id)} 
                                             className="deleteButton">Delete

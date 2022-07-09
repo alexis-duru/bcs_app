@@ -1,4 +1,3 @@
-// import axios from "axios";
 import API from "./api";
 
 function findAllCategories() {
@@ -25,13 +24,6 @@ function findAll() {
     return API 
         .get("/spots")
         .then(response => response.data['hydra:member'])
-};
-
-function findAllMedia() {
-    return API 
-        .get("/media_objects")
-        .then(response => response.data
-        )
 };
 
 // Find One spot of the application
@@ -76,6 +68,28 @@ function deleteSpots(id) {
     .delete(`/spots/${id}`);
 }
 
+// All media objects of the application
+
+function findAllMedia() {
+    return API 
+        .get("/media_objects")
+        .then(response => response.data
+    )
+};
+
+
+function createMedia(credentials) {
+    return API
+        .post("/media_objects", credentials, {
+            // headers: {
+            //     "Access-Control-Allow-Origin": "*",
+            //   'Content-Type': 'multipart/form-data'
+            // }}
+        })
+        .then(response => response.data)
+}
+
+
 const exportAPI =  {
     findAll,
     findAllCategories,
@@ -85,6 +99,7 @@ const exportAPI =  {
     findOne,
     createSpot,
     updateSpot,
+    createMedia,
     findAllMedia
 };
 

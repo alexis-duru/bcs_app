@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from "../../components/Pagination";
 import spotsAPI from '../../services/spotsAPI';
 import { toast } from 'react-toastify';
 import CardLoaders from '../../components/loaders/CardLoaders';
+import mapboxgl from 'mapbox-gl';
 
 
 const Spots = (props) => {
@@ -12,7 +13,20 @@ const Spots = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(true);
-    const [medias, setMedias] = useState([]);
+
+
+     /* --------MAPBOX------- */
+    const mapContainer = useRef(null);
+    const map = useRef(null);
+    const [lng, setLng] = useState(-0.594);
+    const [lat, setLat] = useState(44.8378);
+    const [zoom, setZoom] = useState(13);
+    const [marker, setMarker] = useState([]);
+
+
+
+    // eslint-disable-next-line 
+    // const [medias, setMedias] = useState([]);
 
     // Récupération de l'ensemble de mes spots
 
@@ -28,21 +42,61 @@ const Spots = (props) => {
         }
     }
 
-    const fetchMedia = async () => {
-        try {
-            const data = await spotsAPI.findAllMedia()
-            setMedias(data)
-            console.log(data)
-        } catch (error) {
-            console.log(error.response)
-        }
-    }
+    // const fetchMedia = async () => {
+    //     try {
+    //         const data = await spotsAPI.findAllMedia()
+    //         setMedias(data)
+    //         console.log(data)
+    //     } catch (error) {
+    //         console.log(error.response)
+    //     }
+    // }
 
 
     useEffect( () => {
         fetchSpots();
-        fetchMedia();
+        // fetchMedia();
     }, []);
+
+    useEffect( () => {
+        // fetchSpot(id);
+
+         /* ADD MAP ON DOM ELEMENT AND MARKER */
+         if (map.current) return;
+         map.current = new mapboxgl.Map({
+             container: mapContainer.current,
+             style: 'mapbox://styles/mapbox/streets-v11',
+             center: [lng, lat],
+             zoom: zoom
+         });
+         setMarker(new mapboxgl.Marker({
+            color: "##000000",
+            draggable: false,
+        })
+        .setLngLat([lng, lat])
+        .addTo(map.current)
+        );
+     }, [lng, lat, zoom]);
+
+    // useEffect( () => {
+    //     // fetchSpot(id);
+
+    //      /* ADD MAP ON DOM ELEMENT AND MARKER */
+    //      if (map.current) return;
+    //      map.current = new mapboxgl.Map({
+    //          container: mapContainer.current,
+    //          style: 'mapbox://styles/mapbox/streets-v11',
+    //          center: [lng, lat],
+    //          zoom: zoom
+    //      });
+    //      setMarker(new mapboxgl.Marker({
+    //         color: "##000000",
+    //         draggable: false,
+    //     })
+    //     .setLngLat([lng, lat])
+    //     .addTo(map.current)
+    //     );
+    //  }, [lng, lat, zoom]);
 
     // Gestion de l'update d'un spot
 
@@ -163,6 +217,13 @@ const Spots = (props) => {
                     </div>}
                     <div className="loaders">
                         {loading && <CardLoaders />}
+                    </div>
+                    <div className="mapbox-container-full-wrapper">
+                        <div className="sidebar">
+                            Longitude: {spots.longitude} | Latitude: {spots.latitude} | Zoom: {zoom}
+                        </div>
+                        <div ref={mapContainer} className="map-container mapbox-container-full" 
+                        />
                     </div>
                     
                     <div className="fullPaginationContainer">

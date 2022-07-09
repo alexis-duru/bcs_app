@@ -147,9 +147,11 @@ class Spot
     private $comments;
 
     #[ORM\Column(type: 'float', nullable: true)]
+    #[Groups(["read:spot:collection", "read:spot:item"])]
     private $longitude;
 
     #[ORM\Column(type: 'float', nullable: true)]
+    #[Groups(["read:spot:collection", "read:spot:item"])]
     private $latitude;
 
     #[ORM\ManyToOne(targetEntity: MediaObject::class)]
