@@ -44,6 +44,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
             [
                 "groups" => "read:spot:item",
             ],
+            // "security" => "is_granted('ROLE_ADMIN')",
         ], 
         "DELETE" 
         // => [
