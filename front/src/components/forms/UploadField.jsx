@@ -1,5 +1,7 @@
 import React from 'react';
 
+// UPLOAD FIELD COMPONENT
+
 const UploadField = ({name, value, error, onChange}) => {
     return ( 
         <div className="formGroup">

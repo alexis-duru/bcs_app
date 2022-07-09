@@ -30,28 +30,104 @@
             border-top: 1px solid rgba(255, 255, 255, 0.5);
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
             z-index: 10;
+             // HOVER FX BUTTON
             .spotsCreate {
-                background-color: $white;
-                padding: 10px;
-                margin-left: 20px;
-                transition: 0.3s ease-in-out;
-                border: 1px solid rgba(255, 255, 255, 0);
-                cursor: pointer;
-                &:hover {
-                    background-color: $black;
-                    border: 1px solid white;
-                     transition: 0.3s ease-in-out;
-                    a {
-                        color: $white;
-                    }
-                }
-                a {
-                    margin-left: 20px;
-                    color: $black;
-                    text-decoration: none;
-                    font-family: $lorinReg;
+                height: 100%;
+                .container {
+                    height: 100%;
+                    .button-container {
+                       position: relative;
+                       width: 200px;
+                       height: 100%;
+                       margin-left: auto;
+                       margin-right: auto;
+                       overflow: hidden;
+                       transition: 0.5s;
+                    //    border: 1px solid rgba(255, 255, 255, 0.2);
+                     }
+                     
+                     .button-container button {
+                       width: 101%;
+                       height: 100%;
+                       font-family: $adieu;
+                       letter-spacing: 0.8px;
+                       font-size: 1rem;
+                       background: #fff;
+                       -webkit-mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png");
+                       mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png");
+                       -webkit-mask-size: 2300% 100%;
+                       mask-size: 2300% 100%;
+                       border: none;
+                       color: #000;
+                       cursor: pointer;
+                       animation: anim2 0.7s steps(22) forwards;
+                     }
+                     
+                     .button-container button:hover {
+                       animation: anim1 0.7s steps(22) forwards;
+                     }
+                     
+                     .mask {
+                       position: absolute;
+                       color: #fff;
+                       text-align: center;
+                       width: 101%;
+                       letter-spacing: 0.8px;
+                       font-family: $adieu;
+                       font-weight: lighter;
+                       font-size: 1rem;
+                       overflow: hidden;
+                       display: flex;
+                       justify-content: center;
+                       align-items: center;
+                       height: 100%;
+                     }
+                     
+                     @keyframes anim1 {
+                       from {
+                         -webkit-mask-position: 100% 0;
+                         mask-position: 100% 0;
+                       }
+                       to {
+                         -webkit-mask-position: 0 0;
+                         mask-position: 0 0;
+                       }
+                     }
+                     
+                     @keyframes anim2 {
+                       from {
+                         -webkit-mask-position: 0 0;
+                         mask-position: 0 0;
+                       }
+                       to {
+                         -webkit-mask-position: 100% 0;
+                         mask-position: 100% 0;
+                       }
+                     }
                 }
             }
+            // .spotsCreate {
+            //     background-color: $white;
+            //     padding: 10px;
+            //     margin-left: 20px;
+            //     transition: 0.3s ease-in-out;
+            //     border: 1px solid rgba(255, 255, 255, 0);
+            //     cursor: pointer;
+            //     &:hover {
+            //         background-color: $black;
+            //         border: 1px solid white;
+            //          transition: 0.3s ease-in-out;
+            //         a {
+            //             color: $white;
+            //         }
+            //     }
+            //     a {
+            //         margin-left: 20px;
+            //         color: $black;
+            //         text-decoration: none;
+            //         font-family: $lorinReg;
+            //     }
+            // }
             p {
                 color: white;
                 font-family: 'lorinReg';

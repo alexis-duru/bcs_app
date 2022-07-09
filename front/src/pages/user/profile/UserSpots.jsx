@@ -68,6 +68,8 @@ const UserSpots  = () => {
         // eslint-disable-next-line
     }, [currentUser]);
 
+    /* GESTION DE LA SUPPRESSION D'UN SPOT */
+
     const handleDelete = async id =>  {
         const originalSpots = [...spots];
 
@@ -85,9 +87,13 @@ const UserSpots  = () => {
         }
     };
 
+    /* GESTION DE LA PAGINATION */
+
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
+
+    /* GESTION DE LA RECHERCHE */
 
     const handleSearch = ({currentTarget}) => {
         setSearch(currentTarget.value);

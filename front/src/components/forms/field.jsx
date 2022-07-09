@@ -1,6 +1,8 @@
 import React from 'react';
 
 
+// FIELD FORM COMPONENT
+
 const Field = ({name, label, value, onChange, placeholder, type = "text", error = " "}) => {
     return (  
         <div className="form-group">

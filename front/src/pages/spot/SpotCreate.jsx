@@ -162,6 +162,7 @@ const SpotCreate = () => {
             .addTo(map.current));
     }, [lng, lat, zoom]);
 
+
     useEffect(() => {
         /* FLY FEATURES ON MAP */
         map.current.flyTo({
@@ -215,10 +216,6 @@ const SpotCreate = () => {
         const { name, value } = currentTarget;
         setSpot({ ...spot, [name]: value })
     }
-
-            
-        
-
 
     // const handleChangeMedia = ({ currentTarget }) => {
 

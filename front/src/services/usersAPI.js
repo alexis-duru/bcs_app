@@ -1,7 +1,7 @@
 // import axios from "axios";
 import API from "./api";
 
-// Find All Users of the application
+// FIND ALL USERS OF THE APP
 
  function findAllUsers() {
     return API 
@@ -9,17 +9,15 @@ import API from "./api";
         .then(response => response.data['hydra:member'])
 };
 
-// Find One User by the ID of the application
+// FIND ONE USER BY ID
+
 const findOneUser = async (id) => {
     return API
         .get(`/users/${id}`)
         .then(response => response.data)
 };
 
-// const getUserId 
-
-
-// find Spots by the ID of the user - Perf solution
+// FIND SPOT BY THE ID OF THE USER - PERFORMANCE SOLUTION
 
 const findSpotOfUser = (id) => {
     return API
@@ -27,7 +25,7 @@ const findSpotOfUser = (id) => {
         .then(response => response.data['hydra:member'])
 };
 
-// Create a new User
+// CREATE A NEW USER
 
 const createUser = (credentials) => {
     return API 
@@ -35,7 +33,7 @@ const createUser = (credentials) => {
         .then(response => response.data)
 }
 
-// Delete a User by the ID of the application
+// DELETE A USER OF THE APP
 
 function deleteUser(id) {
     return API

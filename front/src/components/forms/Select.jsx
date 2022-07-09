@@ -1,5 +1,7 @@
 import React from 'react';
 
+// SELECT FORM COMPONENT
+
 const Select = ({name, value, error, label, onChange, children, category, type, flat}) => {
     return ( 
         <div className="formGroup">
