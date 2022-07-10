@@ -21,6 +21,7 @@ class Like
 
     #[ORM\ManyToOne(targetEntity: Spot::class, inversedBy: 'likes')]
     #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private $spot;
 
     public function getId(): ?int

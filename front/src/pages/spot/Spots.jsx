@@ -147,7 +147,7 @@ const Spots = (props) => {
 
                         <div className="toggle_wrapper">
                             <button className="toggle" onClick={() => setShow(prev => !prev)}>
-                                <label class="switch">
+                                <label className="switch">
                                     <input type="checkbox"/>
                                         <span className="slider round"></span>
                                 </label>

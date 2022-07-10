@@ -52,6 +52,7 @@ class Comment
     private $content;
 
     #[ORM\ManyToOne(targetEntity: Spot::class, inversedBy: 'comments')]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     #[ORM\JoinColumn(nullable: true)]
     #[Groups(["read:comment:collection"])]
     private $spot;

@@ -14,9 +14,9 @@ class SpotedController extends AbstractController
     public function index(): Response
     {
 
-        // return $this->redirect('http://localhost:8000/api');
-        return $this->render('homepage/index.html.twig', [
-            'controller_name' => 'SpotedController',
-        ]);
+        return $this->redirect('http://localhost:8000/login');
+        // return $this->render('homepage/index.html.twig', [
+        //     'controller_name' => 'SpotedController',
+        // ]);
     }
 }

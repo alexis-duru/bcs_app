@@ -64,15 +64,15 @@ security:
         - { path: ^/api/spots, roles: IS_AUTHENTICATED_FULLY, methods: [POST, PUT, DELETE ], }
         # - { path: ^/api/users/id/spots, roles: ROLE_USER, methods: [POST, PUT, DELETE ], }
         - { path: ^/api/spots, roles: PUBLIC_ACCESS, methods: [GET], }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/api/media_objects, roles: PUBLIC_ACCESS, methods: [GET], }
 
         # Version non sécurisé POUR POSTMAN 
         # - { path: ^/api/users, roles: PUBLIC_ACCESS }
         # - { path: ^/api/spots, roles: PUBLIC_ACCESS }
 
-        # - { path: ~/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/homepage, roles: ROLE_ADMIN }
+        # - { path: ^/login, roles: ROLE_ADMIN }
+        # - { path: ^/homepage, roles: ROLE_ADMIN }
 when@test:
     security:
         password_hashers:
