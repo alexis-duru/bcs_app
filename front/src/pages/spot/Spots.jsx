@@ -176,7 +176,7 @@ const Spots = (props) => {
                                             <p>{spot.type.name}</p>
                                             <p>{spot.category.name}</p>
                                             <p>{spot.flat.name}</p>
-                                            <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" />
+                                            {/* <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> */}
                                             {/* <img src="IMG_8818.jpg"  alt="spot" /> */}
 
 

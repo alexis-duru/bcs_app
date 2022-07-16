@@ -157,7 +157,7 @@ const UserSpots  = () => {
                                         <p>{spot.flat.name}</p>
                                         <p>{spot.latitude}</p>
                                         <p>{spot.longitude}</p>
-                                        <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" />
+                                        {/* <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> */}
 
                                         <button 
                                             onClick={() => handleDelete(spot.id)} 

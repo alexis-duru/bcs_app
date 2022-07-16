@@ -24,9 +24,10 @@ class SpotFixtures extends Fixture
             $spot->setCreatedAt($faker->dateTimeBetween("-4 week", "-1 week"));
             $spot->setUpdatedAt($faker->dateTimeBetween("-4 week", "-1 week"));
             $spot->setDetails($faker->words(1, true));
-            $spot->setMedia($faker->words(1, true));
             $manager->persist($spot);
         }
+
+        
 
         $manager->flush();
     }

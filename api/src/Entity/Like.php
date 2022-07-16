@@ -16,8 +16,8 @@ class Like
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    // #[ORM\Column(type: 'boolean', nullable: true)]
-    // private $value;
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $value;
 
     #[ORM\ManyToOne(targetEntity: Spot::class, inversedBy: 'likes')]
     #[ORM\JoinColumn(nullable: true)]
@@ -29,17 +29,17 @@ class Like
         return $this->id;
     }
 
-    // public function getValue(): ?bool
-    // {
-    //     return $this->value;
-    // }
+    public function getValue(): ?bool
+    {
+        return $this->value;
+    }
 
-    // public function setValue(?bool $value): self
-    // {
-    //     $this->value = $value;
+    public function setValue(?bool $value): self
+    {
+        $this->value = $value;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
     public function getSpot(): ?Spot
     {
