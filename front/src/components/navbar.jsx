@@ -27,6 +27,7 @@ const Navbar  = ({isAuthenticated}) => {
               { isAuthenticated  && <li>
                 <Link to='/profile/spots'>My spots</Link>
               </li>}
+              <li><Link to="/contact">Contact</Link></li>
             </ul>
           </div>
         </div>

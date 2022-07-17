@@ -13,6 +13,7 @@ import SpotCreate from './pages/spot/SpotCreate';
 import UserSpots from './pages/user/profile/UserSpots';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ContactForm from './pages/contact/ContactForm';
 // useEffect useNavigate
 
 authAPI.setup();
@@ -48,6 +49,7 @@ const App = () => {
           <Route path="/spots/:id" element={ <SpotDetails/> } />
           <Route path="/spots/create" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
           <Route path="/spots/update/:id" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
+          <Route path="/contact" element={ <ContactForm/> } />
       </Routes>
       
     <ToastContainer position={toast.POSITION.BOTTOM_RIGHT } />
