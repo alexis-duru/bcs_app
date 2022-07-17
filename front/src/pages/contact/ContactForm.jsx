@@ -32,6 +32,7 @@ export const ContactUs = () => {
                 <div className="globalPageWrapperCards">
                 <div className="text_infos">
                         <h1>Contact</h1>
+                        <h2 className="fade-in">Contact us for all inquiries</h2>
                     </div>
                 <form className="formContainer contactForm" ref={form} onSubmit={sendEmail}>
                 <div className="form_overlay"></div>
@@ -39,33 +40,33 @@ export const ContactUs = () => {
                 <div className="form-group">
                   <div className="wrapper-form-group">
                     <label>Firstname</label>
-                    <input type="text" name="firstname" required="required" />
+                    <input type="text" name="firstname" required="required" placeholder="firstname" />
                   </div>
                   <div className="wrapper-form-group">
                   <label>LastName</label>
-                  <input type="text" name="lastname" required="required" />
+                  <input type="text" name="lastname" required="required" placeholder="lastname" />
                   </div>
                 </div>
                 <div className="form-group">
                 <div className="wrapper-form-group">
                   <label>Email</label>
-                  <input type="email" name="email" required="required" />
+                  <input type="email" name="email" required="required" placeholder="email" />
                   </div>
                   <div className="wrapper-form-group">
                   <label>Phone</label>
-                  <input type="tel" name="phone"/>
+                  <input type="tel" name="phone" placeholder="phone number"/>
                   </div>
                 </div>
                 <div className="form-group">
                 <div className="wrapper-form-group" id="subject-field">
                   <label>Subject</label>
-                  <input type="text" name="subject" />
+                  <input type="text" name="subject" placeholder="subject" />
                   </div>
                 </div>
                 <div className="form-group" id="message-field">
                 <div className="wrapper-form-group">
                   <label>Message</label>
-                  <textarea name="message" required="required" />
+                  <textarea name="message" required="required" placeholder="Write your message..." />
                   </div>
                 </div>
                 <div className="form-group">
