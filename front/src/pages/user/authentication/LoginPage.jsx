@@ -58,7 +58,7 @@ const LoginPage = ( { onLogin } ) => {
                     <div className="form_overlay"></div>
             
                     <Field 
-                        label="Email adress" 
+                        label="Email" 
                         name="email" 
                         onChange={handleChange} 
                         placeholder="Email adress"
