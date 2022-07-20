@@ -12,9 +12,8 @@
 
 .contactForm {
     padding: 20px;
-    .form_overlay {
-        border: 0px;
-    }
+    max-height: auto !important;
+    height: auto !important;
     .form-group {
         flex-direction: row;
         width: 100%;

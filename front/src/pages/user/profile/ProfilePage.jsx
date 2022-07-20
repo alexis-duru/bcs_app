@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import usersAPI from '../../../services/usersAPI';
-import profil_image from '../../../assets/img/profil_image.png'
+import profil_image from '../../../assets/img/profil_image.png';
+import { toast } from 'react-toastify';
+
+
 const Profile  = (props) => {
 
     const [user, setUser] = useState([]);
@@ -21,6 +24,10 @@ const Profile  = (props) => {
             })
         })
     }
+
+    /* GESTION DE LA SUPPRESSION D'UN SPOT */
+
+   
 
     useEffect( () => {
         const decoded = jwtDecode(localStorage.getItem('token'));
@@ -41,22 +48,6 @@ const Profile  = (props) => {
             <div className="leftSideBar">
 
             </div>
-            {/* <div className="profilePageWrapper">
-                <div className="profilePageTop">
-                    <p>SETTINGS</p>
-                </div>
-                <div className="profilePageMiddle">
-                    <h1> Hello, {currentUser.email}</h1>
-                    <h2>Your id : {currentUser.id}</h2>
-                        <h2>Email : {currentUser.email}</h2>
-                        <Link to='/profile/spots'>
-                            <p>My Spots</p>
-                        </Link>
-                </div>
-                <div className="profilePageBottom">
-                    <p>BOTTOM</p>
-                </div>
-            </div> */}
             <div className="pageWrapper">
                     <div className="pageHeader">
                         <div className="pageWrapperHeader">
@@ -77,7 +68,7 @@ const Profile  = (props) => {
                             <h3>ID : {currentUser.id}</h3>
                             <div className="btnContainer">
                                 <button 
-                                    // onClick={() => handleDelete(spot.id)} 
+                                    // onClick={() => handleDelete(user.id)} 
                                     className="deleteButton">Delete
                                 </button> 
                                                                         

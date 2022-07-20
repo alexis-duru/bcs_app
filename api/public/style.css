@@ -6,9 +6,154 @@
   list-style: none;
 }
 
-body {
-  background-color: red;
+.page-admin-form {
   height: 100vh;
+  width: 100vw;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.page-admin-form .wrapper-admin-form {
+  min-width: 40vw;
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px;
+}
+.page-admin-form .wrapper-admin-form img {
+  height: 30px;
+  width: auto;
+}
+.page-admin-form .wrapper-admin-form #admin-form {
+  height: auto;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+}
+.page-admin-form .wrapper-admin-form #admin-form h1 {
+  text-align: center;
+  margin-top: 10px;
+  font-family: "adieu";
+  letter-spacing: 5px;
+}
+.page-admin-form .wrapper-admin-form #admin-form p {
+  text-align: center;
+  font-family: "lorinReg";
+  margin: 5px 0px;
+}
+.page-admin-form .wrapper-admin-form #admin-form .wrapper-infos {
+  margin-top: 25px;
+}
+.page-admin-form .wrapper-admin-form #admin-form .wrapper-infos .form-group {
+  flex-direction: column;
+  display: flex;
+  margin: 20px 0px;
+}
+.page-admin-form .wrapper-admin-form #admin-form .wrapper-infos .form-group:last-child {
+  margin: 20px 0px 0px 0px;
+}
+.page-admin-form .wrapper-admin-form #admin-form .wrapper-infos .form-group:last-child::after {
+  display: none;
+}
+.page-admin-form .wrapper-admin-form #admin-form .wrapper-infos .form-group::after {
+  margin-top: 0px;
+  content: "";
+  color: white;
+  height: 0.5px;
+  width: 100%;
+  background-color: white;
+  opacity: 0.3;
+}
+.page-admin-form .wrapper-admin-form #admin-form .wrapper-infos .form-group label {
+  width: 100%;
+  font-family: "adieu";
+}
+.page-admin-form .wrapper-admin-form #admin-form .wrapper-infos .form-group input {
+  width: 100%;
+  border: 0px;
+  padding: 8px 0px;
+  outline: none;
+  border-radius: 3px;
+  font-family: "adieu";
+  background-color: transparent;
+  color: white;
+  flex-direction: column;
+}
+.page-admin-form .wrapper-admin-form #admin-form .wrapper-infos .form-group input::placeholder {
+  font-family: "adieu";
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7;
+  font-style: italic;
+}
+.page-admin-form .wrapper-admin-form #admin-form .wrapper-infos .form-group button {
+  width: 100%;
+  border: 0px;
+  padding: 8px;
+  border-radius: 3px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  font-family: "adieu";
+}
+.page-admin-form .wrapper-admin-form #admin-form .wrapper-infos .form-group button:hover {
+  opacity: 0.8;
+}
+
+.fade-in {
+  animation-name: FadeIn;
+  animation-duration: 3s;
+  transition-timing-function: linear;
+}
+
+@keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+html {
+  font-size: 16px;
+}
+html h1 {
+  font-size: 3rem;
+}
+html h2 {
+  font-size: 2.5rem;
+}
+html h3 {
+  font-size: 2rem;
+}
+html p {
+  font-size: 1rem;
+}
+html label {
+  font-size: 1rem;
+}
+
+@font-face {
+  font-family: "adieu";
+  src: local("Adieu-Bold.woff2"), url("../../font/Adieu-Bold.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "lorinBold";
+  src: local("Lorin-Bold.woff2"), url("../../font/Lorin-Bold.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "lorinReg";
+  src: local("Lorin-Regular.woff2"), url("../../font/Lorin-Regular.woff2") format("woff2");
+  font-display: swap;
 }
 
 /*# sourceMappingURL=style.css.map */

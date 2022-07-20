@@ -1,12 +1,5 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
-}
+@import 'reset/reset.scss';
+@import 'admin/admin-form.scss';
+@import 'font/fontsize.scss';
+@import 'font/fontfamily.scss';
 
-body {
-    background-color: red;
-    height: 100vh;
-}

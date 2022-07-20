@@ -43,7 +43,7 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
+            // flex-wrap: wrap;
             overflow-y: scroll;
             align-items: center;
             flex-direction: column;
@@ -87,7 +87,7 @@
             height: 100%;
             border-top: 1px solid rgba(255, 255, 255, 0.5);
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-            z-index: 999;
+            // z-index: 999;
         }
     }
 }
