@@ -15,6 +15,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ContactForm from './pages/contact/ContactForm';
 import About from './pages/about/About';
+import NotFound from "./pages/404/NotFound";
 // useEffect useNavigate
 
 authAPI.setup();
@@ -52,6 +53,8 @@ const App = () => {
           <Route path="/spots/update/:id" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
           <Route path="/contact" element={ <ContactForm/> } />
           <Route path="/about" element={ <About/> } />
+          <Route path='*' element={<NotFound />} />
+
       </Routes>
       
     <ToastContainer position={toast.POSITION.BOTTOM_RIGHT } />
