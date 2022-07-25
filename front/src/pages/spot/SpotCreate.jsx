@@ -21,7 +21,9 @@ const SpotCreate = () => {
     const [lat, setLat] = useState(44.8378);
     const mapContainer = useRef(null);
     const map = useRef(null);
+    // eslint-disable-next-line
     const [zoom, setZoom] = useState(13);
+    // eslint-disable-next-line
     const [marker, setMarker] = useState([]);
 
      /* -------- SPOT ------- */
@@ -60,6 +62,7 @@ const SpotCreate = () => {
     const [categories, setCategories] = useState([]);
     const [types, setTypes] = useState([]);
     const [flats, setFlats] = useState([]);
+    // eslint-disable-next-line
     const [medias, setMedias] = useState([]);
 
     const fetchCategories = async () => {
@@ -95,15 +98,15 @@ const SpotCreate = () => {
         }
     }
 
-    const fetchMedias = async () => {
-        try {
-            const data = await spotsAPI.createMedia(JSON.stringify(medias));
-               console.log(data)
-        } catch (error) {
-            console.log(error.response)
+    // const fetchMedias = async () => {
+    //     try {
+    //         const data = await spotsAPI.createMedia(JSON.stringify(medias));
+    //            console.log(data)
+    //     } catch (error) {
+    //         console.log(error.response)
 
-        }
-    }
+    //     }
+    // }
 
     // const fetchMedias = async (_media) => {
     //     try {
@@ -237,8 +240,6 @@ const SpotCreate = () => {
     //     });
 
     //     result.then(mediaData => setMedias(mediaData))
-
-
     // }
 
     const handleSubmit = async (event) => {
@@ -264,8 +265,10 @@ const SpotCreate = () => {
 
         } catch (error) {
             // console.log('La requête à échoué')
-            console.log(error.response.data.violations)
-            console.log(error)
+            // console.log(error.response.data.violations)
+            // console.log(error)
+            toast.error("Sorry, the spot could not be created or updated, please retry")
+            console.log(error.response + " Sorry, the spot could not be created or updated, please retry");
             if (error.response.data.violations) {
                 const apiErrors = {};
                 error.response.data.violations.forEach(violation => {
@@ -354,6 +357,7 @@ const SpotCreate = () => {
                                     onChange={handleChange}
                                     error={errors.media}
                                 /> */}
+
                             </div>
                             
                             <div className="wrapper_form_group">
@@ -417,21 +421,13 @@ const SpotCreate = () => {
                             <div className="wrapper_form_group">
 
                             
-                                <UploadField 
+                                {/* <UploadField 
                                     name="medias"
                                     label="medias"
                                     placeholder="medias"
                                     onChange={handleChange}
                                     error={errors.medias}
-                                />
-
-                                {/* <label htmlFor="avatar">Choose a profile picture:</label> */}
-
-                                {/* <input type="file"
-                                    id="avatar" name="avatar"
-                                    accept="image/png, image/jpeg"
-                                    onChange={handleChangeMedia}
-                                />  */}
+                                /> */}
 
                             </div>
 

@@ -16,7 +16,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
             [
                 "groups" => "read:comment:collection", 
             ]
-        ], "POST"],
+        ], "POST"
+    ],
+    
     itemOperations:
     [
         "GET" => [

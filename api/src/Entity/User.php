@@ -14,33 +14,56 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+// collectionOperations:["GET"=> ['path' => '/toto/{id}'], "POST"],
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity("email", message: "this email is already used")]
 #[ApiResource(
-    // collectionOperations:["GET"=> ['path' => '/toto/{id}'], "POST"],
     collectionOperations:
-    ["GET" => [
-        "normalization_context" => 
-        [
-            "groups" => 
-                "read:user:collection",
-        ]
-    ], "POST"],
+    [
+        "GET" => [
+            "normalization_context" => 
+            [
+                "groups" => 
+                    "read:user:collection",
+            ]
+        ],
+        "POST"
+    ],
 
-    itemOperations:[
+    itemOperations:
+    [
         "GET" => [
             "normalization_context" => 
             [
                 "groups" => 
                     "read:user:item",
             ]
-        ], "PUT", "DELETE" 
+        ], 
+        "PUT" => 
+        [
+            "normalization_context" => 
+            [
+                "groups" => "read:spot:item",
+            ],
+            "security" => "is_granted('ROLE_ADMIN')",
+            "security_message" => "Only administrator can update a user",
+        ],
+        "DELETE" => 
+        [
+            "normalization_context" => 
+            [
+                "groups" => "read:user:item",
+            ],
+            "security" => "is_granted('ROLE_ADMIN')",
+            "security_message" => "Only administrator can delete a user",
+        ],
     ],
     order: ["createdAt" => "DESC"]
 
 )]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -58,11 +81,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     #[ORM\Column(type: 'json')]
-    // #[Groups(["read:user:collection",])]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
-    // #[Groups(["read:user:collection",])]
     #[Assert\NotBlank(message: 'Password is required')]
     #[Assert\Length(
         min: 5,
@@ -71,11 +92,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     #[ORM\Column(type: 'datetime')]
-    // #[Groups(["read:user:collection",])]
     private $updatedAt;
 
     #[ORM\Column(type: 'datetime')]
-    // #[Groups(["read:user:collection",])]
     private $createdAt;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Spot::class)]

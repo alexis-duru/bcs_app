@@ -14,9 +14,9 @@ class SpotedController extends AbstractController
     public function index(): Response
     {
 
-        // return $this->redirect('http://localhost:8000/login');
+        return $this->redirect('http://localhost:8000/login');
         // return $this->redirect('https://spoted-website.herokuapp.com/login');
-        return new Response('hello ok');
+        // return new Response('hello ok');
         // return $this->render('homepage/index.html.twig', [
         //     'controller_name' => 'SpotedController',
         // ]);

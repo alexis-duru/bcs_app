@@ -71,16 +71,16 @@ function findAllMedia() {
 
 // CREATE A NEW MEDIA
 
-function createMedia(credentials) {
-    return API
-        .post("/media_objects", credentials, {
-            // headers: {
-            //     "Access-Control-Allow-Origin": "*",
-            //   'Content-Type': 'multipart/form-data'
-            // }}
-        })
-        .then(response => response.data)
-}
+// function createMedia(credentials) {
+//     return API
+//         .post("/media_objects", credentials, {
+//             // headers: {
+//             //     "Access-Control-Allow-Origin": "*",
+//             //   'Content-Type': 'multipart/form-data'
+//             // }}
+//         })
+//         .then(response => response.data)
+// }
 
 // Update a Spot
 
@@ -103,7 +103,7 @@ const exportAPI =  {
     findOne,
     createSpot,
     updateSpot,
-    createMedia,
+    // createMedia,
     findAllMedia
 };
 

@@ -28,7 +28,6 @@ const Spots = (props) => {
 
     const [show, setShow] = useState([]);
 
-    console.log(show)
 
 
 
@@ -42,7 +41,7 @@ const Spots = (props) => {
             const data = await spotsAPI.findAll()
             setSpots(data)
             setLoading(false)
-            console.log(data)
+            // console.log(data)
         } catch (error) {
             toast.error("Sorry, the spots could not be found")
             console.log(error.response)
