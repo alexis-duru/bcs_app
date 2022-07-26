@@ -1,0 +1,19 @@
+.CookieConsent {
+    background-color: $black !important;
+    font-family: $adieu !important;
+    font-size: 1.2rem;
+    a {
+        color: $yellow !important;
+    }
+    #rcc-confirm-button {
+        background-color: $white !important;
+        font-family: $adieu !important;
+        transition: 0.3s ease-in-out;
+        border: 1px solid rgba(255, 255, 255, 0) !important;
+        &:hover {
+            background-color: $black !important;
+            color: $white !important;
+            border: 1px solid white !important;
+        }
+    }
+}

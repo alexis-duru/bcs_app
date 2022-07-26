@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link} from "react-router-dom";
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Homepage from './pages/home/HomePage';
@@ -16,6 +16,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import ContactForm from './pages/contact/ContactForm';
 import About from './pages/about/About';
 import NotFound from "./pages/404/NotFound";
+import CookieConsent from "react-cookie-consent";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 // useEffect useNavigate
 
 authAPI.setup();
@@ -53,11 +55,13 @@ const App = () => {
           <Route path="/spots/update/:id" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
           <Route path="/contact" element={ <ContactForm/> } />
           <Route path="/about" element={ <About/> } />
+          <Route path="/privacypolicy" element={ <PrivacyPolicy/> } />
           <Route path='*' element={<NotFound />} />
 
       </Routes>
       
     <ToastContainer position={toast.POSITION.BOTTOM_RIGHT } />
+    <CookieConsent>This website uses cookies to enhance the user experience. See our <Link to="/privacypolicy" >Privacy Polcy</Link></CookieConsent>
 
     </BrowserRouter>
     
