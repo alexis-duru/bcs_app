@@ -1,22 +1,13 @@
 import React from 'react';
 import { useEffect } from 'react';
-import  { circle } from '../404/circle.js';
+import animation from './circle.js';
 
 
 
 const NotFound = () => {
 
     useEffect(() => {
-        const script = document.createElement('script');
-        script.src = "circle.js";
-        script.type = "text/babel"
-        script.async = true;
-        
-        document.body.appendChild(script);
-        
-        return () => {
-            document.body.removeChild(script);
-        }
+        animation();
     }, []);
 
     return ( 
@@ -31,6 +22,7 @@ const NotFound = () => {
                 <div className="circle circle__three"></div>
                 <div className="circle circle__four"></div>
             </div>
+            <h1 id="title">404</h1>
         </div>
         </>
      );

@@ -1,0 +1,32 @@
+#PrivacyPolicy {
+    justify-content: initial;
+}
+
+.PrivacyPolicyContainer {
+    width: 80%;
+    color: white;
+    H1 {
+        display: flex;
+        justify-content: center;
+        margin: 40px auto;
+        font-family: $adieu;
+    }
+    h2 {
+        margin: 20px auto;
+        font-family: $adieu;
+    }
+
+    h3 {
+        margin: 20px auto;
+        font-family: $lorinReg;
+    }
+
+    h4 {
+        margin: 20px auto;
+        font-family: $lorinReg;
+    }
+
+    p {
+        font-family: $lorinReg;
+    }
+}
