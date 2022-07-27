@@ -61,7 +61,7 @@ const App = () => {
       </Routes>
       
     <ToastContainer position={toast.POSITION.BOTTOM_RIGHT } />
-    <CookieConsent>This website uses cookies to enhance the user experience. See our <Link to="/privacypolicy" >Privacy Polcy</Link></CookieConsent>
+    <CookieConsent>This website uses cookies to enhance the user experience. See our <Link to="/privacypolicy" >Privacy Policy</Link></CookieConsent>
 
     </BrowserRouter>
     
