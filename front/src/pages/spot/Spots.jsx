@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from "../../components/Pagination";
 import spotsAPI from '../../services/spotsAPI';
@@ -14,6 +14,7 @@ const Spots = (props) => {
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(true);
 
+    
 
 
     /* --------MAPBOX------- */
@@ -26,7 +27,7 @@ const Spots = (props) => {
 
     /* SHOW MAP */
 
-    const [show, setShow] = useState([]);
+    const [visible, setVisible] = useState([false]);
 
 
 
@@ -66,23 +67,33 @@ const Spots = (props) => {
 
 
     useEffect( () => {
+        
 
          /* ADD MAP ON DOM ELEMENT AND MARKER */
-         if (map.current) return;
+        //  if (map.current) return;
+      
          map.current = new mapboxgl.Map({
              container: mapContainer.current,
              style: 'mapbox://styles/mapbox/streets-v11',
              center: [lng, lat],
              zoom: zoom
+             
          });
-         setMarker(new mapboxgl.Marker({
-            color: "##000000",
-            draggable: false,
-        })
-        .setLngLat([lng, lat])
-        .addTo(map.current)
-        );
+         
+         
+        //  setMarker(new mapboxgl.Marker({
+        //     color: "##000000",
+        //     draggable: false,
+        // })
+        // .setLngLat([lng, lat])
+        // .addTo(map.current)
+        // );
+
+        
      }, [lng, lat, zoom]);
+
+
+    
 
 
 
@@ -137,7 +148,7 @@ const Spots = (props) => {
                                 <div className="button-container">
                                     <span className="mask">CONTRIBUTION</span>
                                     <Link to='/spots/create'>
-                                    <button type="button" name="Hover">CONTRIBUTION</button>
+                                        <button type="button" name="Hover">CONTRIBUTION</button>
                                     </Link>
                                 </div>
                             </div>
@@ -145,12 +156,14 @@ const Spots = (props) => {
 
 
                         <div className="toggle_wrapper">
-                            <button className="toggle" onClick={() => setShow(prev => !prev)}>
-                                <label className="switch">
+                            {/* <button c onClick={() => setShow(prev => !prev)}>TEST */}
+                                <button className="switch toggle" onClick={() => setVisible(!visible)}>{visible ? 'Hide' : 'Show'}
                                     <input type="checkbox"/>
                                         <span className="slider round"></span>
-                                </label>
-                            </button>
+                                </button>
+                            {/* </button> */}
+                            {/* <button className="toggle" onClick={() => setVisible(!visible)}>{visible ? 'Hide' : 'Show'}
+                            </button> */}
                         </div>
                        
 
@@ -158,7 +171,9 @@ const Spots = (props) => {
                             <input type="text" onChange={handleSearch} value={search} placeholder="Search spot ..." className="searchBarControl" />
                         </div>
                     </div>
-                    {!loading &&
+                    
+                    {/* {!loading && */}
+                     {visible && 
                         <div className="spotsPageWrapperCards">
                             <div className="spotsPageWrapperCards_overlay"></div>
                             {paginatedSpots.map(spot =>
@@ -176,7 +191,6 @@ const Spots = (props) => {
                                             <p>{spot.category.name}</p>
                                             <p>{spot.flat.name}</p>
                                             {/* <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> */}
-                                            {/* <img src="IMG_8818.jpg"  alt="spot" /> */}
 
 
 
@@ -190,10 +204,16 @@ const Spots = (props) => {
                                 </div>
                             )}
                         </div>}
-                    <div className="loaders">
-                        {loading && <CardLoaders />}
-                    </div>
+                 
 
+
+                {/* <div className="mapbox-container-full-wrapper"> */}
+                        <div className="sidebar">
+                            Longitude: {spots.longitude} | Latitude: {spots.latitude} | Zoom: {zoom}
+                        </div>
+                        <div ref={mapContainer} className="map-container mapbox-container-full" 
+                        />
+                {/* </div> */}
 
 
                 <div className="fullPaginationContainer">
@@ -207,16 +227,6 @@ const Spots = (props) => {
                         />
                     )}
                 </div>
-
-                {show &&
-                    <div className="mapbox-container-full-wrapper">
-                            <div className="sidebar">
-                                Longitude: {spots.longitude} | Latitude: {spots.latitude} | Zoom: {zoom}
-                            </div>
-                            <div ref={mapContainer} className="map-container mapbox-container-full" 
-                            />
-                    </div>
-                }
 
             </div>
         </div>

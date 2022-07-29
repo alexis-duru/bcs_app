@@ -18,6 +18,7 @@ import About from './pages/about/About';
 import NotFound from "./pages/404/NotFound";
 import CookieConsent from "react-cookie-consent";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
+import Test from "./components/Test";
 
 authAPI.setup();
 
@@ -56,6 +57,7 @@ const App = () => {
           <Route path="/about" element={ <About/> } />
           <Route path="/privacypolicy" element={ <PrivacyPolicy/> } />
           <Route path='*' element={<NotFound />} />
+          <Route path="/test" element={<Test />} />
 
       </Routes>
       
