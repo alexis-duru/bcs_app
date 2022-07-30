@@ -6,7 +6,7 @@ import spotsAPI from '../../../services/spotsAPI';
 import { Link } from 'react-router-dom';
 import Pagination from '../../../components/Pagination';
 import { toast } from 'react-toastify';
-import CardLoaders from '../../../components/loaders/CardLoaders';
+import ImageGrid from '../../../components/loaders/CardLoaders';
 
 const UserSpots  = () => {
 
@@ -179,10 +179,6 @@ const UserSpots  = () => {
                         )}
                     </div>}
 
-                    <div className="loaders">
-                        {loading && <CardLoaders />}
-                    </div>
-
                     <div className="fullPaginationContainer">
                         {itemsPerPage < filteredSpots.length && (
                             <Pagination 
@@ -193,6 +189,10 @@ const UserSpots  = () => {
                                 onPageChanged={handlePageChange}
                             />
                         )}
+                    </div>
+
+                    <div className="loaders">
+                        {loading && <ImageGrid />}
                     </div>
                 </div>
             </div>

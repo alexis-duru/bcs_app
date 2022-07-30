@@ -1,8 +1,13 @@
-import React from 'react';
-
-import backgroundImg from '../../assets/img/home.png'; 
+import React, { useEffect } from 'react';
+import backgroundImg from '../../assets/img/home.png';
 
 const Homepage = () => {
+
+    
+    useEffect(() => {
+
+    }, [])
+    
     return ( 
         <>
         <main>

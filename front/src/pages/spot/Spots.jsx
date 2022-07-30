@@ -1,10 +1,11 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from "../../components/Pagination";
 import spotsAPI from '../../services/spotsAPI';
 import { toast } from 'react-toastify';
-import CardLoaders from '../../components/loaders/CardLoaders';
-import mapboxgl from 'mapbox-gl';
+// import ContentLoader from 'react-content-loader';
+// import mapboxgl from 'mapbox-gl';
+import ImageGrid from '../../components/loaders/CardLoaders';
 
 
 const Spots = (props) => {
@@ -14,21 +15,18 @@ const Spots = (props) => {
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(true);
 
-    
-
 
     /* --------MAPBOX------- */
-    const mapContainer = useRef(null);
-    const map = useRef(null);
-    const [lng, setLng] = useState(-0.594);
-    const [lat, setLat] = useState(44.8378);
-    const [zoom, setZoom] = useState(13);
-    const [marker, setMarker] = useState([]);
+    // const mapContainer = useRef(null);
+    // const map = useRef(null);
+    // const [lng, setLng] = useState(-0.594);
+    // const [lat, setLat] = useState(44.8378);
+    // const [zoom, setZoom] = useState(13);
+    // const [marker, setMarker] = useState([]);
 
     /* SHOW MAP */
 
-    const [visible, setVisible] = useState([false]);
-
+    // const [visible, setVisible] = useState([false]);
 
 
 
@@ -65,38 +63,25 @@ const Spots = (props) => {
         // fetchMedia();
     }, []);
 
+// LOAD MAP
 
-    useEffect( () => {
-        
-
-         /* ADD MAP ON DOM ELEMENT AND MARKER */
-        //  if (map.current) return;
-      
-         map.current = new mapboxgl.Map({
-             container: mapContainer.current,
-             style: 'mapbox://styles/mapbox/streets-v11',
-             center: [lng, lat],
-             zoom: zoom
-             
-         });
-         
-         
-        //  setMarker(new mapboxgl.Marker({
-        //     color: "##000000",
-        //     draggable: false,
-        // })
-        // .setLngLat([lng, lat])
-        // .addTo(map.current)
-        // );
-
-        
-     }, [lng, lat, zoom]);
-
-
-    
-
-
-
+    // useEffect( () => {
+    //      /* ADD MAP ON DOM ELEMENT AND MARKER */
+    //      if (map.current) return;
+    //      map.current = new mapboxgl.Map({
+    //          container: mapContainer.current,
+    //          style: 'mapbox://styles/mapbox/streets-v11',
+    //          center: [lng, lat],
+    //          zoom: zoom 
+    //      });  
+    //      setMarker(new mapboxgl.Marker({
+    //         color: "##000000",
+    //         draggable: false,
+    //     })
+    //     .setLngLat([lng, lat])
+    //     .addTo(map.current)
+    //     );        
+    //  }, [lng, lat, zoom]);
 
     //  Gestion du changement de page
 
@@ -134,7 +119,6 @@ const Spots = (props) => {
         itemsPerPage
     );
 
-
     return (
         <>
             <div className="spotsPage">
@@ -155,16 +139,12 @@ const Spots = (props) => {
                         </div>
 
 
-                        <div className="toggle_wrapper">
-                            {/* <button c onClick={() => setShow(prev => !prev)}>TEST */}
+                        {/* <div className="toggle_wrapper">
                                 <button className="switch toggle" onClick={() => setVisible(!visible)}>{visible ? 'Hide' : 'Show'}
                                     <input type="checkbox"/>
                                         <span className="slider round"></span>
                                 </button>
-                            {/* </button> */}
-                            {/* <button className="toggle" onClick={() => setVisible(!visible)}>{visible ? 'Hide' : 'Show'}
-                            </button> */}
-                        </div>
+                        </div> */}
                        
 
                         <div className="searchBar">
@@ -172,8 +152,8 @@ const Spots = (props) => {
                         </div>
                     </div>
                     
-                    {/* {!loading && */}
-                     {visible && 
+                     {/* {visible &&  */}
+                    {!loading &&
                         <div className="spotsPageWrapperCards">
                             <div className="spotsPageWrapperCards_overlay"></div>
                             {paginatedSpots.map(spot =>
@@ -204,30 +184,28 @@ const Spots = (props) => {
                                 </div>
                             )}
                         </div>}
-                 
 
+                        <div className="fullPaginationContainer">
+                            {itemsPerPage < filteredSpots.length && (
+                                <Pagination
+                                    currentPage={currentPage}
+                                    itemsPerPage={itemsPerPage}
+                                    length={filteredSpots.length}
+                                    // length={spots.length}
+                                    onPageChanged={handlePageChange}
+                                />
+                            )}
+                        </div>
 
-                {/* <div className="mapbox-container-full-wrapper"> */}
-                        <div className="sidebar">
+                        <div className="loaders">
+                            {loading && <ImageGrid />}
+                        </div>
+                                    
+                        {/* <div className="sidebar">
                             Longitude: {spots.longitude} | Latitude: {spots.latitude} | Zoom: {zoom}
                         </div>
-                        <div ref={mapContainer} className="map-container mapbox-container-full" 
-                        />
-                {/* </div> */}
-
-
-                <div className="fullPaginationContainer">
-                    {itemsPerPage < filteredSpots.length && (
-                        <Pagination
-                            currentPage={currentPage}
-                            itemsPerPage={itemsPerPage}
-                            length={filteredSpots.length}
-                            // length={spots.length}
-                            onPageChanged={handlePageChange}
-                        />
-                    )}
-                </div>
-
+                        <div ref={mapContainer} className="mapbox-container-full" 
+                        /> */}
             </div>
         </div>
         </>
