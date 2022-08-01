@@ -7,8 +7,10 @@ import profil_image from '../../../assets/img/profil_image.png';
 import { toast } from 'react-toastify';
 
 
+
 const Profile  = (props) => {
 
+    
     const [user, setUser] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);
 
@@ -80,7 +82,7 @@ const Profile  = (props) => {
                                 <div className="button-container">
                                     <span className="mask">YOUR SPOTS</span>
                                     <Link to='/profile/spots'>
-                                    <button type="button" name="Hover">YOUR SPOTS</button>
+                                    <button type="button" name="Hover">MY SPOTS</button>
                                     </Link>
                                 </div>
                             </div>

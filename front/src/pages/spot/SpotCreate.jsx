@@ -5,11 +5,9 @@ import Select from '../../components/forms/Select';
 import spotsAPI from '../../services/spotsAPI';
 import mapboxgl from 'mapbox-gl';
 import { toast } from 'react-toastify';
-import UploadField from '../../components/forms/UploadField';
+// import UploadField from '../../components/forms/UploadField';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxbzc5enlobmM0In0.Ed0S5ioc8PQZXqPIfK2CEg";
-
-// import createSpot from "../../services/spotsAPI";
 
 
 const SpotCreate = () => {
@@ -28,6 +26,7 @@ const SpotCreate = () => {
 
      /* -------- SPOT ------- */
     const spotId = useParams('id').id // Object ID
+
     const [spot, setSpot] = useState({
         name: "",
         address: "",
@@ -108,16 +107,6 @@ const SpotCreate = () => {
     //     }
     // }
 
-    // const fetchMedias = async (_media) => {
-    //     try {
-    //         var data = new FormData();
-    //         data.append('file', _media);
-    //         const mediaData = await spotsAPI.createMedia(data);
-    //     } catch (error) {
-    //         console.log(error.response)
-    //     }
-    // } 
-
     const fetchSpot = async () => {
         if (spotId) {
             try {
@@ -139,12 +128,10 @@ const SpotCreate = () => {
                 console.log(data)
             } catch (error) {
                 console.log(error.response)
-
             }
         } else {
             return
         }
-
     }
 
 
@@ -220,62 +207,35 @@ const SpotCreate = () => {
         setSpot({ ...spot, [name]: value })
     }
 
-    // const handleChangeMedia = ({ currentTarget }) => {
-
-    //     const file = currentTarget.files[0]
-
-    //     const result = new Promise((resolve, reject) => {
-
-    //         const reader = new FileReader();
-    
-    //         reader.onload = (event) => {
-    //             resolve(event.target.result);
-    //         };
-    
-    //         reader.onerror = (err) => {
-    //             reject(err);
-    //         };
-    
-    //         reader.readAsDataURL(file);
-    //     });
-
-    //     result.then(mediaData => setMedias(mediaData))
-    // }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(spot)
-
-
+        // console.log(spot)
         try {
-            // spot.media = spot.media.replace(/^.*\\/, "");
-            // console.log(spot.media);
-            spot.postalCode = parseInt(spot.postalCode)
             spot.latitude = parseFloat(spot.latitude)
             spot.longitude = parseFloat(spot.longitude)
-            spotId
-                ?
+            spot.postalCode = parseInt(spot.postalCode)
+            if(spotId) {
                 await spotsAPI.updateSpot(parseInt(spotId), spot)
-                    // navigate("/spots", { replace: true })
-                    (toast.success("The spot has been successfully edited"), navigate("/profile/spots"), { replace: true }, console.log("The spot has been successfully edited"))
-                :
-                await spotsAPI.createSpot(JSON.stringify(spot))
-                    (toast.success("The spot has been successfully created"), navigate("/spots"), { replace: true }, console.log("The spot has been successfully created"))
-            // console.log(spot.media)
+                (
+                    console.log("The spot has been successfully edited"),
+                    toast.success("The spot has been successfully edited"), 
+                    navigate("/profile/spots"), 
+                    { replace: true }, 
+                )
+            }else{
+                const response = await spotsAPI.createSpot(JSON.stringify(spot))
+                console.log(response)
+                console.log('The spot has been successfully created')
+                toast.success("The spot has been successfully created")
+                navigate("/spots")
+            }
 
         } catch (error) {
-            // console.log('La requête à échoué')
-            // console.log(error.response.data.violations)
-            // console.log(error)
-            toast.error("Sorry, the spot could not be created or updated, please retry")
-            console.log(error.response + " Sorry, the spot could not be created or updated, please retry");
-            if (error.response.data.violations) {
-                const apiErrors = {};
-                error.response.data.violations.forEach(violation => {
-                    apiErrors[violation.propertyPath] = violation.message;
-                });
-                toast.error('We detected an error, please retry !');
-                setErrors(apiErrors)
+            if(spotId) {
+                toast.error("The spot has not been edited")
+            }else{
+                toast.error("Sorry, the spot could not be created")
             }
         }
 
@@ -411,7 +371,6 @@ const SpotCreate = () => {
                                     <option
                                         key={flat.id}
                                         value={"api/flats/" + flat.id}>
-                                        {/* // value={flat.id}> */}
                                         {flat.name}
                                     </option>
                                 )}

@@ -46,8 +46,6 @@ const createSpot = (credentials) => {
 // UPDATE A SPOT OF APP
 
 function updateSpot(id, credentials) {
-
-
     return API
         .put(`/spots/${id}`, credentials)
         .then(response => response.data)
