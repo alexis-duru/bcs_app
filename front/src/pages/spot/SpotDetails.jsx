@@ -4,10 +4,17 @@ import { Link, useParams } from 'react-router-dom';
 import spotsAPI from '../../services/spotsAPI';
 import { toast } from 'react-toastify';
 import mapboxgl from 'mapbox-gl';
+import exportAPI from '../../services/commentsAPI';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxbzc5enlobmM0In0.Ed0S5ioc8PQZXqPIfK2CEg";
 
 const SpotDetails  = (props) => {
+
+    /* COMMENTS */
+
+    const [comments, setComments] = useState([]);
+
+    console.log(comments);
 
     /* --------MAPBOX------- */
     const mapContainer = useRef(null);
@@ -31,6 +38,10 @@ const SpotDetails  = (props) => {
         // eslint-disable-next-line
     }, []);
 
+   useEffect( () => {
+    fetchComments();
+   }, []);
+
     useEffect( () => {
          /* ADD MAP ON DOM ELEMENT AND MARKER */
          if (map.current) return;
@@ -51,28 +62,41 @@ const SpotDetails  = (props) => {
         
      }, [lng, lat, zoom]);
 
-     useEffect( () => {
-        setMarker(
-            new mapboxgl.Marker({
-            color: "#000000",
-            draggable: false,
-            })
-            .setLngLat([spot.longitude, spot.latitude])
-            .addTo(map.current)
-        );
-     },[spot.longitude, spot.latitude]);
+    //  useEffect( () => {
+    //     setMarker(
+    //         new mapboxgl.Marker({
+    //         color: "#000000",
+    //         draggable: false,
+    //         })
+    //         .setLngLat([spot.longitude, spot.latitude])
+    //         .addTo(map.current)
+    //     );
+    //  },[spot.longitude, spot.latitude]);
+
+
 
      const fetchSpot = async (spot) => {
         try {
             const spot = await spotsAPI.findOne(id)
             setSpot(spot)
+            // setComments(spot.comments)
             setLng(spot.longitude)
             setLat(spot.latitude)
+            console.log(spot)
             // console.log(spot.latitude)
             // console.log(spot.longitude)
         } catch (error) {
             toast.error("Sorry, the spot could not be found")
             console.log(error + " failed")
+        }
+    }
+
+    const fetchComments = async () => {
+        try {
+            const comments = await exportAPI.findAllComments();
+            setComments(comments);
+        } catch (error) {
+            console.log(error);
         }
     }
     
@@ -83,7 +107,7 @@ const SpotDetails  = (props) => {
             <h1> Spot Details</h1>
             <h2>{spot.name}</h2>
                 <p>{spot.address}</p>
-                {/* <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> */}
+                {spot.image ? <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> : <div><p>No image available</p></div>}
                 <div><p>{spot.city}</p><p>{spot.postalCode}</p></div>
                 <p>{spot.details}</p>
                 <p>{spot.category && spot.category.name}</p>
@@ -91,6 +115,20 @@ const SpotDetails  = (props) => {
                 <p>{spot.flat && spot.flat.name}</p>
                 <p>{spot.latitude}</p>
                 <p>{spot.longitude}</p>
+
+
+                {spot.comments?.map(
+                    (comment) => {
+                        return (
+                            <div key={comment.id}>
+                                <p>{comment.content}</p>
+                                <p>{comment.createdAt}</p>
+                            </div>
+                        )
+                    }
+                )}
+               
+                
 
                 <div className="mapbox-container">
                     <div className="sidebar">
