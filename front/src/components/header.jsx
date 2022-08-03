@@ -1,10 +1,13 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import authAPI from '../services/authAPI';
 import image from "../assets/img/logo-header.png";
+import avatarImage from "../assets/img/default_avatar.png";
 import { toast } from 'react-toastify';
+import userAPI from '../services/usersAPI';
 
 const Header = ({isAuthenticated, onLogout}) => {
+
 
     const navigate = useNavigate();
 
@@ -30,7 +33,13 @@ const Header = ({isAuthenticated, onLogout}) => {
                         <Link to="/register">Register</Link>
                         <Link to="/login">Login</Link>
                     </>)) || (
+                        <>
+                        <div id="default_avatar">
+                            {/* { user.image ? <img src={`http://localhost:8000${user.image.contentUrl}`} alt="avatar from user profil" /> : <img src={avatarImage} alt="default avatar" /> } */}
+                            <img src={avatarImage} alt="default avatar" /> 
+                        </div>
                         <button onClick={handleLogout} className="logoutButton">Logout</button>
+                        </>
                     )
                 }
             </div>
