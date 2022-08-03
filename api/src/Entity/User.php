@@ -27,7 +27,9 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             [
                 "groups" => 
                     "read:user:collection",
-            ]
+            ],
+            "security" => "is_granted('ROLE_ADMIN')",
+            "security_message" => "Only administrator can access this resource",
         ],
         "POST"
     ],
@@ -39,7 +41,9 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             [
                 "groups" => 
                     "read:user:item",
-            ]
+            ],
+            "security" => "is_granted('ROLE_ADMIN')",
+            "security_message" => "Only administrator can access this resource",
         ], 
         "PUT" => 
         [
@@ -75,9 +79,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Groups(["read:user:collection", "read:user:item", "read:spot:collection", "read:spot:item","read:comment:collection"])]
     #[Assert\NotBlank(message: 'Email is required')]
-    #[Assert\Email(
-        message: 'The email {{ value }} is not a valid email.',
-    )]
+    #[Assert\Email(message: 'The email {{ value }} is not a valid email.',)]
     private $email;
 
     #[ORM\Column(type: 'json')]

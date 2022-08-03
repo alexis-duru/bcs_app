@@ -5,6 +5,7 @@ import Select from '../../components/forms/Select';
 import spotsAPI from '../../services/spotsAPI';
 import mapboxgl from 'mapbox-gl';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 // import UploadField from '../../components/forms/UploadField';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxbzc5enlobmM0In0.Ed0S5ioc8PQZXqPIfK2CEg";
@@ -13,6 +14,8 @@ mapboxgl.accessToken = "pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxb
 const SpotCreate = () => {
 
     const navigate = useNavigate();
+
+    /* -------- UPLOAD FIELD -------- */
 
     /* --------MAPBOX------- */
     const [lng, setLng] = useState(-0.594);
@@ -62,7 +65,7 @@ const SpotCreate = () => {
     const [types, setTypes] = useState([]);
     const [flats, setFlats] = useState([]);
     // eslint-disable-next-line
-    const [medias, setMedias] = useState([]);
+    // const [medias, setMedias] = useState([]);
 
     const fetchCategories = async () => {
         try {
@@ -193,6 +196,9 @@ const SpotCreate = () => {
         // eslint-disable-next-line
     }, [])
 
+
+    
+
     // useEffect(() => {
     //     console.log(medias)
     //     fetchMedia(medias);
@@ -308,6 +314,8 @@ const SpotCreate = () => {
                                     onChange={handleChange}
                                     error={errors.details}
                                 />
+
+                                {/* <input type="file" id="image" accept="image/png"/> */}
 
                                 {/* <Field
                                     name="media"

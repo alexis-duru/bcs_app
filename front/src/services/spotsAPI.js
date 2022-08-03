@@ -72,10 +72,10 @@ function findAllMedia() {
 // function createMedia(credentials) {
 //     return API
 //         .post("/media_objects", credentials, {
-//             // headers: {
-//             //     "Access-Control-Allow-Origin": "*",
-//             //   'Content-Type': 'multipart/form-data'
-//             // }}
+//             headers: {
+//                 "Access-Control-Allow-Origin": "*",
+//               'Content-Type': 'multipart/form-data',
+//             }
 //         })
 //         .then(response => response.data)
 // }

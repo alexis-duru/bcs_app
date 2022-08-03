@@ -12,6 +12,7 @@
         background-image: url(../../assets/img/navigation.png);
         filter: brightness(50%);
         background-attachment:fixed;
+        background-size: contain;
     }
     .spotsPageWrapper {
         display: flex;

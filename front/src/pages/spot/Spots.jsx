@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import Pagination from "../../components/Pagination";
 import spotsAPI from '../../services/spotsAPI';
 import { toast } from 'react-toastify';
+import ImageGrid from '../../components/loaders/CardLoaders';
 // import ContentLoader from 'react-content-loader';
 // import mapboxgl from 'mapbox-gl';
-import ImageGrid from '../../components/loaders/CardLoaders';
 
 
 const Spots = (props) => {
@@ -170,7 +170,9 @@ const Spots = (props) => {
                                             <p>{spot.type.name}</p>
                                             <p>{spot.category.name}</p>
                                             <p>{spot.flat.name}</p>
-                                            {/* <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> */}
+                                            {spot.image ? <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> : <div><p>No image available</p></div>}
+                                                {/* <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> */}
+                                            
 
 
 
