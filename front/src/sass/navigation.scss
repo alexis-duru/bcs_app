@@ -86,10 +86,30 @@ header {
         cursor: pointer;
       }
       #default_avatar {
-        img {
-          width: 25px;
-          height: 25px;
-          margin-right: 10px;
+        a {
+          display: initial;
+    flex-direction: initial;
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.1s ease-in-out;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    background-color: #000000;
+    border: 0px;
+    font-family: "adieu";
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      opacity: 0.7;
+    }
+          img {
+            width: auto;
+            height: 25px;
+            margin-right: 10px;
+            border-radius: 50%;
+          }
         }
       }
     }

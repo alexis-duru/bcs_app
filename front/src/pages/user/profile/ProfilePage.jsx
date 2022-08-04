@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import usersAPI from '../../../services/usersAPI';
-import profil_image from '../../../assets/img/profil_image.png';
+// import profil_image from '../../../assets/img/profil_image.png';
 import { toast } from 'react-toastify';
+import avatarImage from "../../../assets/img/defaultAvatar.png";
 
 
 
@@ -13,6 +14,7 @@ const Profile  = (props) => {
     
     const [user, setUser] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);
+    
 
     const findCurrentUser = () => {
 
@@ -40,7 +42,10 @@ const Profile  = (props) => {
 
 
     useEffect(() => {
-        findCurrentUser();
+        if(currentUser) {
+            findCurrentUser();
+            console.log(currentUser)
+        }
         // eslint-disable-next-line
     }, [user])
 
@@ -62,7 +67,9 @@ const Profile  = (props) => {
                     <div className="pageWrapperContainer">
                         <div className="usersInfos">
                             <div className="profile_image">
-                                <img src={profil_image} alt="avatar of the user" />
+                                {currentUser.image ? <img src={`http://localhost:8000${currentUser.image.contentUrl}`} alt="profil_image" /> : <img src={avatarImage} alt="default avatar" /> }
+                                {/* <img src={profil_image} alt="avatar of the user" />
+                                <img src={`http://localhost:8000${currentUser.image.contentUrl}`} /> */}
                                 <button className="profile_upload">UPLOAD AVATAR</button>
                             </div>
                             <h2> Hello, {currentUser.email}</h2>
