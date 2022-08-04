@@ -4,11 +4,16 @@ import Pagination from "../../components/Pagination";
 import spotsAPI from '../../services/spotsAPI';
 import { toast } from 'react-toastify';
 import ImageGrid from '../../components/loaders/CardLoaders';
+import authAPI from '../../services/authAPI';
 // import ContentLoader from 'react-content-loader';
 // import mapboxgl from 'mapbox-gl';
 
 
-const Spots = (props) => {
+const Spots = () => {
+
+    const [isAuthenticated, setIsAuthenticated] = useState(
+        authAPI.isAuthenticated()
+    ); 
 
     const [spots, setSpots] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -176,11 +181,13 @@ const Spots = (props) => {
 
 
 
+                                            {isAuthenticated &&
                                             <div className="moreInfosButton">
                                                 <Link to={`/spots/${spot.id}`}>
                                                     More informations
                                                 </Link>
                                             </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>

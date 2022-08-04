@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Comment;
 use App\Entity\Spot;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,5 +50,6 @@ class SpotedDashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Spot', 'fas fa-list', Spot::class);
+        yield MenuItem::linkToCrud('Comment', 'fas fa-list', Comment::class);
     }
 }

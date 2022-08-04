@@ -15,7 +15,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
             "normalization_context" => 
             [
                 "groups" => "read:comment:collection", 
-            ]
+            ],
+            "security" => "is_granted('ROLE_USER')",
+            "security_message" => "Only user of the application can view the spot detail",
         ], "POST"
     ],
     
@@ -25,9 +27,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
             "normalization_context" => 
             [
                 "groups" => "read:comment:item",
-            ]
+            ],
+            "security" => "is_granted('ROLE_USER')",
+            "security_message" => "Only user of the application can view the spot detail",
         ],
-        "PUT", 
+        "PUT" => [
+            "normalization_context" => 
+            [
+                "groups" => "read:comment:item",
+            ],
+            "security" => "is_granted('ROLE_ADMIN')",
+            "security_message" => "Only Admin can update the comment",
+        ], 
         "DELETE" 
     ],
     order: ["createdAt" => "DESC"]

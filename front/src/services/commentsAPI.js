@@ -6,8 +6,14 @@ function findAllComments () {
         .then(response => response.data['hydra:member'])
 }
 
+function deleteComments(id) {
+    return API
+        .delete(`/comments/${id}`);
+}
+
 const exportAPI = {
-    findAllComments
+    findAllComments,
+    deleteComments
 }
 
 export default exportAPI;

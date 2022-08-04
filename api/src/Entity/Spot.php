@@ -36,7 +36,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
             "normalization_context" => 
             [
                 "groups" => "read:spot:item",
-            ]
+            ],
+            "security" => "is_granted('ROLE_USER')",
+            "security_message" => "Only user of the application can view the spot detail",
+
         ], 
         "PUT" => 
         [
