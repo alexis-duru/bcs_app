@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import authAPI from '../services/authAPI';
 import logo from "../assets/img/logo-header.png";
 import avatarImage from "../assets/img/defaultAvatar.png";
@@ -9,21 +9,23 @@ import jwtDecode from 'jwt-decode';
 
 const Header = ({isAuthenticated, onLogout}) => {
 
+    const navigate = useNavigate();
+
     const [user, setUser] = useState([]);
 
     const [currentUser, setCurrentUser] = useState([]);
 
     const findCurrentUser = () => {
-        const users =  usersAPI.findAllUsers()
-        return users.then(users => {
-            users.forEach(identity => {
-                if(user.email === identity.email)  
-                setCurrentUser(identity)
+        if(isAuthenticated) {
+            const users =  usersAPI.findAllUsers()
+            return users.then(users => {
+                users.forEach(identity => {
+                    if(user.email === identity.email)  
+                    setCurrentUser(identity)
+                })
             })
-        })
+        }
     }
-
-    const navigate = useNavigate();
 
     const handleLogout = () => {
         authAPI.logout();
@@ -33,15 +35,17 @@ const Header = ({isAuthenticated, onLogout}) => {
     };
 
     useEffect( () => {
+        if(isAuthenticated) {
         const decoded = jwtDecode(localStorage.getItem('token'));
         setUser(decoded);
+        }
         // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
         if(currentUser) {
             findCurrentUser();
-            console.log(currentUser)
+            // console.log(currentUser)
         }
         // eslint-disable-next-line
     }, [user])
@@ -62,15 +66,14 @@ const Header = ({isAuthenticated, onLogout}) => {
                     <>
                         <Link to="/register">Register</Link>
                         <Link to="/login">Login</Link>
-                    </>)) || (
+                    </>)) || (isAuthenticated && (
                         <>
                         <div id="default_avatar">
-                            {/* { user.image ? <img src={`http://localhost:8000${user.image.contentUrl}`} alt="avatar from user profil" /> : <img src={avatarImage} alt="default avatar" /> } */}
-                            {currentUser.image ? <Link id="profile" to="profile"> <img src={`http://localhost:8000${currentUser.image.contentUrl}`} alt="profil_image" /> </Link> : <Link to="profile"><img src={avatarImage} alt="default avatar" /> </Link> }
+                            {currentUser.image ? <Link id="profile" to="profile"><img key={Date.now()} src={`http://localhost:8000${currentUser.image.contentUrl}`} alt="profil_image" /> </Link> : <Link to="profile"><img src={avatarImage} alt="default avatar" /> </Link> }
                         </div>
                         <button onClick={handleLogout} className="logoutButton">Logout</button>
                         </>
-                    )
+                    ))
                 }
             </div>
         </header>

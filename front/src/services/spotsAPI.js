@@ -37,7 +37,6 @@ const findOne = async (id) => {
 // CREATE A NEW SPOT IN APP
 
 const createSpot = (credentials) => {
-    // API.Authorization = ""
     return API 
         .post('/spots', credentials)
         .then(response => response.data)

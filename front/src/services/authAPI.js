@@ -2,8 +2,6 @@ import axios from 'axios';
 import API from "./api";
 import jwtDecode from "jwt-decode"; 
 
-// import spotAPI from '../services/spotsAPI';
-
 // DECONNEXION (SUPPRESION DU TOKEN DU LOCALSTORAGE ET SUR AXIOS
 
 function logout() {

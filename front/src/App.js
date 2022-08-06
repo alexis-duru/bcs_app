@@ -19,6 +19,7 @@ import NotFound from "./pages/404/NotFound";
 import CookieConsent from "react-cookie-consent";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import Test from "./components/Test";
+import Comment from "./components/Comment";
 
 authAPI.setup();
 
@@ -50,7 +51,7 @@ const App = () => {
           {/* SPOTSROUTES */}
     
           <Route path="/spots"  element={ <Spots/> } />
-          <Route path="/spots/:id" element={ <SpotDetails/> } />
+          <Route path="/spots/:id" element={ isAuthenticated ? <SpotDetails/> : <LoginPage/>  } />
           <Route path="/spots/create" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
           <Route path="/spots/update/:id" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
           <Route path="/contact" element={ <ContactForm/> } />
@@ -58,6 +59,7 @@ const App = () => {
           <Route path="/privacypolicy" element={ <PrivacyPolicy/> } />
           <Route path='*' element={<NotFound />} />
           <Route path="/test" element={<Test />} />
+          <Route path="/testComment" element={<Comment />} />
 
       </Routes>
       

@@ -4,9 +4,10 @@ import { Link, useParams } from 'react-router-dom';
 import spotsAPI from '../../services/spotsAPI';
 import { toast } from 'react-toastify';
 import mapboxgl from 'mapbox-gl';
-import commentsAPI from '../../services/commentsAPI';
 import usersAPI from '../../services/usersAPI';
 import jwtDecode from 'jwt-decode';
+import commentsAPI from '../../services/commentsAPI';
+import Field from '../../components/forms/Field';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxbzc5enlobmM0In0.Ed0S5ioc8PQZXqPIfK2CEg";
 
@@ -20,9 +21,29 @@ const SpotDetails  = (props) => {
 
 
     /* COMMENTS */
-
     const [comments, setComments] = useState([]);
-    console.log(comments);
+
+    // const [comments, setComments] = useState({
+    //     content: "",
+    //     createdAt: new Date().toISOString(),
+    //     updatedAt: new Date().toISOString(),
+    //     spot: "",
+    //     author: "",
+    // })
+    
+
+    // console.log(comments)
+
+    // const [errors, setErrors] = useState({
+    //     content: "",
+    //     createdAt: new Date().toISOString(),
+    //     updatedAt: new Date().toISOString(),
+    //     spot: "",
+    //     author: "",
+    // });
+
+    // console.log(comments);
+
 
     /* --------MAPBOX------- */
     const mapContainer = useRef(null);
@@ -33,8 +54,6 @@ const SpotDetails  = (props) => {
 
     const [zoom, setZoom] = useState(12);
     const [marker, setMarker] = useState([]);
-    // const [lngspot, setLngspot] = useState([]);
-    // const [latspot, setLatspot] = useState([]);
 
     const findCurrentUser = () => {
         // Récupération de l'user en cours grâce à l'email unique
@@ -53,27 +72,21 @@ const SpotDetails  = (props) => {
         // eslint-disable-next-line
     }, []);
 
-   useEffect( () => {
-    fetchComments();
-   }, []);
+    useEffect( () => {
+        fetchComments();
+    }, []);
 
-   useEffect( () => {
+    useEffect( () => {
+        const decoded = jwtDecode(localStorage.getItem('token'));
+        setUser(decoded);   
+    }, []); 
 
-    const decoded = jwtDecode(localStorage.getItem('token'));
-    setUser(decoded);   
+    useEffect(() => { 
+        findCurrentUser();
 
-}, []); 
+        // eslint-disable-next-line
+    }, [user]);
 
-useEffect(() => { 
-    findCurrentUser();
-    // eslint-disable-next-line
-}, [user]);
-
-//    useEffect( () => {
-//     fetchUser();
-//     }, []);
-
-    
 
     useEffect( () => {
          /* ADD MAP ON DOM ELEMENT AND MARKER */
@@ -99,25 +112,13 @@ useEffect(() => {
         }
      },[spot.longitude, spot.latitude]);
 
-    // const fetchUser = async () => {
-    //     try {
-    //         const data = await usersAPI.findAllUsers();
-    //         setUser(data);
-    //         console.log(data)
-    //     } catch (error) {
-    //         toast.error("Sorry, the user could not be found")
-    //         console.log(error.response)
-    //     }
-    // }
-
-
      const fetchSpot = async (spot) => {
         try {
             const spot = await spotsAPI.findOne(id)
             setSpot(spot)
             setLng(spot.longitude)
             setLat(spot.latitude)
-            console.log(spot)
+            // console.log(spot)
         } catch (error) {
             toast.error("Sorry, the spot could not be found")
             console.log(error + " failed")
@@ -133,19 +134,41 @@ useEffect(() => {
         }
     }
 
-    const handleDelete = async id => {
-        const originalComments = [...comments];
-        setComments(comments.filter(comment => comment.id !== id));
+    const handleDelete = async (id) => {
+        // const originalComments = [...comments];
+        // setComments(comments.filter(comment => comment.id !== id));
         try {
-            await commentsAPI.deleteComments(id)
+            await commentsAPI.deleteComments(id);
             toast.success("The comment was successfully deleted")
+            fetchComments();
             console.log("The comment was successfully deleted")
         } catch (error) {
-            setComments(originalComments);
             toast.error("Sorry, the comment could not be deleted, please retry")
         }
     }
-    
+
+    // const handleChange = ({ currentTarget }) => {
+    //     const { name, value } = currentTarget;
+    //     setComments({ ...comments, [name]: value })
+    // }
+
+    // const handleSubmit = async (event) => {
+    //     event.preventDefault();
+        
+    //     // console.log(spot)
+    //     try {
+    //         comments.author = parseInt(comments.author)
+    //         comments.spot = parseInt(comments.spot)
+    //         comments.createdAt = new Date().toISOString()
+    //         comments.updatedAt = new Date().toISOString()
+    //         const response = await commentsAPI.createComments(comments);
+    //         console.log(response)
+    //         console.log('The spot has been successfully created')
+    //         toast.success("The spot has been successfully created")
+    //     } catch (error) {
+    //         toast.error("Sorry, the spot could not be created")
+    //     }
+    // }
 
     return (
         <>
@@ -176,8 +199,6 @@ useEffect(() => {
                         )
                     }
                 )}
-               
-                
 
                 <div className="mapbox-container">
                     <div className="sidebar">
@@ -191,6 +212,37 @@ useEffect(() => {
                         Previous page
                     </Link>
                 </div>
+
+                {/* <form className="createSpotForm" onSubmit={handleSubmit}>
+                            <div className="wrapper_form_group">
+                                <Field
+                                    name="content"
+                                    label="content"
+                                    placeholder="content comment"
+                                    value={comments.content}
+                                    onChange={handleChange}
+                                    error={errors.content}
+                                />
+                            </div>
+                    
+                            <div className="submit_group">
+                                <button type="submit">
+                                    SAVE
+                                </button>
+                            </div>
+                        </form> */}
+
+                {/* <form onSubmit={handleSubmit}>
+                    <Field
+                        name="comments"
+                        label="comments"
+                        placeholder="comments"
+                        value={comments.content}
+                        // onChange={handleChange}
+                        error={errors.content}
+                    />
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </form> */}
         </div>
         </>
     )

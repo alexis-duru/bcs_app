@@ -7,6 +7,8 @@ const API = axios.create({
     },
 });
 
+// SAME AS MIDDLEWARE
+
 API.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token')

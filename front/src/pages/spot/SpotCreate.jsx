@@ -5,7 +5,6 @@ import Select from '../../components/forms/Select';
 import spotsAPI from '../../services/spotsAPI';
 import mapboxgl from 'mapbox-gl';
 import { toast } from 'react-toastify';
-import axios from 'axios';
 // import UploadField from '../../components/forms/UploadField';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxbzc5enlobmM0In0.Ed0S5ioc8PQZXqPIfK2CEg";
@@ -16,6 +15,7 @@ const SpotCreate = () => {
     const navigate = useNavigate();
 
     /* -------- UPLOAD FIELD -------- */
+      // const [medias, setMedias] = useState([]);
 
     /* --------MAPBOX------- */
     const [lng, setLng] = useState(-0.594);
@@ -26,6 +26,7 @@ const SpotCreate = () => {
     const [zoom, setZoom] = useState(13);
     // eslint-disable-next-line
     const [marker, setMarker] = useState([]);
+
 
      /* -------- SPOT ------- */
     const spotId = useParams('id').id // Object ID
@@ -61,11 +62,11 @@ const SpotCreate = () => {
         longitude: lng,
     });
 
+    /* -------- SPOTS INFOS ------- */
     const [categories, setCategories] = useState([]);
     const [types, setTypes] = useState([]);
     const [flats, setFlats] = useState([]);
     // eslint-disable-next-line
-    // const [medias, setMedias] = useState([]);
 
     const fetchCategories = async () => {
         try {
@@ -140,7 +141,7 @@ const SpotCreate = () => {
 
     useEffect(() => {
         /* ADD MAP ON DOM ELEMENT AND MARKER */
-        if (map.current) return; // initialize map only once
+        if (map.current) return; //
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/streets-v11',
@@ -196,17 +197,6 @@ const SpotCreate = () => {
         // eslint-disable-next-line
     }, [])
 
-
-    
-
-    // useEffect(() => {
-    //     console.log(medias)
-    //     fetchMedia(medias);
-    // }, [medias])
-
-    // useEffect(() => {
-    //     fetchMedias();
-    // }, [])
 
     const handleChange = ({ currentTarget }) => {
         const { name, value } = currentTarget;

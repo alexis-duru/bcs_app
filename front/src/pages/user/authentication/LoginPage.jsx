@@ -27,7 +27,6 @@ const LoginPage = ( { onLogin } ) => {
 
         try {
            await authAPI.authenticate(credentials);
-        //    setError("");
            onLogin(true);
            toast.success("You are now logged in");
            navigate("/spots", {replace: true})

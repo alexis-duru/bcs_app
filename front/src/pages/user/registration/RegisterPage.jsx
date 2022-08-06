@@ -31,17 +31,13 @@ const RegisterPage = (props) => {
 
     const handleSubmit = async event => {
         event.preventDefault();
-
         const apiErrors = {};
-
         if(user.password !== user.passwordConfirm) {
             apiErrors.passwordConfirm = "passwords do not match";
             setErrors(apiErrors);
             toast.error('Passwords do not match !');
             return
         }
-
-
         try {
             // eslint-disable-next-line
             const response = await usersAPI.createUser(JSON.stringify(user))
@@ -49,7 +45,7 @@ const RegisterPage = (props) => {
             console.log('The account has been successfully created, you can now log in !');
             navigate("/login", {replace: true})
         } catch (error) {
-             console.log('The request failed')
+            console.log('The request failed')
             console.log(error.response.data.violations)
             console.log(error)
             if(error.response.data.violations) {

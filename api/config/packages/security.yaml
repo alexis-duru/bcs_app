@@ -62,9 +62,9 @@ security:
         - { path: ~/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/users, roles: IS_AUTHENTICATED_FULLY, methods: [GET, PUT, DELETE ], } 
         - { path: ^/api/spots, roles: IS_AUTHENTICATED_FULLY, methods: [POST, PUT, DELETE ], }
+        - { path: ^/api/spots, roles: PUBLIC_ACCESS, methods: [GET] }
         - { path: ^/api/comments, roles: IS_AUTHENTICATED_FULLY, methods: [POST, PUT, DELETE ], }
         # - { path: ^/api/comments, roles: PUBLIC_ACCESS }
-        - { path: ^/api/spots, roles: PUBLIC_ACCESS, methods: [GET] }
         - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/api/users/id/spots, roles: ROLE_USER, methods: [POST, PUT, DELETE ], }
         # - { path: ^/api/media_objects, roles: PUBLIC_ACCESS, methods: [GET], }

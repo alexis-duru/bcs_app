@@ -45,7 +45,6 @@ const Spots = () => {
             const data = await spotsAPI.findAll()
             setSpots(data)
             setLoading(false)
-            // console.log(data)
         } catch (error) {
             toast.error("Sorry, the spots could not be found")
             console.log(error.response)
@@ -65,7 +64,6 @@ const Spots = () => {
 
     useEffect(() => {
         fetchSpots();
-        // fetchMedia();
     }, []);
 
 // LOAD MAP
@@ -165,7 +163,6 @@ const Spots = () => {
                                 <div key={spot.id} className="spotsPageCards">
                                     <div className='spotsPageCardsInfos'>
                                         <p className="spotNumber">{spot.id}</p>
-                                        {/* <p className="spotType">{spot.type.name}</p> */}
                                         <div className="overlay">
                                             <h2>{spot.name}</h2>
                                             <p>{spot.address}</p>
@@ -176,11 +173,7 @@ const Spots = () => {
                                             <p>{spot.category.name}</p>
                                             <p>{spot.flat.name}</p>
                                             {spot.image ? <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> : <div><p>No image available</p></div>}
-                                                {/* <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> */}
                                             
-
-
-
                                             {isAuthenticated &&
                                             <div className="moreInfosButton">
                                                 <Link to={`/spots/${spot.id}`}>
