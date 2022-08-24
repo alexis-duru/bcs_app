@@ -174,46 +174,90 @@ const SpotDetails  = (props) => {
 
     return (
         <>
-        <div className='spotDetails'>
-            <h1> Spot Details</h1>
-            <h2>{spot.name}</h2>
-                <p>{spot.address}</p>
-                {spot.image ? <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> : <div><p>No image available</p></div>}
-                <div><p>{spot.city}</p><p>{spot.postalCode}</p></div>
-                <p>{spot.details}</p>
-                <p>{spot.category && spot.category.name}</p>
-                <p>{spot.type && spot.type.name}</p>
-                <p>{spot.flat && spot.flat.name}</p>
-                <p>{spot.latitude}</p>
-                <p>{spot.longitude}</p>
+    <div className="spotsPage">
+            <div className="leftSideBar">
 
-
-                {spot.comments?.map(
-                    (comment) => {
-                        return (
-                            <div key={comment.id}>
-                                <br></br>
-                                <p>{comment.author.email}</p>
-                                <p>{comment.content}</p>
-                                {comment.author.email === user.email && <button onClick={() => handleDelete(comment.id)}>Delete</button>}
-                                <br></br>
+            </div>
+            <div className="spotsPageWrapper">
+                <div className="spotsPageHeader">
+                    <div className="spotsCreate">
+                        <div className="container">
+                            <div className="button-container">
+                                <span className="mask">CONTRIBUTION</span>
+                                <Link to='/spots/create'>
+                                    <button type="button" name="Hover">CONTRIBUTION</button>
+                                </Link>
                             </div>
-                        )
-                    }
-                )}
-
-                <div className="mapbox-container">
-                    <div className="sidebar">
-                        Longitude: {spot.longitude} | Latitude: {spot.latitude} | Zoom: {zoom}
+                        </div>
                     </div>
-                    <div ref={mapContainer} className="map-container" 
-                    />
+
+
+                    {/* <div className="toggle_wrapper">
+                            <button className="switch toggle" onClick={() => setVisible(!visible)}>{visible ? 'Hide' : 'Show'}
+                                <input type="checkbox"/>
+                                    <span className="slider round"></span>
+                            </button>
+                    </div> */}
                 </div>
-                <div className="moreInfosButton">
-                    <Link to='/spots/'>
-                        Previous page
-                    </Link>
-                </div>
+                    <div className="spotsPageWrapperCards" id="spotDetails">
+                    <div id="mediasContainer">
+                        <div id="mediasContainerWrapper">
+                            <div id="imageContainer">
+                                {spot.image ? <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> : <div><p>No image available</p></div>}
+                            </div>
+                            <div id="mapContainer">
+                                <div className="mapbox-container">
+                                        <div className="sidebar">
+                                            Longitude: {spot.longitude} | Latitude: {spot.latitude} | Zoom: {zoom}
+                                        </div>
+                                        <div ref={mapContainer} className="map-container" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="infosContainer">
+                        <div id="infosContainerWrapper">
+                            <h2>{spot.name}</h2>
+                            <p>{spot.address}</p>
+                                <div><p>{spot.city}</p><p>{spot.postalCode}</p></div>
+                                <p>{spot.details}</p>
+                                <p>{spot.category && spot.category.name}</p>
+                                <p>{spot.type && spot.type.name}</p>
+                                <p>{spot.flat && spot.flat.name}</p>
+                                <p>{spot.latitude}</p>
+                                <p>{spot.longitude}</p>
+
+
+                                {spot.comments?.map(
+                                    (comment) => {
+                                        return (
+                                            <div key={comment.id}>
+                                                <br></br>
+                                                <p>{comment.author.email}</p>
+                                                <p>{comment.content}</p>
+                                                {comment.author.email === user.email && <button onClick={() => handleDelete(comment.id)}>Delete</button>}
+                                                <br></br>
+                                            </div>
+                                        )
+                                    }
+                                )}
+                            </div>
+                        </div>
+                    
+                    
+
+
+                        <div className="moreInfosButton">
+                            <Link to='/spots/'>
+                                Previous page
+                            </Link>
+                        </div>
+                    </div>
+                <div className="fullPaginationContainer"></div>
+            </div>
+        </div>
+
 
                 {/* <form className="createSpotForm" onSubmit={handleSubmit}>
                             <div className="wrapper_form_group">
@@ -245,7 +289,6 @@ const SpotDetails  = (props) => {
                     />
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form> */}
-        </div>
         </>
     )
 }
