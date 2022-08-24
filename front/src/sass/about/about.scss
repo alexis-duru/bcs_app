@@ -1,0 +1,59 @@
+#about {
+    justify-content: initial;
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+justify-content: center;
+    .aboutContainer {
+        width: 80%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        h1 {
+            font-size: 4rem;
+            &:after {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 1px;
+                background-color: $white;
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+            }
+        }
+        p {
+            font-family: $adieu;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: $lorinReg;
+            &:nth-child(4) {
+                &:after {
+                    content: "";
+                    display: block;
+                    width: 50%;
+                    height: 1px;
+                    background-color: $white;
+                    margin-top: 2rem;
+                    margin-bottom: 2rem;
+                }
+
+            }
+        }
+        div {
+            display: flex;
+            align-items: center;
+            img {
+                height: 50px;
+                border-radius: 50%;
+            }
+            p {
+                margin-left: 1rem;
+                margin-bottom: 0rem;
+                font-family: $lorinReg;
+                font-style: italic;
+                font-size: 1.5rem;
+            }
+        }
+    }
+}

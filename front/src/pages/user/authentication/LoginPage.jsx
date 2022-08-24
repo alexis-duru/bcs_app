@@ -50,7 +50,7 @@ const LoginPage = ( { onLogin } ) => {
                 </div>
                 <div className="globalPageWrapperCards">
                 <div className="text_infos">
-                        <h1>Welcome</h1>
+                        <h1>LOGIN</h1>
                         <h2 className="fade-in">Fill out the form to log in</h2>
                     </div>
                 <form className="formContainer" onSubmit={handleSubmit}>

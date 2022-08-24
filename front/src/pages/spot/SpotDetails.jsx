@@ -23,6 +23,7 @@ const SpotDetails  = (props) => {
     /* COMMENTS */
     const [comments, setComments] = useState([]);
 
+
     // const [comments, setComments] = useState({
     //     content: "",
     //     createdAt: new Date().toISOString(),
@@ -129,6 +130,7 @@ const SpotDetails  = (props) => {
         try {
             const comments = await commentsAPI.findAllComments();
             setComments(comments);
+            console.log(comments);
         } catch (error) {
             console.log(error);
         }
@@ -140,7 +142,7 @@ const SpotDetails  = (props) => {
         try {
             await commentsAPI.deleteComments(id);
             toast.success("The comment was successfully deleted")
-            fetchComments();
+            setComments(comments);
             console.log("The comment was successfully deleted")
         } catch (error) {
             toast.error("Sorry, the comment could not be deleted, please retry")

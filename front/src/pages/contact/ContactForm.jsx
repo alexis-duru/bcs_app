@@ -31,7 +31,7 @@ export const ContactUs = () => {
                 </div>
                 <div className="globalPageWrapperCards">
                 <div className="text_infos">
-                        <h1>Contact</h1>
+                        <h1>CONTACT</h1>
                         <h2 className="fade-in">Contact us for all inquiries</h2>
                     </div>
                 <form className="formContainer contactForm" ref={form} onSubmit={sendEmail}>

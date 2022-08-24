@@ -11,9 +11,10 @@
 // }
 
 .contactForm {
-    padding: 20px;
+    padding: 50px;
     max-height: auto !important;
     height: auto !important;
+    width: 70%;
     .form-group {
         flex-direction: row;
         width: 100%;
@@ -26,6 +27,7 @@
         .wrapper-form-group {
             display: flex;
             flex-direction: column;
+            margin-right: 20px;
             &::after {
                 margin-top: 0px;
                 content: "";

@@ -76,7 +76,7 @@ const RegisterPage = (props) => {
                 </div>
                 <div className="globalPageWrapperCards">
                     <div className="text_infos">
-                        <h1>Welcome</h1>
+                        <h1>REGISTER</h1>
                         <h2 className="fade-in">Fill the form to become a member of SPOTED APP</h2>
                     </div>
                     <form className="formContainer" onSubmit={handleSubmit}>

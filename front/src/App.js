@@ -54,10 +54,25 @@ const App = () => {
           <Route path="/spots/:id" element={ isAuthenticated ? <SpotDetails/> : <LoginPage/>  } />
           <Route path="/spots/create" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
           <Route path="/spots/update/:id" element={ isAuthenticated ? <SpotCreate/> : <LoginPage />} />
+
+          {/* CONTACT */}
+
           <Route path="/contact" element={ <ContactForm/> } />
+
+          {/* ABOUT */}
+
           <Route path="/about" element={ <About/> } />
+
+          {/* PRIVACY POLICY */}
+
           <Route path="/privacypolicy" element={ <PrivacyPolicy/> } />
+
+          {/* 404 */}
+
           <Route path='*' element={<NotFound />} />
+
+          {/* TEST */}
+          
           <Route path="/test" element={<Test />} />
           <Route path="/testComment" element={<Comment />} />
 

@@ -27,8 +27,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             [
                 "groups" => "read:user:collection",
             ],
-            "security" => "is_granted('ROLE_ADMIN')",
-            "security_message" => "Only administrator can access this resource",
+            // "security" => "is_granted('ROLE_ADMIN')",
+            // "security_message" => "Only administrator can access this resource",
         ],
         "POST"
     ],
@@ -41,8 +41,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
                 "groups" => 
                     "read:user:item",
             ],
-            "security" => "is_granted('ROLE_ADMIN')",
-            "security_message" => "Only administrator can access this resource",
+            // "security" => "is_granted('ROLE_ADMIN')",
+            // "security_message" => "Only administrator can access this resource",
         ], 
         "PUT" => 
         [
