@@ -203,7 +203,7 @@ const SpotDetails  = (props) => {
                     <div id="mediasContainer">
                         <div id="mediasContainerWrapper">
                             <div id="imageContainer">
-                                {spot.image ? <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> : <div><p>No image available</p></div>}
+                                {spot.image ? <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> : <p>No image available</p>}
                             </div>
                             <div id="mapContainer">
                                 <div className="mapbox-container">
@@ -219,15 +219,27 @@ const SpotDetails  = (props) => {
                     <div id="infosContainer">
                         <div id="infosContainerWrapper">
                             <h2>{spot.name}</h2>
-                            <p>{spot.address}</p>
-                                <div><p>{spot.city}</p><p>{spot.postalCode}</p></div>
-                                <p>{spot.details}</p>
-                                <p>{spot.category && spot.category.name}</p>
-                                <p>{spot.type && spot.type.name}</p>
-                                <p>{spot.flat && spot.flat.name}</p>
-                                <p>{spot.latitude}</p>
-                                <p>{spot.longitude}</p>
+                            <div id="infosAdress">
+                                <p>{spot.address}</p>
+                                <div>
+                                    <p>{spot.city}</p><p>{spot.postalCode}</p>
+                                </div>
+                            </div>
+                            <div id="infosDetails">
+                                <div id="infosType">
+                                    <p>Type :</p><p>{spot.type && spot.type.name}</p>
+                                </div>
+                                <div id="infosCategory">
+                                    <p>Category :</p><p>{spot.category && spot.category.name}</p>
+                                </div>
+                                <div id="infosFlat">
+                                    <p>Flat :</p><p>{spot.flat && spot.flat.name}</p>
+                                </div>
+                            </div>
 
+                                {/* <p>{spot.details}</p> */}
+
+                                {/* COMMENTS */}
 
                                 {spot.comments?.map(
                                     (comment) => {
