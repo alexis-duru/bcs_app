@@ -241,6 +241,8 @@ const SpotDetails  = (props) => {
 
                                 {/* COMMENTS */}
 
+                                {spot.comments && spot.comments.length ? <p>Comments : {spot.comments.length}</p> : <p>No comments available</p> }
+                                
                                 {spot.comments?.map(
                                     (comment) => {
                                         return (

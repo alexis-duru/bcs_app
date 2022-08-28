@@ -1,29 +1,174 @@
 main {
-    height: 100vh;
-    width: 100vw;
-    background-image: url(../../assets/img/noise.gif);
-    .content {
-       background-color: rgba(0, 0, 0, 0.97);
-       width: 100%;
-       height: 100%;
-       display: flex;
+    height: 200vh;
+    width: 100%;
+    #overlay-hero-image {
+        position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.97);
+    background-size: cover;
+    // z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // border: 1Px solid white;
+    // border-radius: 15px;
+    }
+    .mouse {
+        width: 25px;
+        height: 50px;
+        border: 2px solid $white;
+        border-radius: 20px;
+        display: flex;
+        z-index: 1;
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.6;
+        .mouse-wheel {
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: $white;
+            border-radius: 50%;
+            margin: auto;
+            animation: move-wheel 1s linear infinite;
+        }
+
+    
+    
+        @keyframes move-wheel {
+            0% {
+                opacity: 0;
+                transform: translateY(-1rem);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(1rem);
+            }
+        }
+    }
+    .header {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        background: #000;
+        z-index: 1;
+        display: flex;
         justify-content: center;
         align-items: center;
+        background-image: url(../../assets/img/noise.gif);
+        z-index: 1000000000;
+        h1 {
+            font-size: 10em;
+            font-family: $adieu;
+            color: #fff;
+            z-index: 4;
+            letter-spacing: 1rem;
+            // animation: fadeInBackgroundImg 2s;
+            // .title {
+            //     animation: fadeInBackgroundImg 2s;
+            // }
+            #l-1 {
+                animation: fadeInBackgroundImg 1s;
+            }
+            #l-2 {
+                animation: fadeInBackgroundImg 2s;
+                // animation-delay: 2s;
+            }
+            #l-3 {
+                animation: fadeInBackgroundImg 3s;
+            }
+            #l-4 {
+                animation: fadeInBackgroundImg 3s;
+            }
+            #l-5 {
+                animation: fadeInBackgroundImg 3s;
+            }
+            #l-6 {
+                animation: fadeInBackgroundImg 3s;
+            }
+            #l-7 {
+                animation: fadeInBackgroundImg 4s;
+            }
+            @keyframes fadeInBackgroundImg {
+                0% {opacity:0;}
+                100% {opacity:1;}
+            }
+         }
+            .hero-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: black;
+            // border: 1px solid white;
+            background-size: cover;
+            // z-index: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url(../../assets/img/noise.gif);
+            // border-radius: 15px;
+            img {
+                z-index: 99;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 44vh;
+                height: auto;
+                opacity: 0.5;
+                transform: translate(-2%, 7%);
+                animation: fadeInLogo 2s ease-out;
+                @keyframes fadeInLogo {
+                    0% {
+                        opacity:0;
+                        transform: translate(0%, 0%) scale(0.5);
+                    }
+                    100% {
+                        opacity:0.5;
+                        transform: translate(-2%, 7%) scale(1);
+                    }
+                }
 
-       img {
-           max-width: 50%;
-           max-height: 50%;
-           animation: fadeInBackgroundImg 2s;
-           transition: 0.3s ease-in-out;
-           cursor: pointer;
-           &:hover {
-             opacity: 0.5;
-           }
-
-        @keyframes fadeInBackgroundImg {
-            0% {opacity:0;}
-            100% {opacity:1;}
+            }
         }
-       }
     }
+     
+    
+     
+    
+
+    #contentHome {
+        position: fixed;
+        height: 100vh;
+        width: 100vw;
+        background-image: url(../../assets/img/noise.gif);
+        .content {
+            background-color: rgba(0, 0, 0, 0.97);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+                img {
+                max-width: 50%;
+                max-height: 50%;
+                animation: fadeInBackgroundImg 2s;
+                transition: 0.3s ease-in-out;
+                cursor: pointer;
+                    &:hover {
+                        opacity: 0.5;
+                    }
+
+                    @keyframes fadeInBackgroundImg {
+                        0% {opacity:0;}
+                        100% {opacity:1;}
+                    }
+                }
+        }
+    }    
 }
+
+
+

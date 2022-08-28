@@ -87,7 +87,7 @@ const Profile  = (props) => {
                             </div>
                             <div className="container">
                                 <div className="button-container">
-                                    <span className="mask">YOUR SPOTS</span>
+                                    <span className="mask">MY SPOTS</span>
                                     <Link to='/profile/spots'>
                                     <button type="button" name="Hover">MY SPOTS</button>
                                     </Link>
