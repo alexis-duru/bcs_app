@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import backgroundImg from '../../assets/img/home.png';
 import logo from '../../assets/img/logo-header.png';
 
@@ -33,7 +34,7 @@ const Homepage = () => {
             </div>
             <div id="contentHome">
                 <div className="content">
-                    <img src={backgroundImg} alt="home" />;
+                    <Link to="/spots"><img src={backgroundImg} alt="home" /></Link>  
                 </div>
             </div>
         </main>
