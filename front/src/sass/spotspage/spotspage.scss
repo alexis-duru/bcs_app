@@ -13,6 +13,9 @@
         filter: brightness(50%);
         background-attachment:fixed;
         background-size: contain;
+        @media screen and (max-width: 1000px){
+          display: none;
+        }
     }
     .spotsPageWrapper {
         display: flex;
@@ -20,6 +23,9 @@
         height: 100vh;
         background: $white;
         flex-direction: column;
+        @media screen and (max-width: 1000px){
+          width: 100%;
+        }
         .spotsPageHeader {
             min-height: 5vh;
             width: 100%;

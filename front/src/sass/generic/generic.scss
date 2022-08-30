@@ -13,6 +13,9 @@
         filter: brightness(50%);
         background-attachment:fixed;
         background-size: contain;
+        @media screen and (max-width: 1000px){
+          display: none;
+        }
     }
     .globalPageWrapper {
         display: flex;
@@ -20,6 +23,9 @@
         height: 100vh;
         background: $white;
         flex-direction: column;
+        @media screen and (max-width: 1000px){
+          width: 100%;
+        }
         .globalPageHeader {
             min-height: 5vh;
             width: 100%;
@@ -31,6 +37,10 @@
             border-top: 1px solid rgba(255, 255, 255, 0.5);
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
             z-index: 10;
+            @media screen and (max-width: 768px){
+              border-top: none;
+            }
+            
             p {
                 color: white;
                 font-family: 'lorinReg';
@@ -43,11 +53,14 @@
             min-height: 83vh;
             width: 100%;
             display: flex;
-            // justify-content: center;
-            // flex-wrap: wrap;
+            justify-content: center;
             overflow-y: scroll;
             align-items: center;
             flex-direction: column;
+            @media screen and (max-width: 768px){
+             height: auto;
+             overflow-y: auto;
+            }
             .text_infos {
                 display: flex;
                 flex-direction: column;
@@ -58,13 +71,16 @@
                 h1 {
                     color: $white;
                     font-family: $adieu;
-                    font-size: 4rem;
+                    // font-size: 4rem;
                     margin-bottom: 10px;
                 }
                 h2 {
                     color: $white;
                     font-family: $lorinReg;
-                    font-size: 2rem;
+                    @media screen and (max-width: 768px){
+                      width: 80%;
+                    }
+
                 }
                 .fade-in {
                     animation-name: FadeIn;

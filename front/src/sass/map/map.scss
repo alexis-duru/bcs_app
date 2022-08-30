@@ -11,6 +11,10 @@
     height: 300px;
     width: 600px;
     position: relative;
+    @media screen and (max-width: 768px) {
+      width: 80vw;
+      height: 30vh;      
+    }
 }
 
 

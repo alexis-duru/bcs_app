@@ -9,14 +9,15 @@
     max-width: 650px;
     min-width: 500px;
     height: auto;
-    // height: 70%;
-    // min-height: 350px;
-    // max-height: 430px;
     margin: 50px;
     padding: 50px;
-
     background-image: url(../../assets/img/noise.gif);
     position: relative;
+    @media screen and (max-width: 768px){
+        width: 80%;
+        max-width: auto;
+        min-width: auto;
+    }
     
     .form_overlay {
         width: 100%;

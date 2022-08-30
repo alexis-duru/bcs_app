@@ -14,10 +14,18 @@ header {
   flex-direction: column;
     width: 100%;
     z-index: 999;
+    @media screen and (max-width: 768px) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+      
+    }
     .logo_header {
       width: auto;
       height: 100%;
       cursor: pointer;
+      @media screen and (max-width: 768px) {
+          display: none;         
+      }
       a {
         color: $white;
         cursor: pointer;
@@ -35,6 +43,10 @@ header {
         }
         p {
           font-size: 13px;
+          // @media screen and (max-width: 425px) {
+          //   font-size: 10px;            
+          // }
+
         }
         &:hover {
           opacity: 0.8;
@@ -62,6 +74,10 @@ header {
         align-items: center;
         padding: 0px;
         margin: 0px 10px;
+        @media screen and (max-width: 425px) {
+          margin: 0px 5px;
+          font-size: 1rem;
+        }
         &::after {
           content: "";
           margin-top: 3px;
@@ -79,6 +95,9 @@ header {
         }
         &:nth-child(2) {
           margin-right: 20px;
+          @media screen and (max-width: 425px) {
+            margin-right: 10px;
+          }
         }
       }
       button {
@@ -88,22 +107,22 @@ header {
       #default_avatar {
         a {
           display: initial;
-    flex-direction: initial;
-    color: #ffffff;
-    text-decoration: none;
-    transition: 0.1s ease-in-out;
-    font-size: 1.1rem;
-    letter-spacing: 0.5px;
-    background-color: #000000;
-    border: 0px;
-    font-family: "adieu";
-    align-items: center;
-    padding: 0px;
-    margin: 0px;
-    transition: 0.3s ease-in-out;
-    &:hover {
-      opacity: 0.7;
-    }
+          flex-direction: initial;
+          color: #ffffff;
+          text-decoration: none;
+          transition: 0.1s ease-in-out;
+          font-size: 1.1rem;
+          letter-spacing: 0.5px;
+          background-color: #000000;
+          border: 0px;
+          font-family: "adieu";
+          align-items: center;
+          padding: 0px;
+          margin: 0px;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            opacity: 0.7;
+          }
           img {
             width: auto;
             height: 25px;
@@ -162,6 +181,10 @@ header {
   margin-left: 25px;
   touch-action: manipulation;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+  @media screen and (max-width: 425px) {
+    margin-left: 10px;
+    height: 60px;
+  }
   &:hover {
       transition: 0.3s ease-in-out;
       .icon-bar {
@@ -210,7 +233,6 @@ header {
   margin-top: 7vh;
   padding: 20px;
   width: 90%;
-  // min-width: 300px;
   min-width: 197px;
   max-width: 20%;
   position: absolute;
@@ -230,6 +252,9 @@ header {
   width: 100%;
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 768px) {
+    min-width: 90%;
+  }
   ul {
     height: 60%;
     opacity: 1;

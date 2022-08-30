@@ -24,9 +24,11 @@ justify-content: center;
         }
         p {
             font-family: $adieu;
-            font-size: 2rem;
             margin-bottom: 1rem;
             font-family: $lorinReg;
+            @media screen and (max-width: 375px) {
+                font-size: 1.2rem;
+            }
             &:nth-child(4) {
                 &:after {
                     content: "";
@@ -43,9 +45,17 @@ justify-content: center;
         div {
             display: flex;
             align-items: center;
+            @media screen and (max-width: 425px) {
+                flex-direction: column;
+            }
             img {
                 height: 50px;
                 border-radius: 50%;
+                @media screen and (max-width: 425px) {
+                    margin-bottom: 10px;
+                    height: 30px;
+                }
+                
             }
             p {
                 margin-left: 1rem;
@@ -53,6 +63,9 @@ justify-content: center;
                 font-family: $lorinReg;
                 font-style: italic;
                 font-size: 1.5rem;
+                @media screen and (max-width: 425px) {
+                    font-size: 1rem;
+                }
             }
         }
     }

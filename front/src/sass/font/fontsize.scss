@@ -1,17 +1,30 @@
 html {
     font-size: 16px;
         h1 {
-            font-size: 7rem;
+            font-size: 4rem;
             font-family: $adieu;
             color: $white;
+            @media screen and (max-width: 768px){
+                font-size: 3rem; 
+            }
         }
         
         h2 {
-            font-size: 3rem;
+            font-size: 2rem;
+            @media screen and (max-width: 425px){
+                font-size: 1.5rem; 
+            }
         }
         
         h3 {
             font-size: 2.5rem;
+            @media screen and (max-width: 768px){
+                font-size: 2rem; 
+            }     
+            @media screen and (max-width: 425px){
+                font-size: 1.5rem; 
+                font-family: 'ChaparralPro-Light';
+            }    
         }
 
         h4 {
@@ -21,10 +34,19 @@ html {
         p {
             font-size: 2rem;
             color: $white;
+            @media screen and (max-width: 768px){
+                font-size: 1.5rem; 
+            }
         }
         
         label {
             font-size: 2rem;
+            @media screen and (max-width: 768px){
+                font-size: 1.5rem; 
+            }
+            @media screen and (max-width: 425px){
+                font-size: 1.5rem; 
+            }
         }
 
     }
