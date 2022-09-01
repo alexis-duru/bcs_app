@@ -14,9 +14,11 @@
     background-image: url(../../assets/img/noise.gif);
     position: relative;
     @media screen and (max-width: 768px){
-        width: 80%;
+        width: 100%;
         max-width: auto;
         min-width: auto;
+        background-image: none;
+        margin: initial;
     }
     
     .form_overlay {
@@ -29,6 +31,9 @@
         z-index: 1;
         border: 1px solid white;
         background-size: cover;
+        @media screen and (max-width: 768px){
+            border: none;
+        }
 
     }
     .form-group  {

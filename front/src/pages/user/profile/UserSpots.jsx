@@ -141,38 +141,65 @@ const UserSpots  = () => {
                     {!loading &&
                     <div className="spotsPageWrapperCards">
                     <div className="spotsPageWrapperCards_overlay"></div>
+                    
                         {paginatedSpots.map(spot => 
                             <div key={spot.id} className="spotsPageCards">
                                 <div className='spotsPageCardsInfos'>
-                                    <p className="spotNumber">{spot.id}</p>
-                                    <div className="overlay">
-                                        <h2>{spot.name}</h2>
-                                        <p>{spot.address}</p>
-                                        <p>{spot.city}</p>
-                                        <p>{spot.postalCode}</p>
-                                        <p>{spot.details}</p>
-                                        <p>{spot.user.email}</p>
-                                        <p>{spot.type.name}</p>
-                                        <p>{spot.category.name}</p>
-                                        <p>{spot.flat.name}</p>
-                                        <p>{spot.latitude}</p>
-                                        <p>{spot.longitude}</p>
-                                        {/* <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> */}
-
-                                        <button 
-                                            onClick={() => handleDelete(spot.id)} 
-                                            className="deleteButton">Delete
-                                        </button> 
-                                                                                
-                                         <Link to={'/spots/update/' + spot.id}>
-                                            <button className="btn-green">UPDATE</button>
-                                        </Link>
-
-                                        <div className="moreInfosButton">
-                                            <Link to={`/spots/${spot.id}`}>
-                                                More informations
-                                            </Link>
+                                <p className="spotNumber">{spot.id}</p>
+                                        <div className="name_adress_spot">
+                                            <h2>{spot.name}</h2>
+                                            <div className="adress">
+                                                <p>{spot.address}</p>
+                                                <div>
+                                                    <p>{spot.postalCode}</p>
+                                                    <p>{spot.city}</p>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <span id="line"></span>
+                                        <div className="infos_spot">
+                                            <div className="infos">
+                                                <p>Type :</p>
+                                                <p>{spot.type && spot.type.name}</p>
+                                            </div>
+                                            <div className="infos">
+                                                <p>Category :</p>
+                                                <p>{spot.category && spot.category.name}</p>
+                                            </div>
+                                            <div className="infos">
+                                                <p>Flat :</p>
+                                                <p>{spot.flat && spot.flat.name}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="media_details_spot">
+                                            <div id="media">
+                                                {spot.image ? <div><img crossorigin="anonymous"  src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /></div> : <div><p>No image available</p></div>}
+                                            </div>
+
+                                            <div id="details">
+                                                <p>{spot.details}</p>
+                                            </div>
+                                        </div>
+
+
+                                    <div>
+                                        {spot.comments && spot.comments.length ? <p>Comments : {spot.comments.length}</p> : <p>No comments available</p> }
+                                    </div>
+
+                                    <button 
+                                        onClick={() => handleDelete(spot.id)} 
+                                        className="deleteButton">Delete
+                                    </button> 
+                                                                            
+                                    <Link to={'/spots/update/' + spot.id}>
+                                        <button className="btn-green">UPDATE</button>
+                                    </Link>
+
+                                    <div className="moreInfosButton">
+                                        <Link to={`/spots/${spot.id}`}>
+                                            More informations
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

@@ -45,6 +45,7 @@ const Spots = () => {
             const data = await spotsAPI.findAll()
             setSpots(data)
             setLoading(false)
+            console.log(data)
         } catch (error) {
             toast.error("Sorry, the spots could not be found")
             console.log(error.response)
@@ -163,25 +164,65 @@ const Spots = () => {
                                 <div key={spot.id} className="spotsPageCards">
                                     <div className='spotsPageCardsInfos'>
                                         <p className="spotNumber">{spot.id}</p>
-                                        <div className="overlay">
+                                        <div className="name_adress_spot">
                                             <h2>{spot.name}</h2>
-                                            <p>{spot.address}</p>
-                                            <p>{spot.city}</p>
-                                            <p>{spot.postalCode}</p>
-                                            <p>{spot.details}</p>
-                                            <p>{spot.type.name}</p>
-                                            <p>{spot.category.name}</p>
-                                            <p>{spot.flat.name}</p>
-                                            {spot.image ? <img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /> : <div><p>No image available</p></div>}
-                                            
-                                            {isAuthenticated &&
-                                            <div className="moreInfosButton">
+                                            <div className="adress">
+                                                <p>{spot.address}</p>
+                                                <div>
+                                                    <p>{spot.postalCode}</p>
+                                                    <p>{spot.city}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="line_wrapper">
+                                            <span id="line"></span>
+                                        </div>
+                                        
+                                        <div className="infos_spot">
+                                            <div className="infos">
+                                                <p>Type :</p>
+                                                <p>{spot.type && spot.type.name}</p>
+                                            </div>
+                                            <div className="infos">
+                                                <p>Category :</p>
+                                                <p>{spot.category && spot.category.name}</p>
+                                            </div>
+                                            <div className="infos">
+                                                <p>Flat :</p>
+                                                <p>{spot.flat && spot.flat.name}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="media_spot">
+                                            <div id="media">
                                                 <Link to={`/spots/${spot.id}`}>
-                                                    More informations
+                                                    {spot.image ? <div><img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /></div> : <div><p>No image available</p></div>}
                                                 </Link>
                                             </div>
-                                            }
                                         </div>
+
+                                        <div className="comment_spot">
+                                            <div className="comment">
+                                                {spot.comments && spot.comments.length ? <p>View comments : {spot.comments.length}</p> : <p>View comments :<span>No comments available</span></p> }
+                                            </div>
+                                        </div>
+
+                                        {/* <div>
+                                            {isAuthenticated &&
+                                                <div className="moreInfosButton">
+                                                  <Link to={`/spots/${spot.id}`}>
+                                                      More informations
+                                                  </Link>
+                                              </div>
+                                                    
+                                            }
+                                        </div> */}
+                                            
+
+                                            
+                                            
+                                            
+                                        {/* </div> */}
                                     </div>
                                 </div>
                             )}
