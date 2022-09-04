@@ -412,7 +412,7 @@ const SpotCreate = () => {
 
 
                             <div className="submit_group">
-                                <button type="submit">
+                                <button type="submit" className="submitBtn">
                                     SAVE
                                 </button>
                             </div>

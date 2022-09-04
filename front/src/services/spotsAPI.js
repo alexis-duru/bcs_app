@@ -62,8 +62,7 @@ function deleteSpots(id) {
 function findAllMedia() {
     return API 
         .get("/media_objects")
-        .then(response => response.data
-    )
+        .then(response => response.data)
 };
 
 // CREATE A NEW MEDIA

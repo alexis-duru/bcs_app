@@ -1,3 +1,61 @@
+.spoted-btn {
+    position: absolute;
+    right: 7px;
+    top: 14px;
+    background: transparent;
+    border: 0px;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8;
+    }
+    img {
+        width: 20px;
+        height: auto;
+    }
+}
+
+.icon-btn {
+    background: transparent;
+    border: 0px;
+    width: auto;
+    height: auto;
+    transition: 0.1s ease-in-out;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+.edit-icon-btn {
+    position: absolute;
+    right: 74px;
+    top: 13px;
+    img {
+        width: 17px;
+    height: auto;
+    }
+}
+
+.delete-icon-btn {
+    position: absolute;
+    right: 36px;
+    top: 9px;
+    img {
+        width: 24px;
+        height: auto;
+    }
+}
+
+#delete-btn-card-wrapper {
+    position: absolute;
+    left: 0px;
+    bottom: -40px;
+    .deleteButton {
+        width: 25px;
+        height: 25px;
+    }
+}
+
 .deleteButton {
     border: 0px;
     height: auto;
@@ -12,18 +70,88 @@
     }
 }
 
-.moreInfosButton {
-    font-family: 'lorinReg';
+.more_info_btn {
+    font-family: $adieu;
     text-decoration: none;
-    color: black;
-    background-color: white;
-    padding: 5px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: 0.3s ease-in-out;
+    animation: translateTxtMoreInfo 2s ease-in-out;
+    animation-iteration-count: linear;
+    cursor: pointer;
     &:hover {
-        opacity: 0.8;
+        opacity: 0.6;
     }
+    @keyframes translateTxtMoreInfo {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+    
+    a {
+        font-size: 2rem;
+        color: $white;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &::after {
+            content: "";
+            height: 1px;
+            width: 100%;
+            background-color: $white;
+            margin-top: 10px;
+            animation: translateBorder 2s ease-in-out;
+            animation-iteration-count: linear;
+            // animation-delay: 1s;
+            @keyframes translateBorder {
+                0% {
+                    opacity: 0;
+                    width: 0%;
+                }
+                100% {
+                    opacity: 1;
+                    width: 100%;
+                }
+            }
+        }
+        // &:hover {
+        //     transition: 0.3s ease-in-out;
+        //     &::after {
+        //         @keyframes animBorder {
+        //             0% {
+        //                 width: 0%;
+        //                 transform: translateY(0);
+        //             }
+        //             100% {
+        //                 width: 100%;
+        //                 transform: translateY(1);
+        //             }
+        //         }
+        //     }
+        // }
 
+    }
+}
+
+.submitBtn {
+    width: 100%;
+        border: 0px;
+        padding: 8px;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+        font-family: 'adieu';
+        background-color: white;
+        color: black;
+        &:hover {
+            opacity: 0.8;
+        }
 }

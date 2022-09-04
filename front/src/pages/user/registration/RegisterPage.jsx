@@ -17,6 +17,7 @@ const RegisterPage = (props) => {
         passwordConfirm: "",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
+        roles: ["ROLE_USER"]
 
     });
 

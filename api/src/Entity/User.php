@@ -59,8 +59,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             [
                 "groups" => "read:user:item",
             ],
-            "security" => "is_granted('ROLE_ADMIN')",
-            "security_message" => "Only administrator can delete a user",
+            // "security" => "is_granted('ROLE_ADMIN')",
+            // "security_message" => "Only administrator can delete a user",
         ],
     ],
     order: ["createdAt" => "DESC"]

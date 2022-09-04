@@ -7,8 +7,17 @@ import { Link } from 'react-router-dom';
 import Pagination from '../../../components/Pagination';
 import { toast } from 'react-toastify';
 import ImageGrid from '../../../components/loaders/CardLoaders';
+import deleteIcon from '../../../assets/img/icons/delete-icon.png';
+import editIcon from '../../../assets/img/icons/edit-icon.png';
+import logo from '../../../assets/img/logo-header.png';
+import authAPI from '../../../services/authAPI';
 
 const UserSpots  = () => {
+
+    const [isAuthenticated] = useState(
+        authAPI.isAuthenticated()
+        // eslint-disable-next-line
+    ); 
 
     const [user, setUser] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);
@@ -18,6 +27,11 @@ const UserSpots  = () => {
     const [spots, setSpots] = useState([]);
     // eslint-disable-next-line
     const [loading, setLoading] = useState(true);
+
+    const [visible, setVisible] = useState([false]);
+    
+
+
 
 
     const findCurrentUser = () => {
@@ -131,9 +145,18 @@ const UserSpots  = () => {
                 </div>
                 <div className="spotsPageWrapper">
                     <div className="spotsPageHeader">
-                        <div className="spotsCreate">
-                            <Link to='/spots/create'>Share a spot with community</Link>
+                    <div className="spotsCreate">
+                            <div className="container">
+                                <div className="button-container">
+                                    <span className="mask">CONTRIBUTION</span>
+                                    <Link to='/spots/create'>
+                                        <button type="button" name="Hover">CONTRIBUTION</button>
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
+
+
                         <div className="searchBar">
                             <input type="text" onChange={handleSearch} value={search} placeholder="Search spot ..." className="searchBarControl" />
                         </div>
@@ -141,13 +164,32 @@ const UserSpots  = () => {
                     {!loading &&
                     <div className="spotsPageWrapperCards">
                     <div className="spotsPageWrapperCards_overlay"></div>
-                    
-                        {paginatedSpots.map(spot => 
-                            <div key={spot.id} className="spotsPageCards">
-                                <div className='spotsPageCardsInfos'>
-                                <p className="spotNumber">{spot.id}</p>
+                    { spots.length === 0 
+                        ? 
+                            <div className="spotsPageWrapperCards_noSpot">
+                                <div className="spotsPageWrapperCards_noSpot_wrapper">
+                                    <p>You have not contributed to any spot yet</p>
+                                    <Link to='/spots/create'>Share your first spot</Link>
+                                </div>
+                            </div>
+                            
+                            
+                        
+                        :
+                            <div className="spotPageWrapperCardsIn">
+                            {paginatedSpots.map(spot => 
+                                <div key={spot.id} className="spotsPageCards">
+                                    <div className='spotsPageCardsInfos'>
+                                    <p className="spotNumber">{spot.id}</p>
                                         <div className="name_adress_spot">
-                                            <h2>{spot.name}</h2>
+                                            <h2>{spot.name}</h2>                                   
+                                                <Link to={'/spots/update/' + spot.id} className="icon-btn edit-icon-btn">
+                                                    <img src={editIcon} alt="update button"></img>
+                                                </Link>
+                                            <button 
+                                                onClick={() => handleDelete(spot.id)} className="icon-btn delete-icon-btn">
+                                                    <img src={deleteIcon} alt="delete button"></img>
+                                            </button> 
                                             <div className="adress">
                                                 <p>{spot.address}</p>
                                                 <div>
@@ -156,7 +198,10 @@ const UserSpots  = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <span id="line"></span>
+                                        <div id="line_wrapper">
+                                            <span id="line"></span>
+                                        </div>
+                                        
                                         <div className="infos_spot">
                                             <div className="infos">
                                                 <p>Type :</p>
@@ -172,38 +217,48 @@ const UserSpots  = () => {
                                             </div>
                                         </div>
 
-                                        <div className="media_details_spot">
+                                        <div className="media_spot">
                                             <div id="media">
-                                                {spot.image ? <div><img crossorigin="anonymous"  src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /></div> : <div><p>No image available</p></div>}
-                                            </div>
-
-                                            <div id="details">
-                                                <p>{spot.details}</p>
+                                                <Link to={`/spots/${spot.id}`}>
+                                                    {/* {spot.image ? <div><img crossorigin="anonymous" src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /></div> : <div><p>No image available</p></div>} */}
+                                                    <div><p>No image available</p></div>
+                                                </Link>
                                             </div>
                                         </div>
 
+                                        <div className="comment_spot">
+                                            <div className="comment">
+                                                {spot.comments && spot.comments.length ? <p>View comments : {spot.comments.length}</p> : <p>View comments :<span>No comments available</span></p> }
+                                            </div>
+                                        </div>
 
-                                    <div>
-                                        {spot.comments && spot.comments.length ? <p>Comments : {spot.comments.length}</p> : <p>No comments available</p> }
-                                    </div>
+                                        {!visible &&
+                                            <div className="more_info_container">
+                                                <div className="more_info_btn">
+                                                    <Link to={`/spots/${spot.id}`}>
+                                                        DISCOVER
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        }
+                                          
+                                        {isAuthenticated &&
+                                            <button className="spoted-btn" onClick={() => setVisible(!visible)}>
+                                                <img src={logo} alt="logo" />
+                                            </button>
+                                            
+                                        }
 
-                                    <button 
-                                        onClick={() => handleDelete(spot.id)} 
-                                        className="deleteButton">Delete
-                                    </button> 
-                                                                            
-                                    <Link to={'/spots/update/' + spot.id}>
-                                        <button className="btn-green">UPDATE</button>
-                                    </Link>
-
-                                    <div className="moreInfosButton">
-                                        <Link to={`/spots/${spot.id}`}>
-                                            More informations
-                                        </Link>
+                                        {/* <div className="moreInfosButton">
+                                            <Link to={`/spots/${spot.id}`}>
+                                                More informations
+                                            </Link>
+                                        </div> */}
                                     </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
+                        </div>
+                    }
                     </div>}
 
                     <div className="fullPaginationContainer">

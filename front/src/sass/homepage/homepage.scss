@@ -115,7 +115,7 @@ main {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url(../../assets/img/noise.gif);
+            // background-image: url(../../assets/img/noise.gif);
             // border-radius: 15px;
             img {
                 z-index: 99;
@@ -173,19 +173,18 @@ main {
                 max-height: 50%;
                 animation: translateImg 4s ease-in-out;
                 animation-iteration-count: infinite;
-                // transition: 0.3s ease-in-out;
                 cursor: pointer;
                 @keyframes translateImg {
-                    0% {
-                        transform: translateY(0px);
+                        0% {
+                            transform: translateY(0px);
+                        }
+                        50% {
+                            transform: translateY(-5px);
+                        }
+                        100% {
+                            transform: translateY(0px);
+                        }
                     }
-                    50% {
-                        transform: translateY(-5px);
-                    }
-                    100% {
-                        transform: translateY(0px);
-                    }
-                }
                 
                 }
             }

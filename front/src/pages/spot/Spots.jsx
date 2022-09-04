@@ -5,20 +5,23 @@ import spotsAPI from '../../services/spotsAPI';
 import { toast } from 'react-toastify';
 import ImageGrid from '../../components/loaders/CardLoaders';
 import authAPI from '../../services/authAPI';
+import logo from '../../assets/img/logo-header.png';
 // import ContentLoader from 'react-content-loader';
 // import mapboxgl from 'mapbox-gl';
 
 
 const Spots = () => {
 
-    const [isAuthenticated, setIsAuthenticated] = useState(
+    const [isAuthenticated] = useState(
         authAPI.isAuthenticated()
+        
     ); 
 
     const [spots, setSpots] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(true);
+    const [visible, setVisible] = useState([false]);
 
 
     /* --------MAPBOX------- */
@@ -31,7 +34,6 @@ const Spots = () => {
 
     /* SHOW MAP */
 
-    // const [visible, setVisible] = useState([false]);
 
 
 
@@ -159,96 +161,110 @@ const Spots = () => {
                      {/* {visible &&  */}
                     {!loading &&
                         <div className="spotsPageWrapperCards">
+
                             <div className="spotsPageWrapperCards_overlay"></div>
-                            {paginatedSpots.map(spot =>
-                                <div key={spot.id} className="spotsPageCards">
-                                    <div className='spotsPageCardsInfos'>
-                                        <p className="spotNumber">{spot.id}</p>
-                                        <div className="name_adress_spot">
-                                            <h2>{spot.name}</h2>
-                                            <div className="adress">
-                                                <p>{spot.address}</p>
-                                                <div>
-                                                    <p>{spot.postalCode}</p>
-                                                    <p>{spot.city}</p>
+                            { spots.length === 0 
+                                ?
+                            <div className="spotsPageWrapperCards_noSpot">
+                                <div className="spotsPageWrapperCards_noSpot_wrapper">
+                                    <p>Sorry, but no spots have been added to this app </p>
+                                    <Link to='/spots/create'>Share your first spot</Link>
+                                </div>
+                            </div>
+                                :
+                            <div className="spotPageWrapperCardsIn">
+                                {paginatedSpots.map(spot =>
+                                    <div key={spot.id} className="spotsPageCards">
+                                        <div className='spotsPageCardsInfos'>
+                                            <p className="spotNumber">{spot.id}</p>
+                                            <div className="name_adress_spot">
+                                                <h2>{spot.name}</h2>
+                                                <div className="adress">
+                                                    <p>{spot.address}</p>
+                                                    <div>
+                                                        <p>{spot.postalCode}</p>
+                                                        <p>{spot.city}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div id="line_wrapper">
-                                            <span id="line"></span>
-                                        </div>
-                                        
-                                        <div className="infos_spot">
-                                            <div className="infos">
-                                                <p>Type :</p>
-                                                <p>{spot.type && spot.type.name}</p>
+                                            <div id="line_wrapper">
+                                                <span id="line"></span>
                                             </div>
-                                            <div className="infos">
-                                                <p>Category :</p>
-                                                <p>{spot.category && spot.category.name}</p>
+                                            
+                                            <div className="infos_spot">
+                                                <div className="infos">
+                                                    <p>Type :</p>
+                                                    <p>{spot.type && spot.type.name}</p>
+                                                </div>
+                                                <div className="infos">
+                                                    <p>Category :</p>
+                                                    <p>{spot.category && spot.category.name}</p>
+                                                </div>
+                                                <div className="infos">
+                                                    <p>Flat :</p>
+                                                    <p>{spot.flat && spot.flat.name}</p>
+                                                </div>
                                             </div>
-                                            <div className="infos">
-                                                <p>Flat :</p>
-                                                <p>{spot.flat && spot.flat.name}</p>
-                                            </div>
-                                        </div>
 
-                                        <div className="media_spot">
-                                            <div id="media">
-                                                <Link to={`/spots/${spot.id}`}>
-                                                    {spot.image ? <div><img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /></div> : <div><p>No image available</p></div>}
-                                                </Link>
+                                            <div className="media_spot">
+                                                <div id="media">
+                                                    <Link to={''}>
+                                                        {spot.image ? <div><img src={`http://localhost:8000${spot.image.contentUrl}`} alt="spot" /></div> : <div><p>No image available</p></div>}
+                                                    </Link>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div className="comment_spot">
-                                            <div className="comment">
-                                                {spot.comments && spot.comments.length ? <p>View comments : {spot.comments.length}</p> : <p>View comments :<span>No comments available</span></p> }
+                                            <div className="comment_spot">
+                                                <div className="comment">
+                                                    {spot.comments && spot.comments.length ? <p>View comments : {spot.comments.length}</p> : <p>View comments :<span>No comments available</span></p> }
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        {/* <div>
-                                            {isAuthenticated &&
-                                                <div className="moreInfosButton">
-                                                  <Link to={`/spots/${spot.id}`}>
-                                                      More informations
-                                                  </Link>
-                                              </div>
-                                                    
+                                            {!visible &&
+                                                <div className="more_info_container">
+                                                    <div className="more_info_btn">
+                                                        <Link to={`/spots/${spot.id}`}>
+                                                            DISCOVER
+                                                        </Link>
+                                                    </div>
+                                                </div>
                                             }
-                                        </div> */}
-                                            
-
-                                            
-                                            
-                                            
-                                        {/* </div> */}
+                                          
+                                            {isAuthenticated &&
+                                                <button className="spoted-btn" onClick={() => setVisible(!visible)}>
+                                                    <img src={logo} alt="logo" />
+                                                </button>
+                                                
+                                            }
+                                         
+                                        </div>
                                     </div>
-                                </div>
-                            )}
-                        </div>}
+                                )}
+                            </div>
+                            }
+                        </div>
+                    }
+                <div className="fullPaginationContainer">
+                    {itemsPerPage < filteredSpots.length && (
+                        <Pagination
+                            currentPage={currentPage}
+                            itemsPerPage={itemsPerPage}
+                            length={filteredSpots.length}
+                            // length={spots.length}
+                            onPageChanged={handlePageChange}
+                        />
+                    )}
+                </div>
 
-                        <div className="fullPaginationContainer">
-                            {itemsPerPage < filteredSpots.length && (
-                                <Pagination
-                                    currentPage={currentPage}
-                                    itemsPerPage={itemsPerPage}
-                                    length={filteredSpots.length}
-                                    // length={spots.length}
-                                    onPageChanged={handlePageChange}
-                                />
-                            )}
-                        </div>
-
-                        <div className="loaders">
-                            {loading && <ImageGrid />}
-                        </div>
-                                    
-                        {/* <div className="sidebar">
-                            Longitude: {spots.longitude} | Latitude: {spots.latitude} | Zoom: {zoom}
-                        </div>
-                        <div ref={mapContainer} className="mapbox-container-full" 
-                        /> */}
+                <div className="loaders">
+                    {loading && <ImageGrid />}
+                </div>
+                            
+                {/* <div className="sidebar">
+                    Longitude: {spots.longitude} | Latitude: {spots.latitude} | Zoom: {zoom}
+                </div>
+                <div ref={mapContainer} className="mapbox-container-full" 
+                /> */}
             </div>
         </div>
         </>
