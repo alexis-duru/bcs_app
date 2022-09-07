@@ -4,7 +4,7 @@ import React from 'react';
 
 const Select = ({name, value, error, label, onChange, children, category, type, flat}) => {
     return ( 
-        <div className="formGroup">
+        <div className="form-group" id="select-group">
         <label htmlFor={name}>{label}</label>
         <option value="">--Select a {category}{type}{flat}--</option>
             <select 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Link} from "react-router-dom";
 import Header from './components/Header';
 import Navbar from './components/Navbar';
@@ -18,8 +18,10 @@ import About from './pages/about/About';
 import NotFound from "./pages/404/NotFound";
 import CookieConsent from "react-cookie-consent";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
-import Test from "./components/Test";
+// import Test from "./components/Test";
 import Comment from "./components/Comment";
+import usersAPI from "./services/usersAPI";
+import jwtDecode from "jwt-decode";
 
 authAPI.setup();
 
@@ -73,7 +75,7 @@ const App = () => {
 
           {/* TEST */}
           
-          <Route path="/test" element={<Test />} />
+          {/* <Route path="/test" element={<Test />} /> */}
           <Route path="/testComment" element={<Comment />} />
 
       </Routes>

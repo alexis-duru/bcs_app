@@ -53,8 +53,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
             [
                 "groups" => "read:spot:item",
             ],
-            "security" => "is_granted('ROLE_ADMIN')",
-            "security_message" => "Only administrator can delete a spot",
         ],
     ],
     order: ["id" => "DESC"],

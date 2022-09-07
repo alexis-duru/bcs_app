@@ -1,0 +1,140 @@
+#showComments-btn {
+    width: 50%;
+    border: 0px;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    font-family: 'lorinReg';
+    background-color: white;
+    // background-color: transparent;
+    color: black;
+    z-index: 10000;
+    color: $black;
+    margin-top: 10px;
+    p {
+        color: $black;
+    }
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+#preReadCommentsContainer {
+    margin-top: 20px;
+}
+
+
+#readCommentsContainer {
+    width: 50%;
+    height: 100%;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: FadeIn;
+    animation-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        
+    }
+    #commentsContainerWrapper {
+        background-color: #232426;
+        font-family: "lorinReg";
+        border-radius: 25px;
+        width: 90%;
+        height: 90%;
+        padding: 50px;
+        #singleComment {
+            margin-top: 20px;
+            #authorComment {
+                font-family: $lorinReg;
+                font-size: 1.3rem;
+            }
+            #contentComment {
+                font-family: $adieu;
+                margin-top: 5px;
+                font-size: 1.7rem;
+            }
+        }
+    }
+}
+
+#writeCommentsContainer {
+    margin-top: 20px;
+    width: auto;
+    p {
+        font-size: 1.5rem;
+        width: fit-content;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.276);
+        margin-bottom: 15px;
+    }
+}
+
+#commentForm {
+    .form-group {
+        label {
+            display: none;
+        }
+        input {
+        font-size: 1.5rem;
+        width: 50%;
+        margin-bottom: 15px;
+        background-color: transparent;
+        border: 0px;
+        color: $white;
+        font-family: $lorinReg;
+        outline: none;
+        border-bottom: 1px solid white;
+            &::placeholder {
+                color: rgba(255, 255, 255, 0.508);
+            }
+        }
+    }
+    button {
+        width: 50%;
+        border: 0px;
+        padding: 8px;
+        border-radius: 3px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+        font-family: 'adieu';
+        background-color: white;
+        // background-color: transparent;
+        color: black;
+        z-index: 10000;
+        color: $black;
+        margin-top: 10px;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+#deleteComment-btn {
+    width: 100px;
+    height: 25px;
+    border: 0px;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    font-family: "lorinReg";
+    background-color: white;
+    color: black;
+    z-index: 10000;
+    color: #000000;
+    margin-top: 10px;
+    &:hover {
+        background-color: $red;
+        color: $yellow;
+    }
+}

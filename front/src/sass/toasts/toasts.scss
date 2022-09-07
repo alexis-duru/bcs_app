@@ -1,5 +1,9 @@
 .Toastify__toast-body { 
     background-color: $black;
+    @media screen and (max-width: 768px) {
+        font-size: 0.8rem;
+        
+    }
     
 }
 
@@ -8,6 +12,10 @@
     font-family: $adieu;
     color: $white;
     border: 1px solid $white;
+    @media screen and (max-width: 768px) {
+        width: 80%;
+        
+    }
 }
 .Toastify__toast--rtl { 
     background-color: $black;

@@ -16,7 +16,6 @@ const UserSpots  = () => {
 
     const [isAuthenticated] = useState(
         authAPI.isAuthenticated()
-        // eslint-disable-next-line
     ); 
 
     const [user, setUser] = useState([]);

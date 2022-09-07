@@ -19,32 +19,28 @@ const SpotDetails  = (props) => {
    const [user, setUser] = useState([]);
    const [currentUser, setCurrentUser] = useState([]);
 
+   const [showComments, setShowComments] = useState([false]);
+
 
     /* COMMENTS */
     const [comments, setComments] = useState([]);
 
+    const [createComment, setCreateComment] = useState({
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        spot: id,
+        author: user.id,
+        content: "",
+    })
 
-    // const [comments, setComments] = useState({
-    //     content: "",
-    //     createdAt: new Date().toISOString(),
-    //     updatedAt: new Date().toISOString(),
-    //     spot: "",
-    //     author: "",
-    // })
-    
 
-    // console.log(comments)
-
-    // const [errors, setErrors] = useState({
-    //     content: "",
-    //     createdAt: new Date().toISOString(),
-    //     updatedAt: new Date().toISOString(),
-    //     spot: "",
-    //     author: "",
-    // });
-
-    // console.log(comments);
-
+    const [errors, setErrors] = useState({
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        spot: "",
+        author: "",
+        content: "",
+    });
 
     /* --------MAPBOX------- */
     const mapContainer = useRef(null);
@@ -84,7 +80,6 @@ const SpotDetails  = (props) => {
 
     useEffect(() => { 
         findCurrentUser();
-
         // eslint-disable-next-line
     }, [user]);
 
@@ -137,40 +132,42 @@ const SpotDetails  = (props) => {
     }
 
     const handleDelete = async (id) => {
-        // const originalComments = [...comments];
-        // setComments(comments.filter(comment => comment.id !== id));
+        const originalComments = [...comments];
+        setComments(comments.filter(comment => comment.id !== id));
         try {
             await commentsAPI.deleteComments(id);
-            toast.success("The comment was successfully deleted")
             setComments(comments);
+            toast.success("The comment was successfully deleted")
             console.log("The comment was successfully deleted")
         } catch (error) {
+            setComments(originalComments);
             toast.error("Sorry, the comment could not be deleted, please retry")
         }
     }
 
-    // const handleChange = ({ currentTarget }) => {
-    //     const { name, value } = currentTarget;
-    //     setComments({ ...comments, [name]: value })
-    // }
 
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
+
+    const handleSubmit = async event => {
+        event.preventDefault();
+        try {
+            createComment.spot = parseInt(createComment.spot)
+            createComment.author = parseInt(createComment.author)
+            console.log(createComment.author)
         
-    //     // console.log(spot)
-    //     try {
-    //         comments.author = parseInt(comments.author)
-    //         comments.spot = parseInt(comments.spot)
-    //         comments.createdAt = new Date().toISOString()
-    //         comments.updatedAt = new Date().toISOString()
-    //         const response = await commentsAPI.createComments(comments);
-    //         console.log(response)
-    //         console.log('The spot has been successfully created')
-    //         toast.success("The spot has been successfully created")
-    //     } catch (error) {
-    //         toast.error("Sorry, the spot could not be created")
-    //     }
-    // }
+            const response = await commentsAPI.createComments(JSON.stringify(createComment));
+            console.log(response)
+            console.log('The comment has been successfully created')
+            console.log(createComment)
+        } catch (error) {
+            console.log(error + '. Sorry, an error has occured')
+        }
+    }
+
+    const handleChange = ({currentTarget}) => {
+        const {name, value} = currentTarget;
+        setCreateComment({...createComment, [name]: value})
+    }
+
 
     return (
         <>
@@ -241,21 +238,45 @@ const SpotDetails  = (props) => {
 
                                 {/* COMMENTS */}
 
-                                {spot.comments && spot.comments.length ? <p>Comments : {spot.comments.length}</p> : <p>No comments available</p> }
-                                
-                                {spot.comments?.map(
-                                    (comment) => {
-                                        return (
-                                            <div key={comment.id}>
-                                                <br></br>
-                                                <p>{comment.author.email}</p>
-                                                <p>{comment.content}</p>
-                                                {comment.author.email === user.email && <button onClick={() => handleDelete(comment.id)}>Delete</button>}
-                                                <br></br>
-                                            </div>
-                                        )
-                                    }
-                                )}
+                                <div id="preReadCommentsContainer">
+                                    {spot.comments && spot.comments.length ? <p>Comments : {spot.comments.length}</p> : <p>No comments available</p> }
+                                    {spot.comments && spot.comments.length  ?
+                                    <button id="showComments-btn" onClick={() => setShowComments(!showComments)}> {showComments ? 'View comments' : 'Hide comments'} </button>
+                                    : <p></p>}
+                                </div>
+
+                                {!showComments &&
+                                <div id="readCommentsContainer">
+                                    <div id="commentsContainerWrapper">
+                                        <h2>Comments :</h2>
+                                        {spot.comments?.map(
+                                            (comment) => {
+                                                return (
+                                                    <div id="singleComment" key={comment.id}>
+                                                        <p id="authorComment">{comment.author.email}</p>
+                                                        <p id="contentComment">{comment.content}</p>
+                                                        {comment.author.email === user.email && <button id="deleteComment-btn" onClick={() => handleDelete(comment.id)}>DELETE</button>}
+                                                    </div>
+                                                )
+                                            }
+                                        )}
+                                    </div>
+                                </div>
+                                }
+                                  
+                                 <div id="writeCommentsContainer">
+                                    <form id="commentForm" onSubmit={handleSubmit}>
+                                        <Field
+                                            name="content"
+                                            label="content"
+                                            placeholder="Write new comment..."
+                                            value={createComment.content}
+                                            error={errors.content}
+                                            onChange={handleChange}
+                                        />
+                                        <button type="submit" className="btn btn-primary">SEND</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     
@@ -271,38 +292,6 @@ const SpotDetails  = (props) => {
                 <div className="fullPaginationContainer"></div>
             </div>
         </div>
-
-
-                {/* <form className="createSpotForm" onSubmit={handleSubmit}>
-                            <div className="wrapper_form_group">
-                                <Field
-                                    name="content"
-                                    label="content"
-                                    placeholder="content comment"
-                                    value={comments.content}
-                                    onChange={handleChange}
-                                    error={errors.content}
-                                />
-                            </div>
-                    
-                            <div className="submit_group">
-                                <button type="submit">
-                                    SAVE
-                                </button>
-                            </div>
-                        </form> */}
-
-                {/* <form onSubmit={handleSubmit}>
-                    <Field
-                        name="comments"
-                        label="comments"
-                        placeholder="comments"
-                        value={comments.content}
-                        // onChange={handleChange}
-                        error={errors.content}
-                    />
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </form> */}
         </>
     )
 }

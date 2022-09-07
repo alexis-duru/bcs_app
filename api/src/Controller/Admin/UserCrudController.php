@@ -25,6 +25,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('email'),
             DateTimeField::new('createdAt')->onlyOnIndex(),
             DateTimeField::new('updatedAt')->onlyOnIndex(),
+            // TextField::new('password')->HideOnIndex(),
 
             // ImageField::new('media', 'Profil Picture')->setBasePath('/images/media/')
             // ->OnlyOnIndex(),

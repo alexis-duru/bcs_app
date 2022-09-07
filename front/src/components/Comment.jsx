@@ -1,40 +1,69 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import commentsAPI from '../services/commentsAPI';
 import Field from './forms/Field';
+import { useNavigate } from 'react-router-dom';
+import usersAPI from '../services/usersAPI';
+import { useEffect } from 'react';
 
 
 
-const PostComment = () => {
+const PostComment = (props) => {
+
+
+    const navigate = useNavigate();
+
+    const [user, setUser] = useState([]);
+   const [currentUser, setCurrentUser] = useState([]);
 
     const [comment, setComment] = useState({
-        content: "dqsdqdqdqd",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        spot: "",
-        author: "",
+        spot: props.spotId,
+        author: currentUser.id,
+        content: "",
     })
-    console.log(comment);
+
 
     const [errors, setErrors] = useState({
-        content: "",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         spot: "",
         author: "",
+        content: "",
     });
 
+    const findCurrentUser = () => {
+        // Récupération de l'user en cours grâce à l'email unique
+        const users =  usersAPI.findAllUsers()
 
-    const handleChange = ({currentTarget}) => {
-        const {name, value} = currentTarget;
-        setComment({...comment, [name]: value})
+        return users.then(users => {
+            users.forEach(identity => {
+                if(user.email === identity.email)  
+                setCurrentUser(identity)
+            })
+        })
     }
-    
-    const handleSubmit = async (event) => {
+
+    console.log(currentUser)
+
+    useEffect (() => {
+        findCurrentUser()
+    }, [])
+
+    useEffect(() => {
+        setComment({...comment, spot: props.spotId})
+    }, [props.spotId])
+
+    useEffect(() => {
+        setComment({...comment, author: currentUser.id})
+    }, [currentUser])
+
+    const handleSubmit = async event => {
         event.preventDefault();
         try {
             comment.spot = parseInt(comment.spot)
             comment.author = parseInt(comment.author)
-            const response = await commentsAPI.createComments(comment);
+            const response = await commentsAPI.createComments(JSON.stringify(comment));
             console.log(response)
             console.log('The comment has been successfully created')
             console.log(comment)
@@ -43,22 +72,29 @@ const PostComment = () => {
         }
     }
 
+    const handleChange = ({currentTarget}) => {
+        const {name, value} = currentTarget;
+        setComment({...comment, [name]: value})
+    }
+    
+
     return (
          <>
-         <h1>dfsqdqd</h1>
-         <h1>dfsqdqd</h1>
-         <h1>dfsqdqd</h1>
-         <h1>dfsqdqd</h1>
-         <h1>dfsqdqd</h1>
+         <div><p>kjldjqsdlqjdql</p></div>
+         <div><p>kjldjqsdlqjdql</p></div>
+         <div><p>kjldjqsdlqjdql</p></div>
+         <div><p>kjldjqsdlqjdql</p></div>
+         <div><p>kjldjqsdlqjdql</p></div>
+          <div><p>kjldjqsdlqjdql</p></div>
          <div>
                 <form onSubmit={handleSubmit}>
                     <Field
-                        name="comments"
-                        label="comments"
-                        placeholder="comments"
+                        name="content"
+                        label="content"
+                        placeholder="content"
                         value={comment.content}
-                        onChange={handleChange}
                         error={errors.content}
+                        onChange={handleChange}
                     />
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>

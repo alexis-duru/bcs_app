@@ -5,6 +5,8 @@ import Select from '../../components/forms/Select';
 import spotsAPI from '../../services/spotsAPI';
 import mapboxgl from 'mapbox-gl';
 import { toast } from 'react-toastify';
+import usersAPI from '../../services/usersAPI';
+import jwtDecode from 'jwt-decode';
 // import UploadField from '../../components/forms/UploadField';
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxbzc5enlobmM0In0.Ed0S5ioc8PQZXqPIfK2CEg";
@@ -13,6 +15,11 @@ mapboxgl.accessToken = "pk.eyJ1IjoiYWxleGlzZHVydSIsImEiOiJja3dydXk5NHIxMDl2MnRxb
 const SpotCreate = () => {
 
     const navigate = useNavigate();
+
+    /* USER */
+
+    const [currentUser, setCurrentUser] = useState([]);
+    const [user, setUser] = useState([]);
 
     /* -------- UPLOAD FIELD -------- */
       // const [medias, setMedias] = useState([]);
@@ -68,6 +75,18 @@ const SpotCreate = () => {
     const [flats, setFlats] = useState([]);
     // eslint-disable-next-line
 
+    const findCurrentUser = () => {
+        // Récupération de l'user en cours grâce à l'email unique
+        const users =  usersAPI.findAllUsers()
+
+        return users.then(users => {
+            users.forEach(identity => {
+                if(user.email === identity.email)  
+                setCurrentUser(identity)
+            })
+        })
+    }
+
     const fetchCategories = async () => {
         try {
             const data = await spotsAPI.findAllCategories(JSON.stringify(categories));
@@ -113,8 +132,15 @@ const SpotCreate = () => {
 
     const fetchSpot = async () => {
         if (spotId) {
+            // console.log(currentUser.email)
+            // console.log(data.user.email)
             try {
+                
                 const data = await spotsAPI.findOne(parseInt(spotId));
+                // if(currentUser.email !== data.user.email){
+                //     console.log('pas le droit')
+                // }
+            // Si email du current user est différent de l'email du data alors navigate vers /spots
                 setSpot(
                     {
                         name: data.name,
@@ -137,6 +163,16 @@ const SpotCreate = () => {
             return
         }
     }
+
+    useEffect( () => {
+        const decoded = jwtDecode(localStorage.getItem('token'));
+        setUser(decoded);   
+    }, []); 
+
+    useEffect(() => { 
+        findCurrentUser();
+        // eslint-disable-next-line
+    }, [user]);
 
 
     useEffect(() => {
@@ -214,7 +250,7 @@ const SpotCreate = () => {
             if(spotId) {
                 await spotsAPI.updateSpot(parseInt(spotId), spot)
                 (
-                    console.log("The spot has been successfully edited"),
+                    console.log("The spot has been successfully edited , 1"),
                     toast.success("The spot has been successfully edited"), 
                     navigate("/profile/spots"), 
                     { replace: true }, 
@@ -222,17 +258,18 @@ const SpotCreate = () => {
             }else{
                 const response = await spotsAPI.createSpot(JSON.stringify(spot))
                 console.log(response)
-                console.log('The spot has been successfully created')
+                console.log('The spot has been successfully created, 2')
                 toast.success("The spot has been successfully created")
                 navigate("/spots")
             }
 
-        } catch (error) {
-            if(spotId) {
-                toast.error("The spot has not been edited")
-            }else{
-                toast.error("Sorry, the spot could not be created")
-            }
+        }
+         catch (error) {
+            // if(spotId) {
+            //     toast.error("The spot has not been edited, 3")
+            // }else{
+            //     toast.error("Sorry, the spot could not be created, 4")
+            // }
         }
 
     }
@@ -388,7 +425,7 @@ const SpotCreate = () => {
 
                             </div>
 
-                            <div className="wrapper_form_group">
+                            <div className="wrapper_form_group" id="latlong">
                                 <Field
                                     name="latitude"
                                     label="latitude"

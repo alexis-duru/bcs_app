@@ -6,8 +6,6 @@ import { toast } from 'react-toastify';
 import ImageGrid from '../../components/loaders/CardLoaders';
 import authAPI from '../../services/authAPI';
 import logo from '../../assets/img/logo-header.png';
-// import ContentLoader from 'react-content-loader';
-// import mapboxgl from 'mapbox-gl';
 
 
 const Spots = () => {
@@ -23,21 +21,6 @@ const Spots = () => {
     const [loading, setLoading] = useState(true);
     const [visible, setVisible] = useState([false]);
 
-
-    /* --------MAPBOX------- */
-    // const mapContainer = useRef(null);
-    // const map = useRef(null);
-    // const [lng, setLng] = useState(-0.594);
-    // const [lat, setLat] = useState(44.8378);
-    // const [zoom, setZoom] = useState(13);
-    // const [marker, setMarker] = useState([]);
-
-    /* SHOW MAP */
-
-
-
-
-    // eslint-disable-next-line 
     // const [medias, setMedias] = useState([]);
 
     // Récupération de l'ensemble de mes spots
@@ -69,25 +52,6 @@ const Spots = () => {
         fetchSpots();
     }, []);
 
-// LOAD MAP
-
-    // useEffect( () => {
-    //      /* ADD MAP ON DOM ELEMENT AND MARKER */
-    //      if (map.current) return;
-    //      map.current = new mapboxgl.Map({
-    //          container: mapContainer.current,
-    //          style: 'mapbox://styles/mapbox/streets-v11',
-    //          center: [lng, lat],
-    //          zoom: zoom 
-    //      });  
-    //      setMarker(new mapboxgl.Marker({
-    //         color: "##000000",
-    //         draggable: false,
-    //     })
-    //     .setLngLat([lng, lat])
-    //     .addTo(map.current)
-    //     );        
-    //  }, [lng, lat, zoom]);
 
     //  Gestion du changement de page
 
@@ -158,7 +122,6 @@ const Spots = () => {
                         </div>
                     </div>
                     
-                     {/* {visible &&  */}
                     {!loading &&
                         <div className="spotsPageWrapperCards">
 
@@ -259,12 +222,6 @@ const Spots = () => {
                 <div className="loaders">
                     {loading && <ImageGrid />}
                 </div>
-                            
-                {/* <div className="sidebar">
-                    Longitude: {spots.longitude} | Latitude: {spots.latitude} | Zoom: {zoom}
-                </div>
-                <div ref={mapContainer} className="mapbox-container-full" 
-                /> */}
             </div>
         </div>
         </>

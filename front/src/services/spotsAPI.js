@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import API from "./api";
 
 function findAllCategories() {
@@ -45,9 +46,14 @@ const createSpot = (credentials) => {
 // UPDATE A SPOT OF APP
 
 function updateSpot(id, credentials) {
-    return API
+    try {
+        return API
         .put(`/spots/${id}`, credentials)
         .then(response => response.data)
+    } catch (error) {
+        console.log('sorry you can not update the spot');
+        toast.error("Sorry you can not update the spot");
+    }
 };
 
 // DELETE A SPOT OF APP

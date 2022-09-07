@@ -7,6 +7,14 @@ option {
     opacity: 0.7;
     color: $white;
     margin-bottom: 5px;
+    visibility: hidden;
+}
+
+#select-group {
+    align-items: flex-start !important;
+    &::after {
+        display: none;
+    }
 }
 
 select {
@@ -15,6 +23,8 @@ select {
     color: white;
     font-family: 'lorinReg';
     outline: none;
+    width: 90%;
+    padding: 5px;
 }
 
 #createSpotForm {
@@ -22,6 +32,9 @@ select {
     z-index: 0;
     height: 83vh;
     width: 100%;
+    @media screen and (max-width: 768px){
+        padding-top: 5vh;
+    }
     .wrapper_createSpotForm {
         height: 100%;
         display: flex;
@@ -32,84 +45,98 @@ select {
         }
     }
     .createSpotForm {
-        .wrapper_form_group {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            color: white;
-            .form-group  {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-direction: column;
-            width: 40%;
-            z-index: 4;
-            color: white;
-            label {
+            .wrapper_form_group {
                 width: 100%;
-                margin: 15px;
-                color: $white;
-                font-family: $lorinReg;
-                display: none;
-            }
-           
-            input {
-                width: 100%;
-                border: 0px;
-                padding: 8px 0px;
-                outline: none;
-                border-radius: 3px;
-                font-family: 'adieu';
-                background-color: transparent;
-                color: $white;
-                &::placeholder {
-                    font-family: 'adieu';
-                    font-size: 0.9rem;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    opacity: 0.7;
-                    color: $white;
-                }
-            }
-            &::after {
-                margin-top: 0px;
-                content: "";
-                color: white;
-                height: 0.5px;
-                width: 100%;
-                background-color: $white;
-                opacity: 0.3;
-    
-            }
-            .invalid-message {
-                font-style: italic;
-                font-size: 0.9rem;
-                color: $white;
                 display: flex;
-                align-items: flex-start;
-                width: 100%;
-                color: $red;
-    
-            }
-            // .is-invalid {
-            //     color: $red;
-            // }
-    
-            button {
-                width: 100%;
-                border: 0px;
-                padding: 8px;
-                border-radius: 3px;
-                cursor: pointer;
-                transition: 0.3s ease-in-out;
-                font-family: 'adieu';
-                &:hover {
-                    opacity: 0.8;
+                justify-content: space-between;
+                margin-bottom: 10px;
+                color: white;
+                // @media screen and (max-width: 768px){
+                //     flex-direction: column;
+                // }
+                .form-group  {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column;
+                width: 40%;
+                z-index: 4;
+                color: white;
+                // @media screen and (max-width: 768px){
+                //     width: 100%;
+                // }
+                .select-group {
+                    align-items: flex-start;
+                }
+                label {
+                    width: 100%;
+                    font-size: 1.5rem;
+                    margin: 5px;
+                    color: $white;
+                    font-family: $adieu;
+                    // display: none;
+                }
+            
+                input {
+                    width: 100%;
+                    border: 0px;
+                    padding: 8px 0px;
+                    outline: none;
+                    border-radius: 3px;
+                    font-family: 'adieu';
+                    background-color: transparent;
+                    color: $white;
+                    &::placeholder {
+                        font-family: 'adieu';
+                        font-size: 0.9rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        opacity: 0.7;
+                        color: $white;
+                    }
+                }
+                &::after {
+                    margin-top: 0px;
+                    content: "";
+                    color: white;
+                    height: 0.5px;
+                    width: 100%;
+                    background-color: $white;
+                    opacity: 0.3;
+        
+                }
+                .invalid-message {
+                    font-style: italic;
+                    font-size: 0.9rem;
+                    color: $white;
+                    display: flex;
+                    align-items: flex-start;
+                    width: 100%;
+                    color: $red;
+        
+                }
+                // .is-invalid {
+                //     color: $red;
+                // }
+        
+                button {
+                    width: 100%;
+                    border: 0px;
+                    padding: 8px;
+                    border-radius: 3px;
+                    cursor: pointer;
+                    transition: 0.3s ease-in-out;
+                    font-family: 'adieu';
+                    &:hover {
+                        opacity: 0.8;
+                    }
                 }
             }
         }
+
+        #latlong {
+            display: none;
         }
         .submit_group {
             width: 100%;

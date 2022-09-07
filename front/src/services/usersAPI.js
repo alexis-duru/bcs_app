@@ -43,7 +43,7 @@ function deleteUser(id) {
 const exportAPI =  {
     findAllUsers,
     findOneUser,
-    delete: deleteUser,
+    deleteUser,
     createUser,
     findSpotOfUser
 };

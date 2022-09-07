@@ -68,7 +68,11 @@
                 text-align: center;
                 justify-content: center;
                 align-items: center;
-                padding-top: 5vh;
+                @media screen and (max-width: 425px){
+                 display: none;
+                  
+                }
+                // padding-top: 5vh;
                 h1 {
                     color: $white;
                     font-family: $adieu;

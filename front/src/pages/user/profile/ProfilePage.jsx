@@ -14,8 +14,7 @@ const Profile  = (props) => {
     const navigate = useNavigate();
     
     const [user, setUser] = useState([]);
-    const [currentUser, setCurrentUser] = useState([]);
-    
+    const [currentUser, setCurrentUser] = useState([]);    
 
     const findCurrentUser = () => {
         // Récupération de l'user en cours grâce à l'email unique
@@ -27,15 +26,16 @@ const Profile  = (props) => {
                 setCurrentUser(identity)
             })
         })
+        
     }
 
     // console.log(currentUser)
 
-    const handleDelete = () => {
-        const currentUser = jwtDecode(localStorage.getItem("token"));
-        console.log(currentUser)
+    const handleDelete = async () => {
+        const deleteUser = jwtDecode(localStorage.getItem("token"));
         try {
-            // usersAPI.deleteUser()
+            const res = await usersAPI.deleteUser(deleteUser)
+            console.log(res)
             toast.success("Votre compte a bien été supprimé")
             // navigate("/login")
             console.log("proute")
@@ -99,10 +99,10 @@ const Profile  = (props) => {
                         <div className="usersInfos">
                             <div className="profile_image">
                                 {currentUser.image ? <img src={`http://localhost:8000${currentUser.image.contentUrl}`} alt="profil_image" /> : <img src={avatarImage} alt="default avatar" /> }
-                                <button className="profile_upload">UPLOAD AVATAR</button>
+                                {/* <button className="profile_upload">UPLOAD AVATAR</button> */}
                             </div>
                             <h2> Hello, {currentUser.email}</h2>
-                            <div className="btnContainer">
+                            {/* <div className="btnContainer">
                                 <button 
                                     onClick={() => handleDelete(user.id)} 
                                     className="deleteButton">Delete
@@ -111,7 +111,7 @@ const Profile  = (props) => {
                                 <Link to={''}>
                                     <button className="btn-green">UPDATE</button>
                                 </Link>
-                            </div>
+                            </div> */}
                             <div className="container">
                                 <div className="button-container">
                                     <span className="mask">MY SPOTS</span>
