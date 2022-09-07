@@ -28,10 +28,6 @@ const UserSpots  = () => {
     const [loading, setLoading] = useState(true);
 
     const [visible, setVisible] = useState([false]);
-    
-
-
-
 
     const findCurrentUser = () => {
         // Récupération de l'user en cours grâce à l'email unique
@@ -59,8 +55,6 @@ const UserSpots  = () => {
             console.log(error.response)
         }
     }
-
-    // fetchSpots();
 
     useEffect( () => {
 

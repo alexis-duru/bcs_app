@@ -34,3 +34,7 @@ a {
 ::-webkit-scrollbar {
   display: none;
   }
+
+  select::-ms-expand {
+    display: none;
+  }

@@ -29,9 +29,11 @@ const SpotDetails  = (props) => {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         spot: id,
-        author: user.id,
+        author: currentUser.id,
         content: "",
     })
+
+    console.log(currentUser.id)
 
 
     const [errors, setErrors] = useState({
@@ -82,6 +84,13 @@ const SpotDetails  = (props) => {
         findCurrentUser();
         // eslint-disable-next-line
     }, [user]);
+
+
+
+    // useEffect(() => {
+    //     setCurrentUser(currentUser);
+    //     // eslint-disable-next-line
+    // }, [currentUser]);
 
 
     useEffect( () => {
@@ -151,15 +160,16 @@ const SpotDetails  = (props) => {
         event.preventDefault();
         try {
             createComment.spot = parseInt(createComment.spot)
-            createComment.author = parseInt(createComment.author)
+            createComment.author = parseInt(currentUser.id)
             console.log(createComment.author)
         
             const response = await commentsAPI.createComments(JSON.stringify(createComment));
             console.log(response)
             console.log('The comment has been successfully created')
-            console.log(createComment)
+            toast.success("The comment has been successfully created")
         } catch (error) {
             console.log(error + '. Sorry, an error has occured')
+            toast.error("Sorry, an error has occured")
         }
     }
 

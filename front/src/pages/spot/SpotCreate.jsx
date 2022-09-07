@@ -18,7 +18,6 @@ const SpotCreate = () => {
 
     /* USER */
 
-    const [currentUser, setCurrentUser] = useState([]);
     const [user, setUser] = useState([]);
 
     /* -------- UPLOAD FIELD -------- */
@@ -75,18 +74,6 @@ const SpotCreate = () => {
     const [flats, setFlats] = useState([]);
     // eslint-disable-next-line
 
-    const findCurrentUser = () => {
-        // Récupération de l'user en cours grâce à l'email unique
-        const users =  usersAPI.findAllUsers()
-
-        return users.then(users => {
-            users.forEach(identity => {
-                if(user.email === identity.email)  
-                setCurrentUser(identity)
-            })
-        })
-    }
-
     const fetchCategories = async () => {
         try {
             const data = await spotsAPI.findAllCategories(JSON.stringify(categories));
@@ -132,15 +119,9 @@ const SpotCreate = () => {
 
     const fetchSpot = async () => {
         if (spotId) {
-            // console.log(currentUser.email)
-            // console.log(data.user.email)
             try {
-                
                 const data = await spotsAPI.findOne(parseInt(spotId));
-                // if(currentUser.email !== data.user.email){
-                //     console.log('pas le droit')
-                // }
-            // Si email du current user est différent de l'email du data alors navigate vers /spots
+
                 setSpot(
                     {
                         name: data.name,
@@ -168,12 +149,6 @@ const SpotCreate = () => {
         const decoded = jwtDecode(localStorage.getItem('token'));
         setUser(decoded);   
     }, []); 
-
-    useEffect(() => { 
-        findCurrentUser();
-        // eslint-disable-next-line
-    }, [user]);
-
 
     useEffect(() => {
         /* ADD MAP ON DOM ELEMENT AND MARKER */
@@ -242,7 +217,6 @@ const SpotCreate = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // console.log(spot)
         try {
             spot.latitude = parseFloat(spot.latitude)
             spot.longitude = parseFloat(spot.longitude)
@@ -278,9 +252,9 @@ const SpotCreate = () => {
     return (
         <>
             <div className="globalPage">
-                <div className="leftSideBar">
+                <div className="leftSideBar" id="leftSideBarContribution">
                 </div>
-                <div className="globalPageWrapper">
+                <div className="globalPageWrapper" id="createSpotFormContainer">
                     <div className="globalPageHeader">
                         <div className="searchBar">
                         </div>
@@ -291,7 +265,7 @@ const SpotCreate = () => {
                             <h1>CONTRIBUTION</h1>
                             <h2 className="fade-in">Share a spot to our team and expands the community</h2>
                         </div>
-                        <div>
+                        <div id="wrapperCreateSpotForm">
                         <form className="createSpotForm" onSubmit={handleSubmit}>
                             <div className="wrapper_form_group">
                                 <Field
