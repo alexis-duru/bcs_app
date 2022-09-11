@@ -48,10 +48,10 @@ const SpotDetails  = (props) => {
     const mapContainer = useRef(null);
     const map = useRef(null);
 
-    const [lng, setLng] = useState(-0.594);
+    const [lng, setLng] = useState(-0.565);
     const [lat, setLat] = useState(44.8378);
 
-    const [zoom, setZoom] = useState(12);
+    const [zoom, setZoom] = useState(11);
     const [marker, setMarker] = useState([]);
 
     const findCurrentUser = () => {
@@ -140,12 +140,11 @@ const SpotDetails  = (props) => {
         }
     }
 
-    const handleDelete = async (id) => {
+    const handleDelete = async id => {
         const originalComments = [...comments];
         setComments(comments.filter(comment => comment.id !== id));
         try {
             await commentsAPI.deleteComments(id);
-            setComments(comments);
             toast.success("The comment was successfully deleted")
             console.log("The comment was successfully deleted")
         } catch (error) {
@@ -287,16 +286,12 @@ const SpotDetails  = (props) => {
                                         <button type="submit" className="btn btn-primary">SEND</button>
                                     </form>
                                 </div>
+                                <div className="previous-page-btn">
+                                    <Link to='/spots/'>
+                                        Previous page
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
-                    
-                    
-
-
-                        <div className="moreInfosButton">
-                            <Link to='/spots/'>
-                                Previous page
-                            </Link>
                         </div>
                     </div>
                 <div className="fullPaginationContainer"></div>

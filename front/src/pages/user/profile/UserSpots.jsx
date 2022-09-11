@@ -241,12 +241,6 @@ const UserSpots  = () => {
                                             </button>
                                             
                                         }
-
-                                        {/* <div className="moreInfosButton">
-                                            <Link to={`/spots/${spot.id}`}>
-                                                More informations
-                                            </Link>
-                                        </div> */}
                                     </div>
                                 </div>
                             )}

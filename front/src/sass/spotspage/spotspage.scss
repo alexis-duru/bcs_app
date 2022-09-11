@@ -81,6 +81,10 @@
              // HOVER FX BUTTON
             .spotsCreate {
                 height: 100%;
+                @media screen and (max-width: 768px){
+                  height: 100%;
+                  width: 50%;
+                }
                 .container {
                     height: 100%;
                     .button-container {
@@ -91,6 +95,9 @@
                        margin-right: auto;
                        overflow: hidden;
                        transition: 0.5s;
+                       @media screen and (max-width: 768px){
+                        width: 100%;
+                      }
                     //    border: 1px solid rgba(255, 255, 255, 0.2);
                      }
                      
@@ -109,6 +116,9 @@
                        color: #000;
                        cursor: pointer;
                        animation: anim2 0.7s steps(22) forwards;
+                       @media screen and (max-width: 768px){
+                        width: 100%;
+                      }
                      }
                      
                      .button-container button:hover {

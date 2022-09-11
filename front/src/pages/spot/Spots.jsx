@@ -21,6 +21,7 @@ const Spots = () => {
     const [loading, setLoading] = useState(true);
     const [visible, setVisible] = useState([false]);
 
+
     // const [medias, setMedias] = useState([]);
 
     // Récupération de l'ensemble de mes spots

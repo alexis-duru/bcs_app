@@ -239,11 +239,7 @@ const SpotCreate = () => {
 
         }
          catch (error) {
-            // if(spotId) {
-            //     toast.error("The spot has not been edited, 3")
-            // }else{
-            //     toast.error("Sorry, the spot could not be created, 4")
-            // }
+           console.log(error.response)
         }
 
     }
@@ -419,18 +415,10 @@ const SpotCreate = () => {
                                 />
                             </div>
 
-
-
-
                             <div className="submit_group">
                                 <button type="submit" className="submitBtn">
                                     SAVE
                                 </button>
-                            </div>
-
-
-                            <div>
-                                <Link to="/spots">Back to spots</Link>
                             </div>
                         </form>
                         <div className="mapbox-container">
