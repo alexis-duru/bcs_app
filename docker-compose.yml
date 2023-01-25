@@ -1,5 +1,5 @@
 version: "3"
-volumes: 
+volumes:
   db-data:
 services:
   nginx:
@@ -36,7 +36,7 @@ services:
       - db-data:/var/lib/mysql
   phpmyadmin:
     container_name: bcs-phpmyadmin
-    depends_on: 
+    depends_on:
       - database
     image: phpmyadmin
     restart: always

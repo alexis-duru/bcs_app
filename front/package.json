@@ -9,7 +9,6 @@
     "@testing-library/user-event": "^13.5.0",
     "aos": "^2.3.4",
     "axios": "^0.27.2",
-    "gsap": "^3.10.4",
     "jwt-decode": "^3.1.2",
     "mapbox-gl": "^2.9.1",
     "react": "^18.2.0",
@@ -19,9 +18,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.5",
-    "reactjs-popup": "^2.0.5",
     "sass": "^1.51.0",
-    "use-file-upload": "^1.0.11",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
